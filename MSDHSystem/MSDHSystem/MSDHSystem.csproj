@@ -7,7 +7,42 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\back.png" />
+    <None Remove="Resources\Images\ic_error.png" />
+    <None Remove="Resources\Images\ic_eye_close.png" />
+    <None Remove="Resources\Images\ic_eye_open.png" />
+    <None Remove="Resources\Images\ic_home.png" />
+    <None Remove="Resources\Images\ic_password.png" />
+    <None Remove="Resources\Images\ic_user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\back.png" />
+    <EmbeddedResource Include="Resources\Images\ic_error.png" />
+    <EmbeddedResource Include="Resources\Images\ic_eye_close.png" />
+    <EmbeddedResource Include="Resources\Images\ic_eye_open.png" />
+    <EmbeddedResource Include="Resources\Images\ic_home.png" />
+    <EmbeddedResource Include="Resources\Images\ic_password.png" />
+    <EmbeddedResource Include="Resources\Images\ic_user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.54.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />  
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />  
+    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2012" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Components\OutlinedMaterialEntry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\FlyoutFooter.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\FlyoutHeader.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

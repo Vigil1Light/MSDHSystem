@@ -3,7 +3,8 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:MSDHSystem.Views"
        Title="MSDHSystem"
-       x:Class="MSDHSystem.AppShell">
+       x:Class="MSDHSystem.AppShell"
+       Shell.TabBarIsVisible="False">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -78,11 +79,37 @@
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
-    <FlyoutItem Title="About" Icon="icon_about.png">
-        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+    
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+
+        <ShellContent Title="Request For Leave" Icon="icon_about.png" Route="RequestForLeave" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Time Study" Icon="icon_feed.png" Route="TimeStudy" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Lab Time Study" Icon="icon_feed.png" Route="LabTimeStudy" ContentTemplate="{DataTemplate local:AboutPage}" />
+        
     </FlyoutItem>
-    <FlyoutItem Title="Browse" Icon="icon_feed.png">
-        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+
+        <ShellContent Title="Your Leave Balance" Icon="icon_about.png" Route="LeaveBalance" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Your Leave History" Icon="icon_feed.png" Route="LeaveHistory" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Submitted Leave Status" Icon="icon_feed.png" Route="LeaveStatus" ContentTemplate="{DataTemplate local:AboutPage}" />
+
+    </FlyoutItem>
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+
+        <ShellContent Title="Payment Request" Icon="icon_about.png" Route="Payment" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Payment Request List" Icon="icon_feed.png" Route="PaymentList" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Payment Request View" Icon="icon_feed.png" Route="PaymentView" ContentTemplate="{DataTemplate local:AboutPage}" />
+
+    </FlyoutItem>
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+
+        <ShellContent Title="Contract Worker Form(WIN)" Icon="icon_about.png" Route="Contract" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Contract Worker List" Icon="icon_feed.png" Route="ContractList" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Contract Worker View" Icon="icon_feed.png" Route="ContractView" ContentTemplate="{DataTemplate local:AboutPage}" />
+
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
@@ -96,10 +123,12 @@
         content you can do so by calling 
         await Shell.Current.GoToAsync("//LoginPage");
     -->
+    <!--
     <TabBar>
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     </TabBar>
-
+    -->
+    
     <!-- Optional Templates 
     // These may be provided inline as below or as separate classes.
 

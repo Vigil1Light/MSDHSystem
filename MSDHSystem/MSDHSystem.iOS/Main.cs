@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using MSDHSystem.iOS.Utils;
 using UIKit;
 
 namespace MSDHSystem.iOS
@@ -14,7 +15,7 @@ namespace MSDHSystem.iOS
         {
             // if you want to use a different Application Delegate class from "AppDelegate"
             // you can specify it here.
-            UIApplication.Main(args, null, typeof(AppDelegate));
+            UIApplication.Main(args, typeof(SessionManagerApp), typeof(AppDelegate));
         }
     }
 }

@@ -1,14 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="MSDHSystem.Views.LoginPage"
-             Shell.NavBarIsVisible="False">
-    <ContentPage.Content>
-        <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:MSDHSystem.Components"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:MSDHSystem.Extensions"
+    x:Class="MSDHSystem.Views.LoginPage"
+    ios:Page.UseSafeArea="True"
+    BackgroundImageSource="{local:ImageResource MSDHSystem.Resources.Images.back.png}">
+
+    <StackLayout>
+        <StackLayout>
+            <components:OutlinedMaterialEntry
+                PlaceholderText="Username"
+                Keyboard="Email"
+                ReturnType="Next"
+                LeadingIcon="{local:ImageResource MSDHSystem.Resources.Images.ic_user.png}"
+                Margin="75, 150, 75, 0"
+                Text="{Binding Users.username}"
+                IsEnabled="{Binding IsEnabled}"/>
+
+            <components:OutlinedMaterialEntry
+                PlaceholderText="Password"
+                Keyboard="Default"
+                ReturnType="Next"
+                IsPassword="True" 
+                LeadingIcon="{local:ImageResource MSDHSystem.Resources.Images.ic_password.png}"
+                Margin="75, 0, 75, 0"
+                Text="{Binding Users.password}"
+                IsEnabled="{Binding IsEnabled}"/>
+
+            <Button
+                Visual="Material"
+                BackgroundColor="DodgerBlue"
+                Text="Login"
+                Margin="75, 0, 75, 0"
+                Command="{Binding LoginCommand}"
+                IsEnabled="{Binding IsEnabled}"/>
+
+            <ActivityIndicator x:Name="activity"  
+                IsRunning="{Binding IsLoading}"  
+                IsEnabled="{Binding IsLoading}"  
+                IsVisible="{Binding IsLoading}"  
+                Color="DodgerBlue"  
+                BackgroundColor="Transparent"
+                Scale="2"
+                Margin="50"/>
+
         </StackLayout>
-    </ContentPage.Content>
+    </StackLayout>
 </ContentPage>
