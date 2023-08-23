@@ -14,6 +14,8 @@
     <None Remove="Resources\Images\ic_home.png" />
     <None Remove="Resources\Images\ic_password.png" />
     <None Remove="Resources\Images\ic_user.png" />
+    <None Remove="Resources\Images\logo.png" />
+    <None Remove="Resources\Images\user_profile.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +26,8 @@
     <EmbeddedResource Include="Resources\Images\ic_home.png" />
     <EmbeddedResource Include="Resources\Images\ic_password.png" />
     <EmbeddedResource Include="Resources\Images\ic_user.png" />
+    <EmbeddedResource Include="Resources\Images\logo.png" />
+    <EmbeddedResource Include="Resources\Images\user_profile.png" />
   </ItemGroup>
 
   <ItemGroup>

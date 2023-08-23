@@ -1,4 +1,5 @@
-﻿using MSDHSystem.Services;
+﻿using MSDHSystem.Models;
+using MSDHSystem.Services;
 using MSDHSystem.Views;
 using System;
 using Xamarin.Forms;
@@ -15,9 +16,11 @@ namespace MSDHSystem
 
             DependencyService.Register<MockDataStore>();
             var isLoogged = Xamarin.Essentials.SecureStorage.GetAsync("isLogged").Result;
+            var users = new Users();
+            users.username = Xamarin.Essentials.SecureStorage.GetAsync("username").Result;
             if (isLoogged == "1")
             {
-                MainPage = new AppShell();
+                MainPage = new AppShell(users);
             }
             else
             {

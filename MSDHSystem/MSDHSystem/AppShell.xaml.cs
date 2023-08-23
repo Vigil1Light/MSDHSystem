@@ -1,4 +1,5 @@
-﻿using MSDHSystem.ViewModels;
+﻿using MSDHSystem.Models;
+using MSDHSystem.ViewModels;
 using MSDHSystem.Views;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,12 @@ namespace MSDHSystem
 {
     public partial class AppShell : Xamarin.Forms.Shell
     {
-        public AppShell()
+        public AppShell(Users users)
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+            this.BindingContext = new AppShellViewModel(users);
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

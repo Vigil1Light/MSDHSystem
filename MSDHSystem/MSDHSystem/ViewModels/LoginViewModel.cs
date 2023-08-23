@@ -94,7 +94,8 @@ namespace MSDHSystem.ViewModels
                         UpdateUI(true);
                         DependencyService.Get<Toast>().Show("Login success");
                         await Xamarin.Essentials.SecureStorage.SetAsync("isLogged", "1");
-                        Application.Current.MainPage = new AppShell();
+                        await Xamarin.Essentials.SecureStorage.SetAsync("username", Users.username);
+                        Application.Current.MainPage = new AppShell(Users);
                         await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
                     }
                 }
@@ -105,7 +106,8 @@ namespace MSDHSystem.ViewModels
                         UpdateUI(true);
                         DependencyService.Get<Toast>().Show("Login success");
                         await Xamarin.Essentials.SecureStorage.SetAsync("isLogged", "1");
-                        Application.Current.MainPage = new AppShell();
+                        await Xamarin.Essentials.SecureStorage.SetAsync("username", Users.username);
+                        Application.Current.MainPage = new AppShell(Users);
                         await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
                     }
                     else

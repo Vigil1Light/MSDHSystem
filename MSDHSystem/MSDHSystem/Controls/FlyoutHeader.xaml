@@ -2,15 +2,9 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="MSDHSystem.Controls.FlyoutHeader"
-             HeightRequest="200">
-    <Grid BackgroundColor="Gray">
-        <Image Aspect="AspectFill" 
-               Source="ic_user.png" 
-               Opacity="0.6" />
-        <Label Text="Animals" 
-               TextColor="White" 
-               FontAttributes="Bold" 
-               HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center" />
-    </Grid>
+             HeightRequest="200"
+             xmlns:local="clr-namespace:MSDHSystem.Extensions">
+    <Image Aspect="AspectFill" 
+        Source="{local:ImageResource MSDHSystem.Resources.Images.logo.png}" 
+        Opacity="0.6" />
 </ContentView>
