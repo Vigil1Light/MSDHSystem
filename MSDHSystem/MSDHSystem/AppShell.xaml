@@ -6,7 +6,8 @@
        x:Class="MSDHSystem.AppShell"
        Shell.TabBarIsVisible="False"
        FlyoutHeaderBehavior="CollapseOnScroll"
-       xmlns:img="clr-namespace:MSDHSystem.Extensions">
+       xmlns:img="clr-namespace:MSDHSystem.Extensions"
+       ItemTemplate="{DataTemplate controls:FlyoutItemTemplate}">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.

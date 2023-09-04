@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="MSDHSystem.Controls.FlyoutItemTemplate">
+
+    <xct:Expander VerticalOptions="Center">
+        <xct:Expander.Header>
+            <Label Text="{Binding Title}"
+                       FontSize="16"
+                       TextColor="Black" />
+        </xct:Expander.Header>
+        <xct:Expander.Content>
+            <StackLayout>
+                <ListView x:Name="lstMenus" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"
+                            SeparatorColor="LightGray" SeparatorVisibility="Default" HasUnevenRows="True"
+                            ItemTapped="lstMenus_ItemTapped"
+                            BackgroundColor="LightCyan"
+                            ItemsSource="{Binding ItemSource}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" MinimumHeightRequest="100">
+                                    <Image Source="{Binding menuImage, Converter={StaticResource imageConverter}, ConverterParameter='FastFood.Resources.Images.Symbolic'}" WidthRequest="100" HeightRequest="75">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                        NumberOfTapsRequired="1" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <StackLayout Orientation="Vertical" Padding="1" VerticalOptions="Center">
+                                        <Label Text="{Binding menuTitle}" FontSize="25" TextColor="OrangeRed" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Label Text="Subitem 1" />
+                <Label Text="Subitem 2" />
+                <!-- Add more sub-items as needed -->
+            </StackLayout>
+        </xct:Expander.Content>
+    </xct:Expander>
+
+</Grid>
