@@ -6,8 +6,7 @@
        x:Class="MSDHSystem.AppShell"
        Shell.TabBarIsVisible="False"
        FlyoutHeaderBehavior="CollapseOnScroll"
-       xmlns:img="clr-namespace:MSDHSystem.Extensions"
-       ItemTemplate="{DataTemplate controls:FlyoutItemTemplate}">
+       xmlns:img="clr-namespace:MSDHSystem.Extensions">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -101,39 +100,31 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+    <ShellItem Route="Startpage" FlyoutItemIsVisible="False" >
+        <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" Route="home"/>
+    </ShellItem>
 
-        <ShellContent Title="Request For Leave" Icon="icon_about.png" Route="RequestForLeave" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Time Study" Icon="icon_feed.png" Route="TimeStudy" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Lab Time Study" Icon="icon_feed.png" Route="LabTimeStudy" ContentTemplate="{DataTemplate local:AboutPage}" />
-        
+    <FlyoutItem Title="Forms" Icon="icon_feed.png" Route="Forms">
+        <ShellContent ContentTemplate="{DataTemplate local:SubMenuPage}" />
     </FlyoutItem>
 
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-
-        <ShellContent Title="Your Leave Balance" Icon="icon_about.png" Route="LeaveBalance" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Your Leave History" Icon="icon_feed.png" Route="LeaveHistory" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Submitted Leave Status" Icon="icon_feed.png" Route="LeaveStatus" ContentTemplate="{DataTemplate local:AboutPage}" />
-
+    <FlyoutItem Title="Leave" Icon="icon_feed.png" Route="Leave">
+        <ShellContent ContentTemplate="{DataTemplate local:SubMenuPage}" />
     </FlyoutItem>
 
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-
-        <ShellContent Title="Payment Request" Icon="icon_about.png" Route="Payment" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Payment Request List" Icon="icon_feed.png" Route="PaymentList" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Payment Request View" Icon="icon_feed.png" Route="PaymentView" ContentTemplate="{DataTemplate local:AboutPage}" />
-
+    <FlyoutItem Title="F &amp; A Form" Icon="icon_feed.png" Route="FA">
+        <ShellContent ContentTemplate="{DataTemplate local:SubMenuPage}" />
     </FlyoutItem>
 
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-
-        <ShellContent Title="Contract Worker Form(WIN)" Icon="icon_about.png" Route="Contract" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Contract Worker List" Icon="icon_feed.png" Route="ContractList" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Contract Worker View" Icon="icon_feed.png" Route="ContractView" ContentTemplate="{DataTemplate local:AboutPage}" />
-
+    <FlyoutItem Title="Win Employees" Icon="icon_feed.png" Route="WIN Employees">
+        <ShellContent ContentTemplate="{DataTemplate local:SubMenuPage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
+
+    <MenuItem Text="Help Videos" StyleClass="MenuItemLayoutStyle" Clicked="OnHelpItem_Clicked">
+    </MenuItem>
+
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>
 

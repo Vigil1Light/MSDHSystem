@@ -2,6 +2,9 @@
 using MSDHSystem.Services;
 using MSDHSystem.Views;
 using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -26,6 +29,7 @@ namespace MSDHSystem
             {
                 MainPage = new LoginPage();
             }
+
         }
 
         protected override void OnStart()

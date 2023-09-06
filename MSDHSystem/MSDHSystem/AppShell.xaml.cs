@@ -13,16 +13,19 @@ namespace MSDHSystem
         public AppShell(Users users)
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             this.BindingContext = new AppShellViewModel(users);
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
-        {
+        { 
             await Xamarin.Essentials.SecureStorage.SetAsync("isLogged", "0");
             //await Shell.Current.GoToAsync("//LoginPage");
             App.Current.MainPage = new LoginPage();
+        }
+
+        private void OnHelpItem_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

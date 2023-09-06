@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:MSDHSystem.Extensions"
+             x:Class="MSDHSystem.Views.SubMenuPage"
+             xmlns:local="clr-namespace:MSDHSystem.Extensions"
+             Title="{Binding HeaderText}">
+    <ContentPage.Resources>
+        <extensions:EmbeddedToImageSourceConverter x:Key="imageConverter" />
+    </ContentPage.Resources>
+    <StackLayout>
+        <Image Source="{local:ImageResource MSDHSystem.Resources.Images.logo.png}" Aspect="AspectFill"></Image>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ListView x:Name="lstSubMenus" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"
+                SeparatorColor="LightGray" SeparatorVisibility="Default" HasUnevenRows="True"
+                ItemTapped="lstSubMenus_ItemTapped"
+                BackgroundColor="LightCyan"
+                IsEnabled="{Binding IsEnabled}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="1" VerticalOptions="Center" HorizontalOptions="Center">
+                                <Label Text="{Binding menuTitle}" FontSize="25" TextColor="MediumSlateBlue" FontAttributes="Bold"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ActivityIndicator HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           x:Name="activity"
+                           Color="MediumSlateBlue"  
+                           BackgroundColor="Transparent"
+                           Scale="2"
+                           IsRunning="{Binding IsLoading}"/>
+        </Grid>
+    </StackLayout>
+</ContentPage>

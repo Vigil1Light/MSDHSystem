@@ -7,6 +7,6 @@ namespace MSDHSystem.Models
     public class Menus
     {
         public string menuTitle { get; set; }
-        public string menuImage { get; set; }
+
     }
 }

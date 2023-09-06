@@ -9,10 +9,7 @@ namespace MSDHSystem.ViewModels
     {
         public AboutViewModel()
         {
-            Title = "About";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
+            Title = "Welcome";
         }
-
-        public ICommand OpenWebCommand { get; }
     }
 }
