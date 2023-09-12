@@ -13,6 +13,7 @@ namespace MSDHSystem
         public AppShell(Users users)
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(TimeStudyPage), typeof(TimeStudyPage));
             this.BindingContext = new AppShellViewModel(users);
         }
 

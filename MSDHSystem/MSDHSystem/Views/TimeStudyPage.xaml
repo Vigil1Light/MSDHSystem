@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:MSDHSystem.Extensions"
+             x:Class="MSDHSystem.Views.TimeStudyPage"
+             xmlns:local="clr-namespace:MSDHSystem.Extensions"
+             Title="Time Study Date Selection">
+    <ContentPage.Resources>
+        <extensions:EmbeddedToImageSourceConverter x:Key="imageConverter" />
+    </ContentPage.Resources>
+    <StackLayout>
+        <Image Source="{local:ImageResource MSDHSystem.Resources.Images.logo.png}" Aspect="AspectFill"></Image>
+        <Label HorizontalTextAlignment="Center" Text="Time Study Date Selection" FontSize="Title" TextColor="#96d1ff"/>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ListView x:Name="lstTimeStudyDates" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"
+                SeparatorColor="LightGray" SeparatorVisibility="Default" HasUnevenRows="True"
+                ItemTapped="lstTimeStudyDates_ItemTapped"
+                BackgroundColor="LightCyan"
+                IsEnabled="{Binding IsEnabled}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="1" VerticalOptions="Center" HorizontalOptions="Center">
+                                <Label Text="{Binding month}" FontSize="15" TextColor="MediumSlateBlue" FontAttributes="Bold"/>
+                                <Label Text=":" FontSize="15" TextColor="MediumSlateBlue" FontAttributes="Bold"/>
+                                <Label Text="{Binding startDate}" FontSize="15" TextColor="MediumSlateBlue" FontAttributes="Bold"/>
+                                <Label Text="-" FontSize="15" TextColor="MediumSlateBlue" FontAttributes="Bold"/>
+                                <Label Text="{Binding endDate}" FontSize="15" TextColor="MediumSlateBlue" FontAttributes="Bold"/>
+                                <Label Text="{Binding status}" FontSize="15" TextColor="Red" FontAttributes="Bold"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ActivityIndicator HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           x:Name="activity"
+                           Color="MediumSlateBlue"  
+                           BackgroundColor="Transparent"
+                           Scale="2"
+                           IsRunning="{Binding IsLoading}"/>
+        </Grid>
+    </StackLayout>
+</ContentPage>

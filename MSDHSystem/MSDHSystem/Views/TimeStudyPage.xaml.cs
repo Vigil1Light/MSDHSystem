@@ -1,5 +1,4 @@
-﻿using Microsoft.SqlServer.Server;
-using MSDHSystem.Models;
+﻿using MSDHSystem.Models;
 using MSDHSystem.Utils;
 using MSDHSystem.ViewModels;
 using System;
@@ -15,30 +14,30 @@ using Xamarin.Forms.Xaml;
 namespace MSDHSystem.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SubMenuPage : ContentPage
+	public partial class TimeStudyPage : ContentPage
 	{
-        public SubMenuPage()
-        {
-            InitializeComponent();
-            this.BindingContext = new SubMenuViewModel(Shell.Current.CurrentItem.Route, lstSubMenus);   
+		public TimeStudyPage ()
+		{
+			InitializeComponent ();
+            this.BindingContext = new TimeStudyViewModel(lstTimeStudyDates);
         }
-
-        private async void lstSubMenus_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void lstTimeStudyDates_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-
-            try
+            if (App.Current.MainPage.Navigation.NavigationStack.Count == 1)
             {
-                var selectedProduct = (Menus)e.Item;
-                if (selectedProduct.menuTitle == "Time Study")
+                IsLoading(true);
+                try
                 {
-                    await Shell.Current.GoToAsync(nameof(TimeStudyPage));
+                    var selectedProduct = (TimeStudyDate)e.Item;
+                    Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
+                    newThread.Start(selectedProduct.month);
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Error", ex.Message.ToString(), "Ok");
                 }
             }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", ex.Message.ToString(), "Ok");
-            }
-            lstSubMenus.SelectedItem = null;
+            lstTimeStudyDates.SelectedItem = null;
         }
 
         private void LongRunningTask(object parameter)
@@ -59,7 +58,7 @@ namespace MSDHSystem.Views
 
         void IsLoading(bool state)
         {
-            lstSubMenus.IsEnabled = !state;
+            lstTimeStudyDates.IsEnabled = !state;
             activity.IsRunning = state;
         }
     }
