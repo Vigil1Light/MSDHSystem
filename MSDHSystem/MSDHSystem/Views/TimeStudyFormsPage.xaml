@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:MSDHSystem.Extensions"
+             x:Class="MSDHSystem.Views.TimeStudyFormsPage"
+             xmlns:local="clr-namespace:MSDHSystem.Extensions"
+             Title="Time Study">
+    <ContentPage.Resources>
+        <extensions:EmbeddedToImageSourceConverter x:Key="imageConverter" />
+    </ContentPage.Resources>
+    <StackLayout>
+        <Image Source="{local:ImageResource MSDHSystem.Resources.Images.logo.png}" Aspect="AspectFill"></Image>
+        <Label HorizontalTextAlignment="Center" Text="Time Study" FontSize="Title" TextColor="#96d1ff"/>
+        <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Name:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding Name}"></Label>
+                <Label Text="Classification:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding Classification}"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Org:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding Orgcode}"></Label>
+                <Label Text="PIN:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding Pin}"></Label>
+                <Label Text="PID No:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding PIDnumber}"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="First Week:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding StartDate}"></Label>
+                <Label Text="To:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding EndDate}"></Label>
+            </StackLayout>
+        </StackLayout>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ActivityIndicator HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           x:Name="activity"
+                           Color="MediumSlateBlue"  
+                           BackgroundColor="Transparent"
+                           Scale="2"
+                           IsRunning="{Binding IsLoading}"/>
+        </Grid>
+    </StackLayout>
+</ContentPage>

@@ -23,19 +23,15 @@ namespace MSDHSystem.Views
         }
         private async void lstTimeStudyDates_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            if (App.Current.MainPage.Navigation.NavigationStack.Count == 1)
+            try
             {
-                IsLoading(true);
-                try
-                {
-                    var selectedProduct = (TimeStudyDate)e.Item;
-                    Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
-                    newThread.Start(selectedProduct.month);
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Error", ex.Message.ToString(), "Ok");
-                }
+                var selectedProduct = (TimeStudyDate)e.Item;
+                Application.Current.Properties["TimeStudyDateValue"] = selectedProduct;
+                await Shell.Current.GoToAsync($"{nameof(TimeStudyFormsPage)}");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message.ToString(), "Ok");
             }
             lstTimeStudyDates.SelectedItem = null;
         }

@@ -14,12 +14,14 @@ namespace MSDHSystem
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(TimeStudyPage), typeof(TimeStudyPage));
+            Routing.RegisterRoute(nameof(TimeStudyFormsPage), typeof(TimeStudyFormsPage));
             this.BindingContext = new AppShellViewModel(users);
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         { 
             await Xamarin.Essentials.SecureStorage.SetAsync("isLogged", "0");
+            await Xamarin.Essentials.SecureStorage.SetAsync("username", "");
             //await Shell.Current.GoToAsync("//LoginPage");
             App.Current.MainPage = new LoginPage();
         }
