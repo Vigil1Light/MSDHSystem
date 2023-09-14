@@ -62,7 +62,6 @@ namespace MSDHSystem.ViewModels
                             month = reader.GetString(2),
                             startDate = reader.GetString(3),
                             endDate = reader.GetString(4),
-                            status = reader.GetString(5)
                         });
                     }   
                 }
