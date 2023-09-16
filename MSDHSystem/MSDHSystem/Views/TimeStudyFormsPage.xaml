@@ -260,7 +260,8 @@
                               x:Name="staticSuggestBox"
                               HorizontalOptions="Center"
                               VerticalOptions="CenterAndExpand"
-                              TextChanged="AutoSuggestBox_TextChanged"/>
+                              TextChanged="AutoSuggestBox_TextChanged"
+                              Text="{Binding SupervisorEmail}"/>
             <Button Grid.Row="2" Grid.Column="0" Text="Save For Later" Command="{Binding SaveForLater_Clicked}"></Button>
             <Button Grid.Row="2" Grid.Column="1" Text="Submit For Review" Command="{Binding SubmitForReview_Clicked}"></Button>
         </Grid>

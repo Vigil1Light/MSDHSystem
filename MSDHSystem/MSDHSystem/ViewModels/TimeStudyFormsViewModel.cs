@@ -23,6 +23,7 @@ namespace MSDHSystem.ViewModels
         private string pidnumber;
         private string startDate;
         private string endDate;
+        private string supervisoremail;
 
         public bool IsLoading
         {
@@ -70,6 +71,12 @@ namespace MSDHSystem.ViewModels
         {
             get { return endDate; }
             set => SetProperty(ref endDate, value);
+        }
+
+        public string SupervisorEmail
+        {
+            get { return supervisoremail; }
+            set => SetProperty(ref supervisoremail, value);
         }
 
         public List<string> programs = new List<string>();

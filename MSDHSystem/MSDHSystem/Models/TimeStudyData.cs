@@ -16,6 +16,6 @@ namespace MSDHSystem.Models
 
         public List<string> Activities { get; set;}
 
-
+        public string SupervisorEmail { get; set; }
     }
 }
