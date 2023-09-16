@@ -31,7 +31,9 @@ namespace MSDHSystem.Views
                 var selectedProduct = (Menus)e.Item;
                 if (selectedProduct.menuTitle == "Time Study")
                 {
-                    await Shell.Current.GoToAsync(nameof(TimeStudyPage));
+                    IsLoading(true);
+                    Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
+                    newThread.Start();
                 }
             }
             catch (Exception ex)
@@ -48,11 +50,12 @@ namespace MSDHSystem.Views
 
             // Perform the long-running operation here
             // ...
-
+            
             // Update UI from the background thread using Device.BeginInvokeOnMainThread
-            Device.BeginInvokeOnMainThread(() =>
+            Device.BeginInvokeOnMainThread(async () =>
             {
                 // Update UI to indicate that the operation has completed
+                await Shell.Current.GoToAsync(nameof(TimeStudyPage));
                 IsLoading(false);
             });
         }

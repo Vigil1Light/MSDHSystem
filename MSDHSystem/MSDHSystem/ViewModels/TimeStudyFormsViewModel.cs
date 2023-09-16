@@ -1,4 +1,5 @@
-﻿using MSDHSystem.Models;
+﻿using dotMorten.Xamarin.Forms;
+using MSDHSystem.Models;
 using MSDHSystem.Utils;
 using MSDHSystem.Views;
 using System;
@@ -71,37 +72,18 @@ namespace MSDHSystem.ViewModels
             set => SetProperty(ref endDate, value);
         }
 
-        public TimeStudyFormsViewModel()
+        public ObservableCollection<string> Programs;
+
+        public ObservableCollection<string> Activities;
+
+        public TimeStudyFormsViewModel(ListView lv, AutoSuggestBox asb)
         {
-            UpdateUI(false);
             if (Application.Current.Properties.ContainsKey("TimeStudyDateValue"))
             {
                 TimeStudyDate timeStudyDate = (TimeStudyDate)Application.Current.Properties["TimeStudyDateValue"];
-                Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
-                newThread.Start(timeStudyDate);
+                GetValue(timeStudyDate);
                 AppSessionManager.Instance.StartSession();
             }  
-        }
-
-
-        private void LongRunningTask(object parameter)
-        {
-            // Get the parameter value
-            TimeStudyDate timeStudyDate = (TimeStudyDate)parameter;
-            // Perform the long-running operation here
-            // ...
-            // Update UI from the background thread using Device.BeginInvokeOnMainThread
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                // Update UI to indicate that the operation has completed
-                GetValue(timeStudyDate);
-                UpdateUI(true);
-            });
-        }
-
-        public void UpdateUI(bool state)
-        {
-            IsLoading = !state;
         }
 
         private void GetValue(TimeStudyDate timeStudyDate)
@@ -128,7 +110,45 @@ namespace MSDHSystem.ViewModels
                     }
                 }
                 reader.Close();
+
+                strQuery = "SELECT * FROM TimeStudyProgram ORDER BY ProgramTitleID ASC";
+                command = new SqlCommand(strQuery, con);
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Programs.Add(reader["ProgramName"].ToString());
+                    }
+                }
+                reader.Close() ;
+
+                strQuery = "SELECT * FROM TimeStudyActivity";
+                command = new SqlCommand(strQuery, con);
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Programs.Add(reader["ActivityName"].ToString());
+                    }
+                }
+                reader.Close();
+
+                strQuery = "SELECT * FROM TimeStudyProgram ORDER BY ProgramTitleID ASC";
+                command = new SqlCommand(strQuery, con);
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Programs.Add(reader["ProgramName"].ToString());
+                    }
+                }
+                reader.Close();
+
                 con.Close();
+
             }
             catch (Exception ex)
             {

@@ -27,7 +27,9 @@ namespace MSDHSystem.Views
             {
                 var selectedProduct = (TimeStudyDate)e.Item;
                 Application.Current.Properties["TimeStudyDateValue"] = selectedProduct;
-                await Shell.Current.GoToAsync($"{nameof(TimeStudyFormsPage)}");
+                IsLoading(true);
+                Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
+                newThread.Start();
             }
             catch (Exception ex)
             {
@@ -45,9 +47,10 @@ namespace MSDHSystem.Views
             // ...
 
             // Update UI from the background thread using Device.BeginInvokeOnMainThread
-            Device.BeginInvokeOnMainThread(() =>
+            Device.BeginInvokeOnMainThread(async () =>
             {
                 // Update UI to indicate that the operation has completed
+                await Shell.Current.GoToAsync($"{nameof(TimeStudyFormsPage)}");
                 IsLoading(false);
             });
         }

@@ -30,15 +30,11 @@ namespace MSDHSystem.ViewModels
             set => SetProperty(ref isenabled, value);
         }
 
-        public ListView lstMenus_instance;
 
         public TimeStudyViewModel(ListView lstMenus)
         {
-            lstMenus_instance = lstMenus;
-            UpdateUI(false);
             AddMenus();
-            Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
-            newThread.Start();
+            lstMenus.ItemsSource = obMenus;
             AppSessionManager.Instance.StartSession();
         }
 
@@ -74,27 +70,5 @@ namespace MSDHSystem.ViewModels
             }
         }
 
-        private void LongRunningTask(object parameter)
-        {
-            // Get the parameter value
-
-            // Perform the long-running operation here
-            // ...
-            AddMenus();
-            // Update UI from the background thread using Device.BeginInvokeOnMainThread
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                // Update UI to indicate that the operation has completed
-                lstMenus_instance.ItemsSource = obMenus;
-                UpdateUI(true);
-            });
-        }
-
-        public void UpdateUI(bool state)
-        {
-
-            IsEnabled = state;
-            IsLoading = !state;
-        }
     }
 }
