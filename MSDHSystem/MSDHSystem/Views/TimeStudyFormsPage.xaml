@@ -261,8 +261,8 @@
                               HorizontalOptions="Center"
                               VerticalOptions="CenterAndExpand"
                               TextChanged="AutoSuggestBox_TextChanged"/>
-            <Button Grid.Row="2" Grid.Column="0" Text="Save For Later"></Button>
-            <Button Grid.Row="2" Grid.Column="1" Text="Submit For Review"></Button>
+            <Button Grid.Row="2" Grid.Column="0" Text="Save For Later" Command="{Binding SaveForLater_Clicked}"></Button>
+            <Button Grid.Row="2" Grid.Column="1" Text="Submit For Review" Command="{Binding SubmitForReview_Clicked}"></Button>
         </Grid>
     </StackLayout>
 </ContentPage>

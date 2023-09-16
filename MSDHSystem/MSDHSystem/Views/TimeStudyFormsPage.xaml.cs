@@ -1,5 +1,6 @@
 ﻿using dotMorten.Xamarin.Forms;
 using MSDHSystem.Models;
+using MSDHSystem.Utils;
 using MSDHSystem.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace MSDHSystem.Views
         {
             InitializeComponent();
             GetEmailValue();
-            this.BindingContext = new TimeStudyFormsViewModel(lstTimeStudy, staticSuggestBox);
+            this.BindingContext = new TimeStudyFormsViewModel();
         }
 
         private void AutoSuggestBox_TextChanged(object sender, AutoSuggestBoxTextChangedEventArgs e)

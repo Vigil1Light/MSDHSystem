@@ -76,10 +76,14 @@ namespace MSDHSystem.ViewModels
 
         public List<string> activities = new List<string>();
 
+        public Command SaveForLater_Clicked { get; }
+        public Command SubmitForReview_Clicked { get; }
         public ObservableCollection<TimeStudyData> TimeStudyItems { get; set; }
 
-        public TimeStudyFormsViewModel(ListView lv, AutoSuggestBox asb)
+        public TimeStudyFormsViewModel()
         {
+            SaveForLater_Clicked = new Command(OnSaveForLaterClicked);
+            SubmitForReview_Clicked = new Command(OnSubmitForReviewClicked);
             TimeStudyItems = new ObservableCollection<TimeStudyData>();
             if (Application.Current.Properties.ContainsKey("TimeStudyDateValue"))
             {
@@ -87,6 +91,16 @@ namespace MSDHSystem.ViewModels
                 GetValue(timeStudyDate);
                 AppSessionManager.Instance.StartSession();
             }  
+        }
+
+        private void OnSubmitForReviewClicked(object obj)
+        {
+            
+        }
+
+        private void OnSaveForLaterClicked(object obj)
+        {
+            DependencyService.Get<Toast>().Show(TimeStudyItems[0].Program);
         }
 
         private void GetValue(TimeStudyDate timeStudyDate)
@@ -114,14 +128,20 @@ namespace MSDHSystem.ViewModels
                 }
                 reader.Close();
 
-                strQuery = "SELECT * FROM TimeStudyProgram ORDER BY ProgramTitleID ASC";
+                strQuery = "SELECT ProgramTitleID, ProgramTitle, ProgramCode, ProgramName FROM TimeStudyProgram AS a INNER JOIN TimeStudyProgramTitle AS b ON a.ProgramTitleID = b.Seq ORDER BY a.ProgramTitleID ASC";
                 command = new SqlCommand(strQuery, con);
                 reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
+                    string stemp = "";
                     while (reader.Read())
                     {
+                        if(stemp != reader["ProgramTitle"].ToString())
+                        {
+                            programs.Add("------" + reader["ProgramTitle"].ToString() + "------");
+                        }
                         programs.Add(reader["ProgramCode"].ToString() + " " + reader["ProgramName"].ToString());
+                        stemp = reader["ProgramTitle"].ToString();
                     }
                 }
                 reader.Close();
