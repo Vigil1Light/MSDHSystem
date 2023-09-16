@@ -257,16 +257,16 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Text="Supervisor Complete Email:" FontSize="Body" HorizontalOptions="End" VerticalOptions="Center"></Label>
-            <forms:AutoSuggestBox Grid.Row="0" Grid.Column="1" PlaceholderText="" 
+            <Label Grid.Row="0" Grid.Column="0" Text="Employee Signature:" FontSize="Body" HorizontalOptions="End" VerticalOptions="Center"></Label>
+            <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsChecked}" VerticalOptions="Center"></CheckBox>
+            <Label Grid.Row="1" Grid.Column="0" Text="Supervisor Complete Email:" FontSize="Body" HorizontalOptions="End" VerticalOptions="Center"></Label>
+            <forms:AutoSuggestBox Grid.Row="1" Grid.Column="1" PlaceholderText="" 
                               WidthRequest="200"
                               x:Name="staticSuggestBox"
                               HorizontalOptions="Center"
                               VerticalOptions="CenterAndExpand"
                               TextChanged="AutoSuggestBox_TextChanged"
                               FlowDirection="MatchParent"/>
-            <Label Grid.Row="1" Grid.Column="0" Text="Employee Signature:" FontSize="Body" HorizontalOptions="End" VerticalOptions="Center"></Label>
-            <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding IsChecked}" VerticalOptions="Center"></CheckBox>
             <Button Grid.Row="2" Grid.Column="0" Text="Save For Later"></Button>
             <Button Grid.Row="2" Grid.Column="1" Text="Submit For Review"></Button>
         </Grid>
