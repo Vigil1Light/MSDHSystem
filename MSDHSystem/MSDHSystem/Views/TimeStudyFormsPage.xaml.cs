@@ -23,7 +23,7 @@ namespace MSDHSystem.Views
         {
             InitializeComponent();
             GetEmailValue();
-            this.BindingContext = new TimeStudyFormsViewModel(lstTimeStudy, staticSuggestBox);           
+            this.BindingContext = new TimeStudyFormsViewModel(lstTimeStudy, staticSuggestBox);
         }
 
         private void AutoSuggestBox_TextChanged(object sender, AutoSuggestBoxTextChangedEventArgs e)

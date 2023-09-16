@@ -72,12 +72,15 @@ namespace MSDHSystem.ViewModels
             set => SetProperty(ref endDate, value);
         }
 
-        public ObservableCollection<string> Programs;
+        public List<string> programs = new List<string>();
 
-        public ObservableCollection<string> Activities;
+        public List<string> activities = new List<string>();
+
+        public ObservableCollection<TimeStudyData> TimeStudyItems { get; set; }
 
         public TimeStudyFormsViewModel(ListView lv, AutoSuggestBox asb)
         {
+            TimeStudyItems = new ObservableCollection<TimeStudyData>();
             if (Application.Current.Properties.ContainsKey("TimeStudyDateValue"))
             {
                 TimeStudyDate timeStudyDate = (TimeStudyDate)Application.Current.Properties["TimeStudyDateValue"];
@@ -101,7 +104,7 @@ namespace MSDHSystem.ViewModels
                     while (reader.Read())
                     {
                         Name = reader["Login_Name"].ToString();
-                        Classification = reader["location"].ToString();
+                        Classification = reader["location"].ToString() + "/" + reader["job_name"].ToString();
                         Orgcode = reader["org_code"].ToString();
                         Pin = reader["pin_win_nmbr"].ToString();
                         PIDnumber = reader["pid_nmbr"].ToString();
@@ -118,10 +121,10 @@ namespace MSDHSystem.ViewModels
                 {
                     while (reader.Read())
                     {
-                        Programs.Add(reader["ProgramName"].ToString());
+                        programs.Add(reader["ProgramCode"].ToString() + " " + reader["ProgramName"].ToString());
                     }
                 }
-                reader.Close() ;
+                reader.Close();
 
                 strQuery = "SELECT * FROM TimeStudyActivity";
                 command = new SqlCommand(strQuery, con);
@@ -130,22 +133,20 @@ namespace MSDHSystem.ViewModels
                 {
                     while (reader.Read())
                     {
-                        Programs.Add(reader["ActivityName"].ToString());
+                        activities.Add(reader["ActivityName"].ToString());
                     }
                 }
                 reader.Close();
 
-                strQuery = "SELECT * FROM TimeStudyProgram ORDER BY ProgramTitleID ASC";
-                command = new SqlCommand(strQuery, con);
-                reader = command.ExecuteReader();
-                if (reader.HasRows)
+                for(int i = 0; i < 19; i++)
                 {
-                    while (reader.Read())
+                    TimeStudyItems.Add(new TimeStudyData
                     {
-                        Programs.Add(reader["ProgramName"].ToString());
-                    }
+                        No = i + 1,
+                        Programs = programs,
+                        Activities = activities,
+                    });
                 }
-                reader.Close();
 
                 con.Close();
 
