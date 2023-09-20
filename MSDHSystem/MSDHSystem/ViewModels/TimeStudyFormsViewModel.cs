@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace MSDHSystem.ViewModels
@@ -85,7 +86,20 @@ namespace MSDHSystem.ViewModels
 
         public Command SaveForLater_Clicked { get; }
         public Command SubmitForReview_Clicked { get; }
-        public ObservableCollection<TimeStudyData> TimeStudyItems { get; set; }
+
+        private ObservableCollection<TimeStudyData> timeStudyItems;
+        public ObservableCollection<TimeStudyData> TimeStudyItems
+        {
+            get { return timeStudyItems; }
+            set
+            {
+                if (timeStudyItems != value)
+                {
+                    timeStudyItems = value;
+                    OnPropertyChanged(nameof(TimeStudyItems));
+                }
+            }
+        }
 
         public TimeStudyFormsViewModel()
         {
@@ -107,7 +121,7 @@ namespace MSDHSystem.ViewModels
 
         private void OnSaveForLaterClicked(object obj)
         {
-            DependencyService.Get<Toast>().Show(TimeStudyItems[0].Program);
+            DependencyService.Get<Toast>().Show(TimeStudyItems[0].M1.ToString());
         }
 
         private void GetValue(TimeStudyDate timeStudyDate)
@@ -172,7 +186,7 @@ namespace MSDHSystem.ViewModels
                         No = i + 1,
                         Programs = programs,
                         Activities = activities,
-                    });
+                });
                 }
 
                 con.Close();

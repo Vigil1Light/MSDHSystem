@@ -5,6 +5,7 @@
              x:Class="MSDHSystem.Views.TimeStudyFormsPage"
              xmlns:local="clr-namespace:MSDHSystem.Extensions"
              xmlns:forms="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"
+             xmlns:behaviors="clr-namespace:Xamarin.CommunityToolkit.Behaviors;assembly=Xamarin.CommunityToolkit"
              Title="Time Study">
     <ContentPage.Resources>
         <extensions:EmbeddedToImageSourceConverter x:Key="imageConverter" />
@@ -98,86 +99,92 @@
                                                 <ColumnDefinition Width="0.625*" />
                                                 <ColumnDefinition Width="0.625*" />
                                             </Grid.ColumnDefinitions>
-                                            <Entry Placeholder="H" Text="" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center">
+                                            <Entry Placeholder="H" Text="{Binding H1, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            </Entry>
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M1, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
-                                                    <x:Array Type="{x:Type x:Int16}">
-                                                        <x:Int16>15</x:Int16>
-                                                        <x:Int16>30</x:Int16>
-                                                        <x:Int16>45</x:Int16>
+                                                    <x:Array Type="{x:Type x:String}">
+                                                        <x:String>0</x:String>
+                                                        <x:String>15</x:String>
+                                                        <x:String>30</x:String>
+                                                        <x:String>45</x:String>
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center">
+                                            <Entry Placeholder="H" Text="{Binding H2, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            </Entry>
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M2, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
-                                                    <x:Array Type="{x:Type x:Int16}">
-                                                        <x:Int16>15</x:Int16>
-                                                        <x:Int16>30</x:Int16>
-                                                        <x:Int16>45</x:Int16>
+                                                    <x:Array Type="{x:Type x:String}">
+                                                        <x:String>0</x:String>
+                                                        <x:String>15</x:String>
+                                                        <x:String>30</x:String>
+                                                        <x:String>45</x:String>
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center">
+                                            <Entry Placeholder="H" Text="{Binding H3, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            </Entry>
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M3, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
-                                                    <x:Array Type="{x:Type x:Int16}">
-                                                        <x:Int16>15</x:Int16>
-                                                        <x:Int16>30</x:Int16>
-                                                        <x:Int16>45</x:Int16>
+                                                    <x:Array Type="{x:Type x:String}">
+                                                        <x:String>0</x:String>
+                                                        <x:String>15</x:String>
+                                                        <x:String>30</x:String>
+                                                        <x:String>45</x:String>
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center">
+                                            <Entry Placeholder="H" Text="{Binding H4, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            </Entry>
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M4, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
-                                                    <x:Array Type="{x:Type x:Int16}">
-                                                        <x:Int16>15</x:Int16>
-                                                        <x:Int16>30</x:Int16>
-                                                        <x:Int16>45</x:Int16>
+                                                    <x:Array Type="{x:Type x:String}">
+                                                        <x:String>0</x:String>
+                                                        <x:String>15</x:String>
+                                                        <x:String>30</x:String>
+                                                        <x:String>45</x:String>
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="" HorizontalOptions="Fill" Grid.Column="8" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="9" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center">
+                                            <Entry Placeholder="H" Text="{Binding H5, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="8" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            </Entry>
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="9" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M5, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
-                                                    <x:Array Type="{x:Type x:Int16}">
-                                                        <x:Int16>15</x:Int16>
-                                                        <x:Int16>30</x:Int16>
-                                                        <x:Int16>45</x:Int16>
+                                                    <x:Array Type="{x:Type x:String}">
+                                                        <x:String>0</x:String>
+                                                        <x:String>15</x:String>
+                                                        <x:String>30</x:String>
+                                                        <x:String>45</x:String>
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="" HorizontalOptions="Fill" Grid.Column="10" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="11" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center">
+                                            <Entry Placeholder="H" Text="{Binding H6, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="10" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            </Entry>
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="11" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M6, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
-                                                    <x:Array Type="{x:Type x:Int16}">
-                                                        <x:Int16>15</x:Int16>
-                                                        <x:Int16>30</x:Int16>
-                                                        <x:Int16>45</x:Int16>
+                                                    <x:Array Type="{x:Type x:String}">
+                                                        <x:String>0</x:String>
+                                                        <x:String>15</x:String>
+                                                        <x:String>30</x:String>
+                                                        <x:String>45</x:String>
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="" HorizontalOptions="Fill" Grid.Column="12" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="13" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center">
+                                            <Entry Placeholder="H" Text="{Binding H7, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="12" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            </Entry>
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="13" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M7, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
-                                                    <x:Array Type="{x:Type x:Int16}">
-                                                        <x:Int16>15</x:Int16>
-                                                        <x:Int16>30</x:Int16>
-                                                        <x:Int16>45</x:Int16>
+                                                    <x:Array Type="{x:Type x:String}">
+                                                        <x:String>0</x:String>
+                                                        <x:String>15</x:String>
+                                                        <x:String>30</x:String>
+                                                        <x:String>45</x:String>
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="" HorizontalOptions="Fill" Grid.Column="14" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="15" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center">
-                                                <Picker.ItemsSource>
-                                                    <x:Array Type="{x:Type x:Int16}">
-                                                        <x:Int16>15</x:Int16>
-                                                        <x:Int16>30</x:Int16>
-                                                        <x:Int16>45</x:Int16>
-                                                    </x:Array>
-                                                </Picker.ItemsSource>
-                                            </Picker>
+                                            <Label Text="{Binding TotalHours}" HorizontalOptions="Fill" Grid.Column="14" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding TotalMins}" HorizontalOptions="Fill" Grid.Column="15" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                                         </Grid>
                                     </Grid>
                                 </Grid>
