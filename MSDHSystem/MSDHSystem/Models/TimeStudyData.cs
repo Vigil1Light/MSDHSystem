@@ -17,20 +17,20 @@ namespace MSDHSystem.Models
         public List<string> Programs { get; set;}
         public List<string> Activities { get; set;}
 
-        private string h1 = "0";
-        private string h2 = "0";
-        private string h3 = "0";
-        private string h4 = "0";
-        private string h5 = "0";
-        private string h6 = "0";
-        private string h7 = "0";
-        private string m1 = "0";
-        private string m2 = "0";
-        private string m3 = "0";
-        private string m4 = "0";
-        private string m5 = "0";
-        private string m6 = "0";
-        private string m7 = "0";
+        private string h1 ;
+        private string h2 ;
+        private string h3 ;
+        private string h4 ;
+        private string h5 ;
+        private string h6 ;
+        private string h7 ;
+        private string m1 ;
+        private string m2 ;
+        private string m3 ;
+        private string m4 ;
+        private string m5 ;
+        private string m6 ;
+        private string m7 ;
         private string totalHours { get; set; }
         private string totalMins { get; set; }
 
