@@ -5,7 +5,6 @@
              x:Class="MSDHSystem.Views.TimeStudyFormsPage"
              xmlns:local="clr-namespace:MSDHSystem.Extensions"
              xmlns:forms="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"
-             xmlns:behaviors="clr-namespace:Xamarin.CommunityToolkit.Behaviors;assembly=Xamarin.CommunityToolkit"
              Title="Time Study">
     <ContentPage.Resources>
         <extensions:EmbeddedToImageSourceConverter x:Key="imageConverter" />

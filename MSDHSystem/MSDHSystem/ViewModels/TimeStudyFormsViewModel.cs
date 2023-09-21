@@ -1,15 +1,9 @@
-﻿using dotMorten.Xamarin.Forms;
-using MSDHSystem.Models;
+﻿using MSDHSystem.Models;
 using MSDHSystem.Utils;
-using MSDHSystem.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace MSDHSystem.ViewModels
@@ -149,7 +143,7 @@ namespace MSDHSystem.ViewModels
                 }
                 reader.Close();
 
-                strQuery = "SELECT ProgramTitleID, ProgramTitle, ProgramCode, ProgramName FROM TimeStudyProgram AS a INNER JOIN TimeStudyProgramTitle AS b ON a.ProgramTitleID = b.Seq ORDER BY a.ProgramTitleID ASC";
+                strQuery = "SELECT a.ProgramTitleID, b.ProgramName as ProgramTitle, a.ProgramCode, a.ProgramName FROM TimeStudyProgram AS a INNER JOIN TimeStudyProgramTitle AS b ON a.ProgramTitleID = b.Seq ORDER BY a.ProgramTitleID ASC";
                 command = new SqlCommand(strQuery, con);
                 reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -174,7 +168,7 @@ namespace MSDHSystem.ViewModels
                 {
                     while (reader.Read())
                     {
-                        activities.Add(reader["ActivityName"].ToString());
+                        activities.Add(reader["ActivityNumber"].ToString() + " " + reader["ActivityName"].ToString());
                     }
                 }
                 reader.Close();
