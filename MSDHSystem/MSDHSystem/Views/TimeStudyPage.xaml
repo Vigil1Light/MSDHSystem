@@ -26,6 +26,7 @@
                                 <Label Text="{Binding startDate}" FontSize="15" TextColor="MediumSlateBlue" FontAttributes="Bold"/>
                                 <Label Text="-" FontSize="15" TextColor="MediumSlateBlue" FontAttributes="Bold"/>
                                 <Label Text="{Binding endDate}" FontSize="15" TextColor="MediumSlateBlue" FontAttributes="Bold"/>
+                                <Label Text="{Binding status}" FontSize="15" TextColor="OrangeRed" FontAttributes="Bold"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

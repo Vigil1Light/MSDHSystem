@@ -53,11 +53,20 @@ namespace MSDHSystem.ViewModels
                 {
                     while (reader.Read())
                     {
+                        List<int> Date = reader["Value2"].ToString().Split('/').Select(int.Parse).ToList();
+                        DateTime dbDate = new DateTime(Date[2], Date[0], Date[1]);
+                        string tmpStatus = "";
+                        if (DateTime.Compare(dbDate, DateTime.Now) >= 0)
+                            tmpStatus = "(New Time Study)";
+                        else if ((bool)reader["Inactive"] == true)
+                            tmpStatus = "(Waiting Approve)";
+                        else tmpStatus = "(Not Started)";
                         obMenus.Add(new TimeStudyDate
                         {
-                            month = reader.GetString(2),
-                            startDate = reader.GetString(3),
-                            endDate = reader.GetString(4),
+                            month = reader["Value1"].ToString(),
+                            startDate = reader["Value2"].ToString(),
+                            endDate = reader["Value3"].ToString(),
+                            status = tmpStatus,      
                         });
                     }   
                 }
