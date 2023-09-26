@@ -221,6 +221,8 @@ namespace MSDHSystem.Models
 
             int m1Value, m2Value, m3Value, m4Value, m5Value, m6Value, m7Value;
 
+            int tHours, tMinutes;
+
             if (string.IsNullOrEmpty(H1)) h1Value = 0;
             else h1Value = Convert.ToInt32(H1);
             if (string.IsNullOrEmpty(H2)) h2Value = 0;
@@ -251,8 +253,10 @@ namespace MSDHSystem.Models
             if (string.IsNullOrEmpty(M7)) m7Value = 0;
             else m7Value = Convert.ToInt32(M7);
 
-            TotalHours = (h1Value + h2Value + h3Value + h4Value + h5Value + h6Value + h7Value).ToString();
-            TotalMins = (m1Value + m2Value + m3Value + m4Value + m5Value + m6Value + m7Value).ToString();
+            tHours = (m1Value + m2Value + m3Value + m4Value + m5Value + m6Value + m7Value) / 60;
+            tMinutes = (m1Value + m2Value + m3Value + m4Value + m5Value + m6Value + m7Value) % 60;
+            TotalHours = (h1Value + h2Value + h3Value + h4Value + h5Value + h6Value + h7Value + tHours).ToString();
+            TotalMins = tMinutes.ToString();
         }
     }
 }
