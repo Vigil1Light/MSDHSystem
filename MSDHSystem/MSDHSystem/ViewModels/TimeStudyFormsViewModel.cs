@@ -3,12 +3,14 @@ using MSDHSystem.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data.SqlClient;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace MSDHSystem.ViewModels
 {
-    public class TimeStudyFormsViewModel : BaseViewModel
+    public class TimeStudyFormsViewModel : BaseViewModel, INotifyPropertyChanged
     {
         private bool isloading = false;
         private string name;
@@ -105,7 +107,24 @@ namespace MSDHSystem.ViewModels
                 TimeStudyDate timeStudyDate = (TimeStudyDate)Application.Current.Properties["TimeStudyDateValue"];
                 GetValue(timeStudyDate);
                 AppSessionManager.Instance.StartSession();
-            }  
+            }
+            foreach (var item in TimeStudyItems)
+            {
+                item.PropertyChanged += Item_PropertyChanged;
+            }
+        }
+
+        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            CalculateSums();
+        }
+
+        private void CalculateSums()
+        {
+            int tHours = TimeStudyItems.Sum(item => Convert.ToInt32(item.TotalHours));
+            int tMins = TimeStudyItems.Sum(item => Convert.ToInt32(item.TotalMins));
+            Hours = (tHours+ (tMins / 60)).ToString();
+            Mins = (tMins % 60).ToString();
         }
 
         private void OnSubmitForReviewClicked(object obj)
@@ -116,6 +135,28 @@ namespace MSDHSystem.ViewModels
         private void OnSaveForLaterClicked(object obj)
         {
             DependencyService.Get<Toast>().Show(TimeStudyItems[0].M1.ToString());
+        }
+
+        private string hours;
+        public string Hours
+        {
+            get { return hours; }
+            set
+            {
+                hours = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string mins;
+        public string Mins
+        {
+            get { return mins; }
+            set
+            {
+                mins = value;
+                OnPropertyChanged();
+            }
         }
 
         private void GetValue(TimeStudyDate timeStudyDate)

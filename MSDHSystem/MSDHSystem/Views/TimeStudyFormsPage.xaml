@@ -70,14 +70,14 @@
                                                 <ColumnDefinition Width="1.25*" />
                                                 <ColumnDefinition Width="1.25*" />
                                             </Grid.ColumnDefinitions>
-                                            <Label Text="Mon" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="Tue" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="Wed" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="Thu" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="Fri" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="Sat" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="Sun" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="Totals" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="Mon" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Tue" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Wed" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Thu" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Fri" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Sat" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Sun" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Totals" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                                         </Grid>
                                         <Grid Grid.Row="2" Grid.ColumnSpan="2" RowSpacing="1" ColumnSpacing="1">
                                             <Grid.ColumnDefinitions>
@@ -191,6 +191,15 @@
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="LightCyan" HorizontalOptions="Center" VerticalOptions="Center" Padding="2">
+                        <Label Text="Total Hours:" FontSize="Small" TextColor="Black"></Label>
+                        <Label Text="{Binding Hours}" FontSize="Small"></Label>
+                        <Label Text=" "></Label>
+                        <Label Text="Total Mins:" FontSize="Small" TextColor="Black"></Label>
+                        <Label Text="{Binding Mins}" FontSize="Small"></Label>
+                    </StackLayout>
+                </ListView.Footer>
             </ListView>
             <ActivityIndicator HorizontalOptions="Center"
                            VerticalOptions="Center"
