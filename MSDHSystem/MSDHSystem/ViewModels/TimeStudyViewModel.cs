@@ -58,7 +58,7 @@ namespace MSDHSystem.ViewModels
                         string tmpStatus = "";
                         if (DateTime.Compare(dbDate, DateTime.Now) >= 0)
                             tmpStatus = "(New Time Study)";
-                        else if ((bool)reader["Inactive"] == true)
+                        else if ((int)reader["Inactive"] == 1)
                             tmpStatus = "(Waiting Approve)";
                         else tmpStatus = "(Not Started)";
                         obMenus.Add(new TimeStudyDate

@@ -221,7 +221,7 @@ namespace MSDHSystem.ViewModels
                         No = i + 1,
                         Programs = programs,
                         Activities = activities,
-                });
+                    });
                 }
 
                 con.Close();
