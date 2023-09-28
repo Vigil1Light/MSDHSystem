@@ -12,28 +12,27 @@ namespace MSDHSystem.Models
     public class TimeStudyData : INotifyPropertyChanged
     {
         public int No { get; set; }
-        public string Program { get; set; }
-        public string Activity { get; set; }
-        public List<string> Programs { get; set;}
-        public List<string> Activities { get; set;}
+        public List<string> Programs { get; set; }
+        public List<string> Activities { get; set; }
 
-        private string h1 ;
-        private string h2 ;
-        private string h3 ;
-        private string h4 ;
-        private string h5 ;
-        private string h6 ;
-        private string h7 ;
-        private string m1 ;
-        private string m2 ;
-        private string m3 ;
-        private string m4 ;
-        private string m5 ;
-        private string m6 ;
-        private string m7 ;
+        private string h1;
+        private string h2;
+        private string h3;
+        private string h4;
+        private string h5;
+        private string h6;
+        private string h7;
+        private string m1;
+        private string m2;
+        private string m3;
+        private string m4;
+        private string m5;
+        private string m6;
+        private string m7;
         private string totalHours { get; set; }
         private string totalMins { get; set; }
-
+        private string program { get; set; }
+        private string activity { get; set; }
         public string TotalHours
         {
             get { return totalHours; }
@@ -53,14 +52,37 @@ namespace MSDHSystem.Models
                 OnPropertyChanged();
             }
         }
+        public string Program
+        {
+            get { return program; }
+            set
+            {
+                program = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Activity
+        {
+            get { return activity; }
+            set
+            {
+                activity = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string H1
         {
             get { return h1; }
             set
             {
-                h1 = value;
-                CalculateTotal();
+                if (CheckRole())
+                {
+                    h1 = value;
+                    CalculateTotal();
+
+                }
+                else h1 = null;
                 OnPropertyChanged();
             }
         }
@@ -70,8 +92,13 @@ namespace MSDHSystem.Models
             get { return h2; }
             set
             {
-                h2 = value;
-                CalculateTotal();
+                if (CheckRole())
+                {
+                    h2 = value;
+                    CalculateTotal();
+
+                }
+                else h2 = null;
                 OnPropertyChanged();
             }
         }
@@ -81,9 +108,12 @@ namespace MSDHSystem.Models
             get { return h3; }
             set
             {
-                h3 = value;
-                CalculateTotal();
-                OnPropertyChanged();
+                if (CheckRole())
+                {
+                    h3 = value;
+                    CalculateTotal();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -92,9 +122,12 @@ namespace MSDHSystem.Models
             get { return h4; }
             set
             {
-                h4 = value;
-                CalculateTotal();
-                OnPropertyChanged();
+                if (CheckRole())
+                {
+                    h4 = value;
+                    CalculateTotal();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -103,9 +136,12 @@ namespace MSDHSystem.Models
             get { return h5; }
             set
             {
-                h5 = value;
-                CalculateTotal();
-                OnPropertyChanged();
+                if (CheckRole())
+                {
+                    h5 = value;
+                    CalculateTotal();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -114,9 +150,12 @@ namespace MSDHSystem.Models
             get { return h6; }
             set
             {
-                h6 = value;
-                CalculateTotal();
-                OnPropertyChanged();
+                if (CheckRole())
+                {
+                    h6 = value;
+                    CalculateTotal();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -125,9 +164,12 @@ namespace MSDHSystem.Models
             get { return h7; }
             set
             {
-                h7 = value;
-                CalculateTotal();
-                OnPropertyChanged();
+                if (CheckRole())
+                {
+                    h7 = value;
+                    CalculateTotal();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -136,9 +178,12 @@ namespace MSDHSystem.Models
             get { return m1; }
             set
             {
-                m1 = value;
-                CalculateTotal();
-                OnPropertyChanged();
+                if (CheckRole())
+                {
+                    m1 = value;
+                    CalculateTotal();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -147,9 +192,12 @@ namespace MSDHSystem.Models
             get { return m2; }
             set
             {
-                m2 = value;
-                CalculateTotal();
-                OnPropertyChanged();
+                if (CheckRole())
+                {
+                    m2 = value;
+                    CalculateTotal();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -158,9 +206,12 @@ namespace MSDHSystem.Models
             get { return m3; }
             set
             {
-                m3 = value;
-                CalculateTotal();
-                OnPropertyChanged();
+                if (CheckRole())
+                {
+                    m3 = value;
+                    CalculateTotal();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -169,9 +220,12 @@ namespace MSDHSystem.Models
             get { return m4; }
             set
             {
-                m4 = value;
-                CalculateTotal();
-                OnPropertyChanged();
+                if (CheckRole())
+                {
+                    m4 = value;
+                    CalculateTotal();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -180,9 +234,12 @@ namespace MSDHSystem.Models
             get { return m5; }
             set
             {
-                m5 = value;
-                CalculateTotal();
-                OnPropertyChanged();
+                if (CheckRole())
+                {
+                    m5 = value;
+                    CalculateTotal();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -191,9 +248,12 @@ namespace MSDHSystem.Models
             get { return m6; }
             set
             {
-                m6 = value;
-                CalculateTotal();
-                OnPropertyChanged();
+                if (CheckRole())
+                {
+                    m6 = value;
+                    CalculateTotal();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -202,9 +262,12 @@ namespace MSDHSystem.Models
             get { return m7; }
             set
             {
-                m7 = value;
-                CalculateTotal();
-                OnPropertyChanged();
+                if (CheckRole())
+                {
+                    m7 = value;
+                    CalculateTotal();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -227,15 +290,15 @@ namespace MSDHSystem.Models
             else h1Value = Convert.ToInt32(H1);
             if (string.IsNullOrEmpty(H2)) h2Value = 0;
             else h2Value = Convert.ToInt32(H2);
-            if(string.IsNullOrEmpty(H3)) h3Value = 0;
+            if (string.IsNullOrEmpty(H3)) h3Value = 0;
             else h3Value = Convert.ToInt32(H3);
-            if(string.IsNullOrEmpty(H4)) h4Value = 0;
+            if (string.IsNullOrEmpty(H4)) h4Value = 0;
             else h4Value = Convert.ToInt32(H4);
-            if(string.IsNullOrEmpty(H5)) h5Value = 0;
+            if (string.IsNullOrEmpty(H5)) h5Value = 0;
             else h5Value = Convert.ToInt32(H5);
-            if(string.IsNullOrEmpty(H6)) h6Value = 0;
+            if (string.IsNullOrEmpty(H6)) h6Value = 0;
             else h6Value = Convert.ToInt32(H6);
-            if(string.IsNullOrEmpty(H7)) h7Value = 0;
+            if (string.IsNullOrEmpty(H7)) h7Value = 0;
             else h7Value = Convert.ToInt32(H7);
 
             if (string.IsNullOrEmpty(M1)) m1Value = 0;
@@ -257,6 +320,16 @@ namespace MSDHSystem.Models
             tMinutes = (m1Value + m2Value + m3Value + m4Value + m5Value + m6Value + m7Value) % 60;
             TotalHours = (h1Value + h2Value + h3Value + h4Value + h5Value + h6Value + h7Value + tHours).ToString();
             TotalMins = tMinutes.ToString();
+        }
+
+        private bool CheckRole()
+        {
+            if (Program == null || Activity == null)
+            {
+                DependencyService.Get<Toast>().Show("Please select Program(" + No.ToString() + ")" + " and Activity(" + No.ToString() + ")" + " first");
+                return false;
+            }
+            else return true;
         }
     }
 }
