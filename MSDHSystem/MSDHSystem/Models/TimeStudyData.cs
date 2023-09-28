@@ -114,6 +114,8 @@ namespace MSDHSystem.Models
                     CalculateTotal();
                     OnPropertyChanged();
                 }
+                else h3 = null;
+                OnPropertyChanged();
             }
         }
 
@@ -128,6 +130,8 @@ namespace MSDHSystem.Models
                     CalculateTotal();
                     OnPropertyChanged();
                 }
+                else h4 = null;
+                OnPropertyChanged();
             }
         }
 
@@ -142,6 +146,8 @@ namespace MSDHSystem.Models
                     CalculateTotal();
                     OnPropertyChanged();
                 }
+                else h5 = null;
+                OnPropertyChanged();
             }
         }
 
@@ -156,6 +162,8 @@ namespace MSDHSystem.Models
                     CalculateTotal();
                     OnPropertyChanged();
                 }
+                else h6 = null;
+                OnPropertyChanged();
             }
         }
 
@@ -170,6 +178,8 @@ namespace MSDHSystem.Models
                     CalculateTotal();
                     OnPropertyChanged();
                 }
+                else h7 = null;
+                OnPropertyChanged();
             }
         }
 
@@ -184,6 +194,8 @@ namespace MSDHSystem.Models
                     CalculateTotal();
                     OnPropertyChanged();
                 }
+                else m1 = null;
+                OnPropertyChanged();
             }
         }
 
@@ -198,6 +210,8 @@ namespace MSDHSystem.Models
                     CalculateTotal();
                     OnPropertyChanged();
                 }
+                else m2 = null;
+                OnPropertyChanged();
             }
         }
 
@@ -212,6 +226,8 @@ namespace MSDHSystem.Models
                     CalculateTotal();
                     OnPropertyChanged();
                 }
+                else m3 = null;
+                OnPropertyChanged();
             }
         }
 
@@ -226,6 +242,8 @@ namespace MSDHSystem.Models
                     CalculateTotal();
                     OnPropertyChanged();
                 }
+                else m4 = null;
+                OnPropertyChanged();
             }
         }
 
@@ -240,6 +258,8 @@ namespace MSDHSystem.Models
                     CalculateTotal();
                     OnPropertyChanged();
                 }
+                else m5 = null;
+                OnPropertyChanged();
             }
         }
 
@@ -254,6 +274,8 @@ namespace MSDHSystem.Models
                     CalculateTotal();
                     OnPropertyChanged();
                 }
+                else m6 = null;
+                OnPropertyChanged();
             }
         }
 
@@ -268,6 +290,8 @@ namespace MSDHSystem.Models
                     CalculateTotal();
                     OnPropertyChanged();
                 }
+                else m7 = null;
+                OnPropertyChanged();
             }
         }
 
