@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -55,15 +56,60 @@ namespace MSDHSystem.ViewModels
                     {
                         List<int> Date = reader["Value2"].ToString().Split('/').Select(int.Parse).ToList();
                         DateTime dbDate = new DateTime(Date[2], Date[0], Date[1]);
+                        int weeknumber = GetWeekNumber(dbDate);
                         string tmpStatus = "";
+                        string tmpMonth = "";
                         if (DateTime.Compare(dbDate, DateTime.Now) >= 0)
-                            tmpStatus = "(New Time Study)";
-                        else if ((int)reader["Inactive"] == 1)
-                            tmpStatus = "(Waiting Approve)";
-                        else tmpStatus = "(Not Started)";
+                        {
+                            tmpStatus = "";
+                            tmpMonth = "New Time Study";
+                        }  
+                        else
+                        {
+                            SqlConnection con1 = new SqlConnection(connstring);
+                            con1.Open();
+                            string query = string.Format("SELECT * FROM TimeStudyDetail AS a INNER JOIN AD_Info AS b ON a.PIN = b.pin_win_nmbr WHERE b.Login_Name = 'Ling.Lu' AND a.CalenderWeek = '{0}' AND a.CalenderYear = '{1}'", weeknumber, dbDate.Year);
+                            SqlCommand command1 = new SqlCommand(query, con1);
+                            SqlDataReader sqlDataReader = command1.ExecuteReader();
+                            
+                            
+                            if (sqlDataReader.HasRows)
+                            {
+                                if (sqlDataReader.Read())
+                                {
+                                    if (sqlDataReader["APPROVED"].ToString() == "Yes")
+                                    {
+                                        continue;
+                                    }
+                                    if (sqlDataReader["APPROVED"] == null)
+                                    {
+                                        tmpStatus = "(Waiting Approve)";
+                                    }
+                                    else if (sqlDataReader["APPROVED"].ToString() != "Yes")
+                                    {
+                                        tmpStatus = "(Waiting Approve)";
+                                    }
+                                    if (sqlDataReader["SignedByEmployee"] == null)
+                                    {
+                                        tmpStatus = "(Not Started)";
+                                    }
+                                    else if (sqlDataReader["SignedByEmployee"].ToString() != "YES")
+                                    {
+                                        tmpStatus = "(Not Started)";
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                tmpStatus = "";
+                            }
+                            sqlDataReader.Close();
+                            con1.Close();
+                            tmpMonth = reader["Value1"].ToString();
+                        }
                         obMenus.Add(new TimeStudyDate
                         {
-                            month = reader["Value1"].ToString(),
+                            month = tmpMonth,
                             startDate = reader["Value2"].ToString(),
                             endDate = reader["Value3"].ToString(),
                             status = tmpStatus,      
@@ -77,6 +123,10 @@ namespace MSDHSystem.ViewModels
             {
                 DependencyService.Get<Toast>().Show(ex.Message);
             }
+        }
+        public static int GetWeekNumber(DateTime thisDate)
+        {
+            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(thisDate, System.Globalization.CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
         }
 
     }
