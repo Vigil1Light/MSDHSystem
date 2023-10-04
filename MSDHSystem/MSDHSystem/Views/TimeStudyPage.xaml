@@ -19,7 +19,7 @@
                 IsEnabled="{Binding IsEnabled}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell IsEnabled="{Binding IsEnabledCell}">
                             <StackLayout Orientation="Horizontal" Padding="1" VerticalOptions="Center" HorizontalOptions="Center">
                                 <Label Text="{Binding month}" FontSize="15" TextColor="MediumSlateBlue" FontAttributes="Bold"/>
                                 <Label Text=":" FontSize="15" TextColor="MediumSlateBlue" FontAttributes="Bold"/>
