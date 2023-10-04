@@ -132,7 +132,7 @@ namespace MSDHSystem.ViewModels
         }
         public static int GetWeekNumber(DateTime thisDate)
         {
-            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(thisDate, System.Globalization.CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
+            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(thisDate, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
         }
 
     }
