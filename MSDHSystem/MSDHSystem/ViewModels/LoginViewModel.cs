@@ -6,6 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using MSDHSystem.Views;
+using System.Data.SqlClient;
+using System.Net.NetworkInformation;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace MSDHSystem.ViewModels
 {
@@ -92,6 +95,22 @@ namespace MSDHSystem.ViewModels
                     if (result != null)
                     {
                         UpdateUI(true);
+                        string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+                        string strQuery = string.Format("SELECT * FROM AD_Info WHERE Login_Name = '{0}'", Users.username);
+                        SqlConnection con = new SqlConnection(connstring);
+                        con.Open();
+                        SqlCommand command = new SqlCommand(strQuery, con);
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                await Xamarin.Essentials.SecureStorage.SetAsync("pid_number", reader["pid_nmbr"].ToString());
+                                await Xamarin.Essentials.SecureStorage.SetAsync("pin_number", reader["pin_win_nmbr"].ToString());
+                            }
+                        }
+                        reader.Close();
+                        con.Close();
                         DependencyService.Get<Toast>().Show("Login success");
                         await Xamarin.Essentials.SecureStorage.SetAsync("isLogged", "1");
                         await Xamarin.Essentials.SecureStorage.SetAsync("username", Users.username);
@@ -104,6 +123,22 @@ namespace MSDHSystem.ViewModels
                     if (ex.Message.Contains("AADSTS50055"))
                     {
                         UpdateUI(true);
+                        string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+                        string strQuery = string.Format("SELECT * FROM AD_Info WHERE Login_Name = '{0}'", Users.username);
+                        SqlConnection con = new SqlConnection(connstring);
+                        con.Open();
+                        SqlCommand command = new SqlCommand(strQuery, con);
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                await Xamarin.Essentials.SecureStorage.SetAsync("pid_number", reader["pid_nmbr"].ToString());
+                                await Xamarin.Essentials.SecureStorage.SetAsync("pin_number", reader["pin_win_nmbr"].ToString());
+                            }
+                        }
+                        reader.Close();
+                        con.Close();
                         DependencyService.Get<Toast>().Show("Login success");
                         await Xamarin.Essentials.SecureStorage.SetAsync("isLogged", "1");
                         await Xamarin.Essentials.SecureStorage.SetAsync("username", Users.username);

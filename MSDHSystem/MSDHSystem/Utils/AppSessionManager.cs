@@ -56,6 +56,9 @@ namespace MSDHSystem.Utils
             Device.BeginInvokeOnMainThread(async () =>
             {
                 await Xamarin.Essentials.SecureStorage.SetAsync("isLogged", "0");
+                await Xamarin.Essentials.SecureStorage.SetAsync("username", "");
+                await Xamarin.Essentials.SecureStorage.SetAsync("pid_number", "");
+                await Xamarin.Essentials.SecureStorage.SetAsync("pin_number", "");
                 Application.Current.MainPage = new LoginPage();
             });
         }

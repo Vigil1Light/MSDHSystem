@@ -22,6 +22,8 @@ namespace MSDHSystem
         { 
             await Xamarin.Essentials.SecureStorage.SetAsync("isLogged", "0");
             await Xamarin.Essentials.SecureStorage.SetAsync("username", "");
+            await Xamarin.Essentials.SecureStorage.SetAsync("pid_number", "");
+            await Xamarin.Essentials.SecureStorage.SetAsync("pin_number", "");
             //await Shell.Current.GoToAsync("//LoginPage");
             App.Current.MainPage = new LoginPage();
         }

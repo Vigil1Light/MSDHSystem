@@ -69,7 +69,7 @@ namespace MSDHSystem.ViewModels
                         {
                             SqlConnection con1 = new SqlConnection(connstring);
                             con1.Open();
-                            string query = string.Format("SELECT * FROM TimeStudyDetail AS a INNER JOIN AD_Info AS b ON a.PIN = b.pin_win_nmbr WHERE b.Login_Name = 'Ling.Lu' AND a.CalenderWeek = '{0}' AND a.CalenderYear = '{1}'", weeknumber, dbDate.Year);
+                            string query = string.Format("SELECT distinct * FROM  TimeStudyDetail a LEFT JOIN  TimeStudyEmmployeeInfo b ON a.pid_nmbr = b.PID_No WHERE a.pid_nmbr = '{0}' AND  FormType= 'TS' AND CalenderYear = '{1}' AND a.CalenderWeek = {2} ORDER BY a.CalenderWeek", Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, dbDate.Year.ToString(), weeknumber.ToString());
                             SqlCommand command1 = new SqlCommand(query, con1);
                             SqlDataReader sqlDataReader = command1.ExecuteReader();
                             
@@ -94,12 +94,12 @@ namespace MSDHSystem.ViewModels
                                     }
                                     if (sqlDataReader["SignedByEmployee"] == null)
                                     {
-                                        tmpStatus = "(Not Started)";
+                                        tmpStatus = "(Saved for Later)";
                                         tmpEnabled = true;
                                     }
                                     else if (sqlDataReader["SignedByEmployee"].ToString() != "YES")
                                     {
-                                        tmpStatus = "(Not Started)";
+                                        tmpStatus = "(Saved for Later)";
                                         tmpEnabled = true;
                                     }
                                 }
@@ -120,6 +120,7 @@ namespace MSDHSystem.ViewModels
                             status = tmpStatus,     
                             IsEnabledCell = tmpEnabled
                         });
+                        if (dbDate.Year >= DateTime.Now.Year && dbDate.Month > DateTime.Now.Month) break;
                     }   
                 }
                 reader.Close();
@@ -132,7 +133,7 @@ namespace MSDHSystem.ViewModels
         }
         public static int GetWeekNumber(DateTime thisDate)
         {
-            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(thisDate, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(thisDate, System.Globalization.CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
         }
 
     }
