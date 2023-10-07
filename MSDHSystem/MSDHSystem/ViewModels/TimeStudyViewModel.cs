@@ -56,6 +56,7 @@ namespace MSDHSystem.ViewModels
                     {
                         List<int> Date = reader["Value2"].ToString().Split('/').Select(int.Parse).ToList();
                         DateTime dbDate = new DateTime(Date[2], Date[0], Date[1]);
+                        if (dbDate.Year >= DateTime.Now.Year && dbDate.Month > DateTime.Now.Month) continue;
                         int weeknumber = GetWeekNumber(dbDate);
                         string tmpStatus = "";
                         string tmpMonth = "";
@@ -120,7 +121,6 @@ namespace MSDHSystem.ViewModels
                             status = tmpStatus,     
                             IsEnabledCell = tmpEnabled
                         });
-                        if (dbDate.Year >= DateTime.Now.Year && dbDate.Month > DateTime.Now.Month) break;
                     }   
                 }
                 reader.Close();
