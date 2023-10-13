@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:extensions="clr-namespace:MSDHSystem.Extensions"
@@ -220,17 +220,18 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Text="Employee Signature:" FontSize="Body" HorizontalOptions="End" VerticalOptions="Center"></Label>
-            <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsChecked}" VerticalOptions="Center"></CheckBox>
+            <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsChecked}" VerticalOptions="Center" IsEnabled="{Binding IsEnabled}"></CheckBox>
             <Label Grid.Row="1" Grid.Column="0" Text="Supervisor Complete Email:" FontSize="Body" HorizontalOptions="End" VerticalOptions="Center"></Label>
             <forms:AutoSuggestBox Grid.Row="1" Grid.Column="1" PlaceholderText="" 
+                              IsEnabled="{Binding IsEnabled}"
                               WidthRequest="200"
                               x:Name="staticSuggestBox"
                               HorizontalOptions="Center"
                               VerticalOptions="CenterAndExpand"
                               TextChanged="AutoSuggestBox_TextChanged"
                               Text="{Binding SupervisorEmail}"/>
-            <Button Grid.Row="2" Grid.Column="0" Text="Save For Later" Command="{Binding SaveForLater_Clicked}"></Button>
-            <Button Grid.Row="2" Grid.Column="1" Text="Submit For Review" Command="{Binding SubmitForReview_Clicked}"></Button>
+            <Button Grid.Row="2" Grid.Column="0" Text="Save For Later" Command="{Binding SaveForLater_Clicked}" IsEnabled="{Binding IsEnabled}"></Button>
+            <Button Grid.Row="2" Grid.Column="1" Text="Submit For Review" Command="{Binding SubmitForReview_Clicked}" IsEnabled="{Binding IsEnabled}"></Button>
         </Grid>
     </StackLayout>
 </ContentPage>

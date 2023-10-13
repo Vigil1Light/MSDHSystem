@@ -1,5 +1,6 @@
 ﻿using MSDHSystem.Models;
 using MSDHSystem.Utils;
+using MSDHSystem.Views;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MSDHSystem.ViewModels
@@ -151,6 +154,12 @@ namespace MSDHSystem.ViewModels
             {
                 DependencyService.Get<Toast>().Show("Please sign and input supervisor email");
             }
+            else
+            {
+                UpdateUI(false);
+                Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
+                newThread.Start("submit");
+            }
         }
 
         private void OnSaveForLaterClicked(object obj)
@@ -161,193 +170,9 @@ namespace MSDHSystem.ViewModels
             }
             else
             {
-                List<int> Date = timeStudyDate.startDate.ToString().Split('/').Select(int.Parse).ToList();
-                DateTime startDate = new DateTime(Date[2], Date[0], Date[1]);
-
-                string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
-                SqlConnection con = new SqlConnection(connstring);
-                con.Open();
-
-                int n = 0;
-                for (int i = 0; i < TimeStudyItems.Count; i++)
-                {
-                    if (TimeStudyItems[i].Program == null)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        List<string> tempHour = new List<string>();
-                        List<string> tempMin = new List<string>();
-                        List<string> tempTime = new List<string>();
-
-                        if (TimeStudyItems[i].H1 == null || TimeStudyItems[i].H1 == "")
-                        {
-                            tempHour.Add("0");
-                        }
-                        else
-                        {
-                            tempHour.Add(TimeStudyItems[i].H1);
-                        }
-                        if (TimeStudyItems[i].H2 == null || TimeStudyItems[i].H2 == "")
-                        {
-                            tempHour.Add("0");
-                        }
-                        else
-                        {
-                            tempHour.Add(TimeStudyItems[i].H2);
-                        }
-                        if (TimeStudyItems[i].H3 == null || TimeStudyItems[i].H3 == "")
-                        {
-                            tempHour.Add("0");
-                        }
-                        else
-                        {
-                            tempHour.Add(TimeStudyItems[i].H3);
-                        }
-                        if (TimeStudyItems[i].H4 == null || TimeStudyItems[i].H4 == "")
-                        {
-                            tempHour.Add("0");
-                        }
-                        else
-                        {
-                            tempHour.Add(TimeStudyItems[i].H4);
-                        }
-                        if (TimeStudyItems[i].H5 == null || TimeStudyItems[i].H5 == "")
-                        {
-                            tempHour.Add("0");
-                        }
-                        else
-                        {
-                            tempHour.Add(TimeStudyItems[i].H5);
-                        }
-                        if (TimeStudyItems[i].H6 == null || TimeStudyItems[i].H6 == "")
-                        {
-                            tempHour.Add("0");
-                        }
-                        else
-                        {
-                            tempHour.Add(TimeStudyItems[i].H6);
-                        }
-                        if (TimeStudyItems[i].H7 == null || TimeStudyItems[i].H7 == "")
-                        {
-                            tempHour.Add("0");
-                        }
-                        else
-                        {
-                            tempHour.Add(TimeStudyItems[i].H7);
-                        }
-
-                        if (TimeStudyItems[i].M1 == null || TimeStudyItems[i].M1 == "")
-                        {
-                            tempMin.Add("0");
-                        }
-                        else
-                        {
-                            tempMin.Add(TimeStudyItems[i].M1);
-                        }
-                        if (TimeStudyItems[i].M2 == null || TimeStudyItems[i].M2 == "")
-                        {
-                            tempMin.Add("0");
-                        }
-                        else
-                        {
-                            tempMin.Add(TimeStudyItems[i].M2);
-                        }
-                        if (TimeStudyItems[i].M3 == null || TimeStudyItems[i].M3 == "")
-                        {
-                            tempMin.Add("0");
-                        }
-                        else
-                        {
-                            tempMin.Add(TimeStudyItems[i].M3);
-                        }
-                        if (TimeStudyItems[i].M4 == null || TimeStudyItems[i].M4 == "")
-                        {
-                            tempMin.Add("0");
-                        }
-                        else
-                        {
-                            tempMin.Add(TimeStudyItems[i].M4);
-                        }
-                        if (TimeStudyItems[i].M5 == null || TimeStudyItems[i].M5 == "")
-                        {
-                            tempMin.Add("0");
-                        }
-                        else
-                        {
-                            tempMin.Add(TimeStudyItems[i].M5);
-                        }
-                        if (TimeStudyItems[i].M6 == null || TimeStudyItems[i].M6 == "")
-                        {
-                            tempMin.Add("0");
-                        }
-                        else
-                        {
-                            tempMin.Add(TimeStudyItems[i].M6);
-                        }
-                        if (TimeStudyItems[i].M7 == null || TimeStudyItems[i].M7 == "")
-                        {
-                            tempMin.Add("0");
-                        }
-                        else
-                        {
-                            tempMin.Add(TimeStudyItems[i].M7);
-                        }
-
-                        for (int j = 0; j < tempHour.Count; j++)
-                        {
-                            if (tempHour[j] == "0" && tempMin[j] == "0")
-                            {
-                                tempTime.Add("");
-                            }
-                            else
-                            {
-                                tempTime.Add(tempHour[j] + ":" + tempMin[j]);
-                            }
-                        }
-                        
-                        string strQuery = string.Format("DELETE FROM TimeStudyDetail WHERE pid_nmbr = '{0}' AND Program = '{1}' AND Activity = '{2}' AND CalenderYear = '{3}' AND CalenderWeek = '{4}'", Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], startDate.Year.ToString(), GetWeekNumber(startDate).ToString());
-
-                        SqlCommand command = new SqlCommand(strQuery, con);
-                        SqlDataReader reader = command.ExecuteReader();
-                        if (reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
-
-                            }
-                        }
-                        reader.Close();
-
-                        strQuery = string.Format("INSERT INTO TimeStudyDetail(PIN, Program, Activity, Mondaytime, TuesdayTime, WednesdayTime, ThursdayTime, FridayTime, SaturdayTime, SundayTime, TotalTime, SupervisorName, DateCompleted, CalenderWeek, pid_nmbr, CalenderYear) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}')", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], tempTime[0], tempTime[1], tempTime[2], tempTime[3], tempTime[4], tempTime[5], tempTime[6], TimeStudyItems[i].TotalHours + ":" + TimeStudyItems[i].TotalMins, SupervisorEmail, DateTime.Today.ToString("MM/dd/yyyy"), GetWeekNumber(startDate).ToString(), Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, startDate.Year.ToString());
-                        command = new SqlCommand(strQuery, con);
-                        reader = command.ExecuteReader();
-                        if (reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
-
-                            }
-                        }
-                        reader.Close();
-
-                        tempHour.Clear();
-                        tempMin.Clear();
-                        tempTime.Clear();
-                        n++;
-                    }
-                }
-                if (n == 0)
-                {
-                    DependencyService.Get<Toast>().Show("Please input some data, can't save now");
-                }
-                else
-                {
-                    DependencyService.Get<Toast>().Show("Successfully saved");
-                }
-                con.Close();
-
+                UpdateUI(false);
+                Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
+                newThread.Start("save");
             }
         }
 
@@ -525,6 +350,412 @@ namespace MSDHSystem.ViewModels
         public static int GetWeekNumber(DateTime thisDate)
         {
             return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(thisDate, System.Globalization.CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
+        }
+
+        public void UpdateUI(bool state)
+        {
+
+            IsEnabled = state;
+            IsLoading = !state;
+        }
+
+        public void Submit()
+        {
+            List<int> Date = timeStudyDate.startDate.ToString().Split('/').Select(int.Parse).ToList();
+            DateTime startDate = new DateTime(Date[2], Date[0], Date[1]);
+
+            string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+            SqlConnection con = new SqlConnection(connstring);
+            con.Open();
+
+            int n = 0;
+            for (int i = 0; i < TimeStudyItems.Count; i++)
+            {
+                if (TimeStudyItems[i].Program == null)
+                {
+                    break;
+                }
+                else
+                {
+                    List<string> tempHour = new List<string>();
+                    List<string> tempMin = new List<string>();
+                    List<string> tempTime = new List<string>();
+
+                    if (TimeStudyItems[i].H1 == null || TimeStudyItems[i].H1 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H1);
+                    }
+                    if (TimeStudyItems[i].H2 == null || TimeStudyItems[i].H2 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H2);
+                    }
+                    if (TimeStudyItems[i].H3 == null || TimeStudyItems[i].H3 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H3);
+                    }
+                    if (TimeStudyItems[i].H4 == null || TimeStudyItems[i].H4 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H4);
+                    }
+                    if (TimeStudyItems[i].H5 == null || TimeStudyItems[i].H5 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H5);
+                    }
+                    if (TimeStudyItems[i].H6 == null || TimeStudyItems[i].H6 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H6);
+                    }
+                    if (TimeStudyItems[i].H7 == null || TimeStudyItems[i].H7 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H7);
+                    }
+
+                    if (TimeStudyItems[i].M1 == null || TimeStudyItems[i].M1 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M1);
+                    }
+                    if (TimeStudyItems[i].M2 == null || TimeStudyItems[i].M2 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M2);
+                    }
+                    if (TimeStudyItems[i].M3 == null || TimeStudyItems[i].M3 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M3);
+                    }
+                    if (TimeStudyItems[i].M4 == null || TimeStudyItems[i].M4 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M4);
+                    }
+                    if (TimeStudyItems[i].M5 == null || TimeStudyItems[i].M5 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M5);
+                    }
+                    if (TimeStudyItems[i].M6 == null || TimeStudyItems[i].M6 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M6);
+                    }
+                    if (TimeStudyItems[i].M7 == null || TimeStudyItems[i].M7 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M7);
+                    }
+
+                    for (int j = 0; j < tempHour.Count; j++)
+                    {
+                        if (tempHour[j] == "0" && tempMin[j] == "0")
+                        {
+                            tempTime.Add("");
+                        }
+                        else
+                        {
+                            tempTime.Add(tempHour[j] + ":" + tempMin[j]);
+                        }
+                    }
+
+                    string strQuery = string.Format("DELETE FROM TimeStudyDetail WHERE pid_nmbr = '{0}' AND Program = '{1}' AND Activity = '{2}' AND CalenderYear = '{3}' AND CalenderWeek = '{4}'", Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], startDate.Year.ToString(), GetWeekNumber(startDate).ToString());
+
+                    SqlCommand command = new SqlCommand(strQuery, con);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+
+                        }
+                    }
+                    reader.Close();
+
+                    strQuery = string.Format("INSERT INTO TimeStudyDetail(PIN, Program, Activity, Mondaytime, TuesdayTime, WednesdayTime, ThursdayTime, FridayTime, SaturdayTime, SundayTime, TotalTime, SupervisorName, DateCompleted, CalenderWeek, pid_nmbr, CalenderYear, SignedByEmployee) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', 'YES')", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], tempTime[0], tempTime[1], tempTime[2], tempTime[3], tempTime[4], tempTime[5], tempTime[6], TimeStudyItems[i].TotalHours + ":" + TimeStudyItems[i].TotalMins, SupervisorEmail, DateTime.Today.ToString("MM/dd/yyyy"), GetWeekNumber(startDate).ToString(), Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, startDate.Year.ToString());
+                    command = new SqlCommand(strQuery, con);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+
+                        }
+                    }
+                    reader.Close();
+
+                    tempHour.Clear();
+                    tempMin.Clear();
+                    tempTime.Clear();
+                    n++;
+                }
+            }
+            if (n == 0)
+            {
+                DependencyService.Get<Toast>().Show("Please input some data, can't submit now");
+            }
+            else
+            {
+                DependencyService.Get<Toast>().Show("Successfully submitted");
+            }
+            con.Close();
+        }
+
+        public void Save()
+        {
+            List<int> Date = timeStudyDate.startDate.ToString().Split('/').Select(int.Parse).ToList();
+            DateTime startDate = new DateTime(Date[2], Date[0], Date[1]);
+
+            string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+            SqlConnection con = new SqlConnection(connstring);
+            con.Open();
+
+            int n = 0;
+            for (int i = 0; i < TimeStudyItems.Count; i++)
+            {
+                if (TimeStudyItems[i].Program == null)
+                {
+                    break;
+                }
+                else
+                {
+                    List<string> tempHour = new List<string>();
+                    List<string> tempMin = new List<string>();
+                    List<string> tempTime = new List<string>();
+
+                    if (TimeStudyItems[i].H1 == null || TimeStudyItems[i].H1 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H1);
+                    }
+                    if (TimeStudyItems[i].H2 == null || TimeStudyItems[i].H2 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H2);
+                    }
+                    if (TimeStudyItems[i].H3 == null || TimeStudyItems[i].H3 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H3);
+                    }
+                    if (TimeStudyItems[i].H4 == null || TimeStudyItems[i].H4 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H4);
+                    }
+                    if (TimeStudyItems[i].H5 == null || TimeStudyItems[i].H5 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H5);
+                    }
+                    if (TimeStudyItems[i].H6 == null || TimeStudyItems[i].H6 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H6);
+                    }
+                    if (TimeStudyItems[i].H7 == null || TimeStudyItems[i].H7 == "")
+                    {
+                        tempHour.Add("0");
+                    }
+                    else
+                    {
+                        tempHour.Add(TimeStudyItems[i].H7);
+                    }
+
+                    if (TimeStudyItems[i].M1 == null || TimeStudyItems[i].M1 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M1);
+                    }
+                    if (TimeStudyItems[i].M2 == null || TimeStudyItems[i].M2 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M2);
+                    }
+                    if (TimeStudyItems[i].M3 == null || TimeStudyItems[i].M3 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M3);
+                    }
+                    if (TimeStudyItems[i].M4 == null || TimeStudyItems[i].M4 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M4);
+                    }
+                    if (TimeStudyItems[i].M5 == null || TimeStudyItems[i].M5 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M5);
+                    }
+                    if (TimeStudyItems[i].M6 == null || TimeStudyItems[i].M6 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M6);
+                    }
+                    if (TimeStudyItems[i].M7 == null || TimeStudyItems[i].M7 == "")
+                    {
+                        tempMin.Add("0");
+                    }
+                    else
+                    {
+                        tempMin.Add(TimeStudyItems[i].M7);
+                    }
+
+                    for (int j = 0; j < tempHour.Count; j++)
+                    {
+                        if (tempHour[j] == "0" && tempMin[j] == "0")
+                        {
+                            tempTime.Add("");
+                        }
+                        else
+                        {
+                            tempTime.Add(tempHour[j] + ":" + tempMin[j]);
+                        }
+                    }
+
+                    string strQuery = string.Format("DELETE FROM TimeStudyDetail WHERE pid_nmbr = '{0}' AND Program = '{1}' AND Activity = '{2}' AND CalenderYear = '{3}' AND CalenderWeek = '{4}'", Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], startDate.Year.ToString(), GetWeekNumber(startDate).ToString());
+
+                    SqlCommand command = new SqlCommand(strQuery, con);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+
+                        }
+                    }
+                    reader.Close();
+
+                    strQuery = string.Format("INSERT INTO TimeStudyDetail(PIN, Program, Activity, Mondaytime, TuesdayTime, WednesdayTime, ThursdayTime, FridayTime, SaturdayTime, SundayTime, TotalTime, SupervisorName, DateCompleted, CalenderWeek, pid_nmbr, CalenderYear) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}')", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], tempTime[0], tempTime[1], tempTime[2], tempTime[3], tempTime[4], tempTime[5], tempTime[6], TimeStudyItems[i].TotalHours + ":" + TimeStudyItems[i].TotalMins, SupervisorEmail, DateTime.Today.ToString("MM/dd/yyyy"), GetWeekNumber(startDate).ToString(), Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, startDate.Year.ToString());
+                    command = new SqlCommand(strQuery, con);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+
+                        }
+                    }
+                    reader.Close();
+
+                    tempHour.Clear();
+                    tempMin.Clear();
+                    tempTime.Clear();
+                    n++;
+                }
+            }
+            if (n == 0)
+            {
+                DependencyService.Get<Toast>().Show("Please input some data, can't save now");
+            }
+            else
+            {
+                DependencyService.Get<Toast>().Show("Successfully saved");
+            }
+            con.Close();
+        }
+        private void LongRunningTask(object parameter)
+        {
+            // Get the parameter value
+            string parameterValue = parameter as string;
+
+            // Perform the long-running operation here
+            // ...
+
+            // Update UI from the background thread using Device.BeginInvokeOnMainThread
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                // Update UI to indicate that the operation has completed
+                if (parameterValue == "submit") Submit();
+                else if (parameterValue == "save") Save();
+                //await Task.Delay(1000);
+                //await Shell.Current.GoToAsync(nameof(TimeStudyPage));
+                UpdateUI(true);
+            });
         }
     }
 }
