@@ -19,8 +19,9 @@
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Classification:" TextColor="Black" FontAttributes="Bold"></Label>
-                <Label Text="{Binding Classification}"></Label>
+                <Label Text="{Binding Location}"></Label>
             </StackLayout>
+            <Label Text="{Binding Jobname}" HorizontalTextAlignment="End"></Label>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Org:" TextColor="Black" FontAttributes="Bold"></Label>
                 <Label Text="{Binding Orgcode}"></Label>

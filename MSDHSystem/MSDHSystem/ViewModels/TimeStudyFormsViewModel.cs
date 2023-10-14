@@ -21,7 +21,8 @@ namespace MSDHSystem.ViewModels
         private bool ischecked;
         private bool isenabled = true;
         private string name;
-        private string classification;
+        private string jobname;
+        private string location;
         private string orgcode;
         private string pin;
         private string pidnumber;
@@ -54,11 +55,15 @@ namespace MSDHSystem.ViewModels
             get { return name; }
             set => SetProperty(ref name, value);
         }
-
-        public string Classification
+        public string Location
         {
-            get { return classification; }
-            set => SetProperty(ref classification, value);
+            get { return location; }
+            set => SetProperty(ref location, value);
+        }
+        public string Jobname
+        {
+            get { return jobname; }
+            set => SetProperty(ref jobname, value);
         }
 
         public string Orgcode
@@ -213,7 +218,8 @@ namespace MSDHSystem.ViewModels
                     while (reader.Read())
                     {
                         Name = reader["Login_Name"].ToString();
-                        Classification = reader["location"].ToString() + "/" + reader["job_name"].ToString();
+                        Location = reader["location"].ToString();
+                        Jobname = reader["job_name"].ToString();
                         Orgcode = reader["org_code"].ToString();
                         Pin = reader["pin_win_nmbr"].ToString();
                         PIDnumber = reader["pid_nmbr"].ToString();
