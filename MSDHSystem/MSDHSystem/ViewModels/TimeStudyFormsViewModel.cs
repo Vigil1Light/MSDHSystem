@@ -1,4 +1,5 @@
-﻿using MSDHSystem.Models;
+﻿using dotMorten.Xamarin.Forms;
+using MSDHSystem.Models;
 using MSDHSystem.Utils;
 using MSDHSystem.Views;
 using System;
@@ -28,7 +29,8 @@ namespace MSDHSystem.ViewModels
         private string pidnumber;
         private string startDate;
         private string endDate;
-        private string supervisoremail;
+
+        private AutoSuggestBox suggestBox;
 
         private TimeStudyDate timeStudyDate = new TimeStudyDate();
 
@@ -96,12 +98,6 @@ namespace MSDHSystem.ViewModels
             set => SetProperty(ref endDate, value);
         }
 
-        public string SupervisorEmail
-        {
-            get { return supervisoremail; }
-            set => SetProperty(ref supervisoremail, value);
-        }
-
         public List<string> programs = new List<string>();
 
         public List<string> activities = new List<string>();
@@ -123,8 +119,9 @@ namespace MSDHSystem.ViewModels
             }
         }
 
-        public TimeStudyFormsViewModel()
+        public TimeStudyFormsViewModel(AutoSuggestBox autoSuggestBox)
         {
+            suggestBox = autoSuggestBox;
             SaveForLater_Clicked = new Command(OnSaveForLaterClicked);
             SubmitForReview_Clicked = new Command(OnSubmitForReviewClicked);
             TimeStudyItems = new ObservableCollection<TimeStudyData>();
@@ -155,7 +152,7 @@ namespace MSDHSystem.ViewModels
 
         private void OnSubmitForReviewClicked(object obj)
         {
-            if (!ischecked || SupervisorEmail == "")
+            if (!ischecked || suggestBox.Text == "")
             {
                 DependencyService.Get<Toast>().Show("Please sign and input supervisor email");
             }
@@ -526,7 +523,7 @@ namespace MSDHSystem.ViewModels
                     }
                     reader.Close();
 
-                    strQuery = string.Format("INSERT INTO TimeStudyDetail(PIN, Program, Activity, Mondaytime, TuesdayTime, WednesdayTime, ThursdayTime, FridayTime, SaturdayTime, SundayTime, TotalTime, SupervisorName, DateCompleted, CalenderWeek, pid_nmbr, CalenderYear, SignedByEmployee) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', 'YES')", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], tempTime[0], tempTime[1], tempTime[2], tempTime[3], tempTime[4], tempTime[5], tempTime[6], TimeStudyItems[i].TotalHours + ":" + TimeStudyItems[i].TotalMins, SupervisorEmail, DateTime.Today.ToString("MM/dd/yyyy"), GetWeekNumber(startDate).ToString(), Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, startDate.Year.ToString());
+                    strQuery = string.Format("INSERT INTO TimeStudyDetail(PIN, Program, Activity, Mondaytime, TuesdayTime, WednesdayTime, ThursdayTime, FridayTime, SaturdayTime, SundayTime, TotalTime, SupervisorName, DateCompleted, CalenderWeek, pid_nmbr, CalenderYear, SignedByEmployee) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', 'YES')", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], tempTime[0], tempTime[1], tempTime[2], tempTime[3], tempTime[4], tempTime[5], tempTime[6], TimeStudyItems[i].TotalHours + ":" + TimeStudyItems[i].TotalMins, suggestBox.Text, DateTime.Today.ToString("MM/dd/yyyy"), GetWeekNumber(startDate).ToString(), Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, startDate.Year.ToString());
                     command = new SqlCommand(strQuery, con);
                     reader = command.ExecuteReader();
                     if (reader.HasRows)
@@ -739,7 +736,7 @@ namespace MSDHSystem.ViewModels
                     }
                     reader.Close();
 
-                    strQuery = string.Format("INSERT INTO TimeStudyDetail(PIN, Program, Activity, Mondaytime, TuesdayTime, WednesdayTime, ThursdayTime, FridayTime, SaturdayTime, SundayTime, TotalTime, SupervisorName, DateCompleted, CalenderWeek, pid_nmbr, CalenderYear) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}')", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], tempTime[0], tempTime[1], tempTime[2], tempTime[3], tempTime[4], tempTime[5], tempTime[6], TimeStudyItems[i].TotalHours + ":" + TimeStudyItems[i].TotalMins, SupervisorEmail, DateTime.Today.ToString("MM/dd/yyyy"), GetWeekNumber(startDate).ToString(), Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, startDate.Year.ToString());
+                    strQuery = string.Format("INSERT INTO TimeStudyDetail(PIN, Program, Activity, Mondaytime, TuesdayTime, WednesdayTime, ThursdayTime, FridayTime, SaturdayTime, SundayTime, TotalTime, SupervisorName, DateCompleted, CalenderWeek, pid_nmbr, CalenderYear) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}')", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], tempTime[0], tempTime[1], tempTime[2], tempTime[3], tempTime[4], tempTime[5], tempTime[6], TimeStudyItems[i].TotalHours + ":" + TimeStudyItems[i].TotalMins, suggestBox.Text, DateTime.Today.ToString("MM/dd/yyyy"), GetWeekNumber(startDate).ToString(), Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, startDate.Year.ToString());
                     command = new SqlCommand(strQuery, con);
                     reader = command.ExecuteReader();
                     if (reader.HasRows)

@@ -24,7 +24,7 @@ namespace MSDHSystem.Views
         {
             InitializeComponent();
             GetEmailValue();
-            this.BindingContext = new TimeStudyFormsViewModel();
+            this.BindingContext = new TimeStudyFormsViewModel(staticSuggestBox);
         }
 
         private void AutoSuggestBox_TextChanged(object sender, AutoSuggestBoxTextChangedEventArgs e)
@@ -51,6 +51,11 @@ namespace MSDHSystem.Views
             }
             reader.Close();
             con.Close();
+        }
+
+        private void staticSuggestBox_SuggestionChosen(object sender, AutoSuggestBoxSuggestionChosenEventArgs e)
+        {
+            staticSuggestBox.Text = e.SelectedItem.ToString();
         }
     }
 }
