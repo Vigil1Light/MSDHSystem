@@ -107,6 +107,7 @@ namespace MSDHSystem.ViewModels
                             {
                                 await Xamarin.Essentials.SecureStorage.SetAsync("pid_number", reader["pid_nmbr"].ToString());
                                 await Xamarin.Essentials.SecureStorage.SetAsync("pin_number", reader["pin_win_nmbr"].ToString());
+                                await Xamarin.Essentials.SecureStorage.SetAsync("email", reader["email"].ToString());
                             }
                         }
                         reader.Close();
@@ -114,6 +115,7 @@ namespace MSDHSystem.ViewModels
                         DependencyService.Get<Toast>().Show("Login success");
                         await Xamarin.Essentials.SecureStorage.SetAsync("isLogged", "1");
                         await Xamarin.Essentials.SecureStorage.SetAsync("username", Users.username);
+                        await Xamarin.Essentials.SecureStorage.SetAsync("pass", Users.password);
                         Application.Current.MainPage = new AppShell(Users);
                         await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
                     }
@@ -135,6 +137,7 @@ namespace MSDHSystem.ViewModels
                             {
                                 await Xamarin.Essentials.SecureStorage.SetAsync("pid_number", reader["pid_nmbr"].ToString());
                                 await Xamarin.Essentials.SecureStorage.SetAsync("pin_number", reader["pin_win_nmbr"].ToString());
+                                await Xamarin.Essentials.SecureStorage.SetAsync("email", reader["email"].ToString());
                             }
                         }
                         reader.Close();
@@ -142,6 +145,7 @@ namespace MSDHSystem.ViewModels
                         DependencyService.Get<Toast>().Show("Login success");
                         await Xamarin.Essentials.SecureStorage.SetAsync("isLogged", "1");
                         await Xamarin.Essentials.SecureStorage.SetAsync("username", Users.username);
+                        await Xamarin.Essentials.SecureStorage.SetAsync("pass", Users.password);
                         Application.Current.MainPage = new AppShell(Users);
                         await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
                     }

@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -573,6 +574,8 @@ namespace MSDHSystem.ViewModels
                 DependencyService.Get<Toast>().Show("Successfully submitted");
             }
             con.Close();
+
+            SendMail(Xamarin.Essentials.SecureStorage.GetAsync("email").Result, suggestBox.Text);
         }
 
         public void Save()
@@ -805,6 +808,33 @@ namespace MSDHSystem.ViewModels
                 //await Shell.Current.GoToAsync(nameof(TimeStudyPage));
                 UpdateUI(true);
             });
+        }
+
+        public void SendMail(string fromEmail, string toEmail)
+        {
+            try
+            {
+
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress(fromEmail);
+                mail.To.Add(toEmail);
+                mail.Subject = "Mississippi State Department Of Health";
+                mail.Body = "A Time Study has been submitted by " + fromEmail;
+
+                SmtpServer.Port = 587;
+                SmtpServer.Host = "smtp.gmail.com";
+                SmtpServer.EnableSsl = true;
+                SmtpServer.UseDefaultCredentials = false;
+                SmtpServer.Credentials = new System.Net.NetworkCredential(toEmail, Xamarin.Essentials.SecureStorage.GetAsync("pass").Result);
+
+                SmtpServer.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toast>().Show("Faild");
+            }
         }
     }
 }
