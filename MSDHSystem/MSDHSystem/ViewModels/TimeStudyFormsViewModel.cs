@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace MSDHSystem.ViewModels
@@ -575,7 +576,7 @@ namespace MSDHSystem.ViewModels
             }
             con.Close();
 
-            SendMail(Xamarin.Essentials.SecureStorage.GetAsync("email").Result, suggestBox.Text);
+            //SendMail(Xamarin.Essentials.SecureStorage.GetAsync("email").Result, suggestBox.Text);
         }
 
         public void Save()
@@ -836,5 +837,6 @@ namespace MSDHSystem.ViewModels
                 DependencyService.Get<Toast>().Show("Faild");
             }
         }
+
     }
 }

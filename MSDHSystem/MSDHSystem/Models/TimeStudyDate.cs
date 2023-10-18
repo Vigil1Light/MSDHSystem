@@ -10,6 +10,5 @@ namespace MSDHSystem.Models
         public string startDate { get; set; }
         public string endDate { get; set; }
         public string status { get; set; }
-        public bool IsEnabledCell { get; set; }
     }
 }

@@ -28,9 +28,16 @@ namespace MSDHSystem.Views
             {
                 var selectedProduct = (TimeStudyDate)e.Item;
                 Application.Current.Properties["TimeStudyDateValue"] = selectedProduct;
-                IsLoading(true);
-                Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
-                newThread.Start();
+                if(selectedProduct.status == "(Waiting Approve)")
+                {
+                    DependencyService.Get<Toast>().Show("Time Study Form is Waiting Approval you can’t click to Edit");
+                }
+                else
+                {
+                    IsLoading(true);
+                    Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
+                    newThread.Start();
+                }      
             }
             catch (Exception ex)
             {

@@ -60,7 +60,6 @@ namespace MSDHSystem.ViewModels
                         int weeknumber = GetWeekNumber(dbDate);
                         string tmpStatus = "";
                         string tmpMonth = "";
-                        bool tmpEnabled = true;
                         if (DateTime.Compare(dbDate, DateTime.Now) >= 0)
                         {
                             tmpStatus = "";
@@ -86,22 +85,18 @@ namespace MSDHSystem.ViewModels
                                     if (sqlDataReader["APPROVED"] == null)
                                     {
                                         tmpStatus = "(Waiting Approve)";
-                                        tmpEnabled = false;
                                     }
                                     else if (sqlDataReader["APPROVED"].ToString() != "Yes")
                                     {
                                         tmpStatus = "(Waiting Approve)";
-                                        tmpEnabled = false;
                                     }
                                     if (sqlDataReader["SignedByEmployee"] == null)
                                     {
                                         tmpStatus = "(Saved for Later)";
-                                        tmpEnabled = true;
                                     }
                                     else if (sqlDataReader["SignedByEmployee"].ToString() != "YES")
                                     {
                                         tmpStatus = "(Saved for Later)";
-                                        tmpEnabled = true;
                                     }
                                 }
                             }
@@ -118,8 +113,7 @@ namespace MSDHSystem.ViewModels
                             month = tmpMonth,
                             startDate = reader["Value2"].ToString(),
                             endDate = reader["Value3"].ToString(),
-                            status = tmpStatus,     
-                            IsEnabledCell = tmpEnabled
+                            status = tmpStatus
                         });
                     }   
                 }
