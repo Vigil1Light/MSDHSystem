@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace MSDHSystem.Models
@@ -19,5 +20,6 @@ namespace MSDHSystem.Models
         public string T6 { get; set; }
         public string T7 { get; set; }
         public string Total { get; set; }
+        public Color BackColor { get; set; }
     }
 }

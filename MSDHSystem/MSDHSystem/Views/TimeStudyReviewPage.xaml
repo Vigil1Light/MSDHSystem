@@ -46,7 +46,7 @@
                                         <ColumnDefinition Width="0.5*" />
                                         <ColumnDefinition Width="9.5*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Text="{Binding No}" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding No}" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                                     <Grid Grid.Column="1" RowSpacing="1" ColumnSpacing="1">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2.5*" />
@@ -54,10 +54,10 @@
                                             <ColumnDefinition Width="2.5*" />
                                             <ColumnDefinition Width="2.5*" />
                                         </Grid.ColumnDefinitions>
-                                        <Label Grid.Row="0" Grid.Column="0" BackgroundColor="LightCyan" Text="{Binding StartDate}" HorizontalTextAlignment="Center"></Label>
-                                        <Label Grid.Row="0" Grid.Column="1" BackgroundColor="LightCyan" Text="{Binding EndDate}" HorizontalTextAlignment="Center"></Label>
-                                        <Label Grid.Row="0" Grid.Column="2" BackgroundColor="LightCyan" Text="{Binding Program}" HorizontalTextAlignment="Center"></Label>
-                                        <Label Grid.Row="0" Grid.Column="3" BackgroundColor="LightCyan" Text="{Binding Activity}" HorizontalTextAlignment="Center"></Label>
+                                        <Label Grid.Row="0" Grid.Column="0" BackgroundColor="{Binding BackColor}" Text="{Binding StartDate}" HorizontalTextAlignment="Center"></Label>
+                                        <Label Grid.Row="0" Grid.Column="1" BackgroundColor="{Binding BackColor}" Text="{Binding EndDate}" HorizontalTextAlignment="Center"></Label>
+                                        <Label Grid.Row="0" Grid.Column="2" BackgroundColor="{Binding BackColor}" Text="{Binding Program}" HorizontalTextAlignment="Center"></Label>
+                                        <Label Grid.Row="0" Grid.Column="3" BackgroundColor="{Binding BackColor}" Text="{Binding Activity}" HorizontalTextAlignment="Center"></Label>
                                         <Grid Grid.Row="1" RowSpacing="1" ColumnSpacing="1" Grid.ColumnSpan="4">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="1.25*" />
@@ -69,14 +69,14 @@
                                                 <ColumnDefinition Width="1.25*" />
                                                 <ColumnDefinition Width="1.25*" />
                                             </Grid.ColumnDefinitions>
-                                            <Label Text="Mon" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Tue" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Wed" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Thu" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Fri" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Sat" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Sun" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Totals" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Mon" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Tue" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Wed" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Thu" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Fri" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Sat" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Sun" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Totals" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                                         </Grid>
                                         <Grid Grid.Row="2" Grid.ColumnSpan="4" RowSpacing="1" ColumnSpacing="1">
                                             <Grid.ColumnDefinitions>
@@ -89,14 +89,14 @@
                                                 <ColumnDefinition Width="1.25*" />
                                                 <ColumnDefinition Width="1.25*" />
                                             </Grid.ColumnDefinitions>
-                                            <Label Text="{Binding T1, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="{Binding T2, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="{Binding T3, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="{Binding T4, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="{Binding T5, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="{Binding T6, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="{Binding T7, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center"></Label>
-                                            <Label Text="{Binding Total}" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding T1, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding T2, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding T3, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding T4, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding T5, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding T6, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding T7, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding Total}" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                                         </Grid>
                                     </Grid>
                                 </Grid>

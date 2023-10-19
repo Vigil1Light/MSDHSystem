@@ -106,6 +106,15 @@ namespace MSDHSystem.ViewModels
                 {
                     while (reader.Read())
                     {
+                        Color backColor = new Color();
+                        if (n % 2 == 0)
+                        {
+                            backColor = Color.LightSkyBlue;
+                        }
+                        else
+                        {
+                            backColor = Color.LightCyan;
+                        }
                         DateTime startDate = GetDate(int.Parse(reader["CalenderYear"].ToString()), int.Parse(reader["CalenderWeek"].ToString()));
                         TimeStudyReviewItems.Add(new TimeStudyReviewData
                         {
@@ -121,10 +130,11 @@ namespace MSDHSystem.ViewModels
                             T5 = reader["FridayTime"].ToString(),
                             T6 = reader["SaturdayTime"].ToString(),
                             T7 = reader["SundayTime"].ToString(),
-                            Total = reader["TotalTime"].ToString()
+                            Total = reader["TotalTime"].ToString(),
+                            BackColor = backColor
                         });
                         n++;
-                        if (n == 1)
+                        if (n == 2)
                         {
                             Name = reader["Login_Name"].ToString();
                             Location = reader["location"].ToString();
