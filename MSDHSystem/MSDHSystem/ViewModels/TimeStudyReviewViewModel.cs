@@ -1,19 +1,11 @@
-﻿using dotMorten.Xamarin.Forms;
-using MSDHSystem.Models;
+﻿using MSDHSystem.Models;
 using MSDHSystem.Utils;
-using MSDHSystem.Views;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Globalization;
-using System.Linq;
-using System.Net.Mail;
 using System.Threading;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace MSDHSystem.ViewModels
