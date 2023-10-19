@@ -14,6 +14,7 @@ namespace MSDHSystem.Models
         public int No { get; set; }
         public List<string> Programs { get; set; }
         public List<string> Activities { get; set; }
+        public Color BackColor { get; set; }
 
         private string h1;
         private string h2;

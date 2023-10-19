@@ -260,6 +260,7 @@ namespace MSDHSystem.ViewModels
                 reader.Close();
 
                 int n = 0;
+                Color backColor = new Color();
                 if (timeStudyDate.status == "(Saved for Later)")
                 {
                     List<int> Date = timeStudyDate.startDate.ToString().Split('/').Select(int.Parse).ToList();
@@ -273,6 +274,14 @@ namespace MSDHSystem.ViewModels
                         while (reader.Read())
                         {
                             n++;
+                            if(n % 2 == 0)
+                            {
+                                backColor = Color.LightSkyBlue;
+                            }
+                            else
+                            {
+                                backColor= Color.LightCyan;
+                            }
                             List<string> tHour = new List<string>();
                             List<string> tMin = new List<string>();
                             for (int i = 3; i < 8; i++)
@@ -325,6 +334,7 @@ namespace MSDHSystem.ViewModels
                                 M5 = tMin[4],
                                 M6 = tMin[5],
                                 M7 = tMin[6],
+                                BackColor = backColor
                             });
                             tHour.Clear();
                             tMin.Clear();
@@ -335,11 +345,20 @@ namespace MSDHSystem.ViewModels
 
                 for (int i = n; i < 19; i++)
                 {
+                    if (i % 2 == 0)
+                    {
+                        backColor = Color.LightCyan;
+                    }
+                    else
+                    {
+                        backColor = Color.LightSkyBlue;
+                    }
                     TimeStudyItems.Add(new TimeStudyData
                     {
                         No = i + 1,
                         Programs = programs,
                         Activities = activities,
+                        BackColor = backColor
                     });
                 }
 

@@ -52,14 +52,14 @@
                                         <ColumnDefinition Width="0.5*" />
                                         <ColumnDefinition Width="9.5*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Text="{Binding No}" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding No}" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                                     <Grid Grid.Column="1" RowSpacing="1" ColumnSpacing="1">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="5*" />
                                             <ColumnDefinition Width="5*" />
                                         </Grid.ColumnDefinitions>
-                                        <Picker Grid.Row="0" Grid.Column="0" Title="Program" BackgroundColor="LightCyan" ItemsSource="{Binding Programs}" SelectedItem="{Binding Program}" HorizontalTextAlignment="Center"></Picker>
-                                        <Picker Grid.Row="0" Grid.Column="1" Title="Activity" BackgroundColor="LightCyan" ItemsSource="{Binding Activities}" SelectedItem="{Binding Activity}" HorizontalTextAlignment="Center"></Picker>
+                                        <Picker Grid.Row="0" Grid.Column="0" Title="Program" BackgroundColor="{Binding BackColor}" ItemsSource="{Binding Programs}" SelectedItem="{Binding Program}" HorizontalTextAlignment="Center"></Picker>
+                                        <Picker Grid.Row="0" Grid.Column="1" Title="Activity" BackgroundColor="{Binding BackColor}" ItemsSource="{Binding Activities}" SelectedItem="{Binding Activity}" HorizontalTextAlignment="Center"></Picker>
                                         <Grid Grid.Row="1" RowSpacing="1" ColumnSpacing="1" Grid.ColumnSpan="2">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="1.25*" />
@@ -71,14 +71,14 @@
                                                 <ColumnDefinition Width="1.25*" />
                                                 <ColumnDefinition Width="1.25*" />
                                             </Grid.ColumnDefinitions>
-                                            <Label Text="Mon" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Tue" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Wed" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Thu" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Fri" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Sat" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Sun" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="Totals" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="#96d1ff" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Mon" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Tue" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Wed" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Thu" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Fri" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Sat" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Sun" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Totals" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                                         </Grid>
                                         <Grid Grid.Row="2" Grid.ColumnSpan="2" RowSpacing="1" ColumnSpacing="1">
                                             <Grid.ColumnDefinitions>
@@ -99,9 +99,9 @@
                                                 <ColumnDefinition Width="0.625*" />
                                                 <ColumnDefinition Width="0.625*" />
                                             </Grid.ColumnDefinitions>
-                                            <Entry Placeholder="H" Text="{Binding H1, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            <Entry Placeholder="H" Text="{Binding H1, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" Keyboard="Numeric">
                                             </Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M1, Mode=TwoWay}">
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" SelectedItem="{Binding M1, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
                                                     <x:Array Type="{x:Type x:String}">
                                                         <x:String>0</x:String>
@@ -111,9 +111,9 @@
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="{Binding H2, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            <Entry Placeholder="H" Text="{Binding H2, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" Keyboard="Numeric">
                                             </Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M2, Mode=TwoWay}">
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" SelectedItem="{Binding M2, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
                                                     <x:Array Type="{x:Type x:String}">
                                                         <x:String>0</x:String>
@@ -123,9 +123,9 @@
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="{Binding H3, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            <Entry Placeholder="H" Text="{Binding H3, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" Keyboard="Numeric">
                                             </Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M3, Mode=TwoWay}">
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" SelectedItem="{Binding M3, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
                                                     <x:Array Type="{x:Type x:String}">
                                                         <x:String>0</x:String>
@@ -135,9 +135,9 @@
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="{Binding H4, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            <Entry Placeholder="H" Text="{Binding H4, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" Keyboard="Numeric">
                                             </Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M4, Mode=TwoWay}">
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" SelectedItem="{Binding M4, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
                                                     <x:Array Type="{x:Type x:String}">
                                                         <x:String>0</x:String>
@@ -147,9 +147,9 @@
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="{Binding H5, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="8" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            <Entry Placeholder="H" Text="{Binding H5, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="8" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" Keyboard="Numeric">
                                             </Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="9" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M5, Mode=TwoWay}">
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="9" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" SelectedItem="{Binding M5, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
                                                     <x:Array Type="{x:Type x:String}">
                                                         <x:String>0</x:String>
@@ -159,9 +159,9 @@
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="{Binding H6, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="10" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            <Entry Placeholder="H" Text="{Binding H6, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="10" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" Keyboard="Numeric">
                                             </Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="11" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M6, Mode=TwoWay}">
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="11" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" SelectedItem="{Binding M6, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
                                                     <x:Array Type="{x:Type x:String}">
                                                         <x:String>0</x:String>
@@ -171,9 +171,9 @@
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Entry Placeholder="H" Text="{Binding H7, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="12" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" Keyboard="Numeric">
+                                            <Entry Placeholder="H" Text="{Binding H7, Mode=TwoWay}" HorizontalOptions="Fill" Grid.Column="12" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" Keyboard="Numeric">
                                             </Entry>
-                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="13" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" SelectedItem="{Binding M7, Mode=TwoWay}">
+                                            <Picker Title="M" HorizontalOptions="Fill" Grid.Column="13" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" SelectedItem="{Binding M7, Mode=TwoWay}">
                                                 <Picker.ItemsSource>
                                                     <x:Array Type="{x:Type x:String}">
                                                         <x:String>0</x:String>
@@ -183,8 +183,8 @@
                                                     </x:Array>
                                                 </Picker.ItemsSource>
                                             </Picker>
-                                            <Label Text="{Binding TotalHours}" HorizontalOptions="Fill" Grid.Column="14" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                                            <Label Text="{Binding TotalMins}" HorizontalOptions="Fill" Grid.Column="15" FontSize="Small" BackgroundColor="LightCyan" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding TotalHours}" HorizontalOptions="Fill" Grid.Column="14" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding TotalMins}" HorizontalOptions="Fill" Grid.Column="15" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                                         </Grid>
                                     </Grid>
                                 </Grid>
