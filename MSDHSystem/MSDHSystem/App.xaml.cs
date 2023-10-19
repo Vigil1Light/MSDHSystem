@@ -28,6 +28,7 @@ namespace MSDHSystem
             else
             {
                 MainPage = new LoginPage();
+
             }
 
         }
