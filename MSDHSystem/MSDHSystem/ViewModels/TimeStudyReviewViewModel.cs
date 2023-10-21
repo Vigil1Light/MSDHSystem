@@ -96,7 +96,7 @@ namespace MSDHSystem.ViewModels
             try
             {
                 string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
-                string strQuery = string.Format("SELECT * FROM  TimeStudyDetail a INNER JOIN AD_Info b ON a.pid_nmbr = b.pid_nmbr WHERE a.PIN = '{0}'", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result);
+                string strQuery = string.Format("SELECT * FROM  TimeStudyDetail a INNER JOIN AD_Info b ON a.pid_nmbr = b.pid_nmbr WHERE a.PIN = '{0}' ORDER BY CAST(a.CalenderYear AS INT) ASC, CAST(a.CalenderWeek AS INT) ASC", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result);
                 SqlConnection con = new SqlConnection(connstring);
                 con.Open();
                 SqlCommand command = new SqlCommand(strQuery, con);
