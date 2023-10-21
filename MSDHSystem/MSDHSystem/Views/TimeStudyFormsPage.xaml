@@ -231,9 +231,9 @@
                               VerticalOptions="CenterAndExpand"
                               TextChanged="AutoSuggestBox_TextChanged"
                               Text="{Binding SupervisorEmail, Mode=TwoWay}"
-                              SuggestionChosen="staticSuggestBox_SuggestionChosen"/>
+                              QuerySubmitted="AutoSuggestBox_QuerySubmitted"/>
             <Button Grid.Row="2" Grid.Column="0" Text="Save For Later" Command="{Binding SaveForLater_Clicked}" IsEnabled="{Binding IsEnabled}"></Button>
-            <Button Grid.Row="2" Grid.Column="1" Text="Submit For Review" Command="{Binding SubmitForReview_Clicked}" IsEnabled="{Binding IsEnabled}"></Button>
+            <Button x:Name="SubmitBtn" Grid.Row="2" Grid.Column="1" Text="Submit For Review" Command="{Binding SubmitForReview_Clicked}" IsEnabled="{Binding IsEnabled}"></Button>
         </Grid>
     </StackLayout>
 </ContentPage>

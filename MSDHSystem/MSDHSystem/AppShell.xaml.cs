@@ -26,6 +26,7 @@ namespace MSDHSystem
             await Xamarin.Essentials.SecureStorage.SetAsync("pin_number", "");
             await Xamarin.Essentials.SecureStorage.SetAsync("email", "");
             await Xamarin.Essentials.SecureStorage.SetAsync("pass", "");
+            await Xamarin.Essentials.SecureStorage.SetAsync("submitstate", "0");
             //await Shell.Current.GoToAsync("//LoginPage");
             App.Current.MainPage = new LoginPage();
         }

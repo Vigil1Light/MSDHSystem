@@ -19,12 +19,13 @@ namespace MSDHSystem.Views
     public partial class TimeStudyFormsPage : ContentPage
     {
         public List<string> SupervisorEmailList = new List<string>();
-
+        bool bstate = false;
         public TimeStudyFormsPage()
         {
             InitializeComponent();
             GetEmailValue();
             this.BindingContext = new TimeStudyFormsViewModel(staticSuggestBox);
+            SubmitBtn.IsEnabled = false;
         }
 
         private void AutoSuggestBox_TextChanged(object sender, AutoSuggestBoxTextChangedEventArgs e)
@@ -32,6 +33,16 @@ namespace MSDHSystem.Views
             staticSuggestBox.ItemsSource = string.IsNullOrWhiteSpace(staticSuggestBox.Text)
                 ? null
                 : SupervisorEmailList.Where(filter => filter.StartsWith(staticSuggestBox.Text, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            if(SupervisorEmailList.FirstOrDefault(s => s == staticSuggestBox.Text) != null)
+            {
+                bstate = true;
+                Xamarin.Essentials.SecureStorage.SetAsync("submitstate", "1");
+            }
+            else
+            {
+                bstate= false;
+                Xamarin.Essentials.SecureStorage.SetAsync("submitstate", "0");
+            }
         }
 
         public void GetEmailValue()
@@ -53,9 +64,32 @@ namespace MSDHSystem.Views
             con.Close();
         }
 
-        private void staticSuggestBox_SuggestionChosen(object sender, AutoSuggestBoxSuggestionChosenEventArgs e)
+        private void AutoSuggestBox_QuerySubmitted(object sender, AutoSuggestBoxQuerySubmittedEventArgs e)
         {
-            staticSuggestBox.Text = e.SelectedItem.ToString();
+            if (e.ChosenSuggestion != null)
+            {
+                // User selected an item from the suggestion list, take an action on it here.
+                if (((AutoSuggestBox)sender).Text == Xamarin.Essentials.SecureStorage.GetAsync("username").Result + "@msdh.ms.gov")
+                {
+                    DependencyService.Get<Toast>().Show("Can't send mail to yourself");
+                    SubmitBtn.IsEnabled = false;
+                }
+                else
+                {
+                    SubmitBtn.IsEnabled = true;
+                }
+
+            }
+            else
+            {
+                // User hit Enter from the search box. Use args.QueryText to determine what to do.
+                if(!bstate)
+                {
+                    SubmitBtn.IsEnabled = false;
+                    DependencyService.Get<Toast>().Show("Please select correct supervisor email");
+                }
+            }
+
         }
     }
 }

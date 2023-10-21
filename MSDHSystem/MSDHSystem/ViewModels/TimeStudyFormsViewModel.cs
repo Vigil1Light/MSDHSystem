@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
@@ -160,9 +161,16 @@ namespace MSDHSystem.ViewModels
             }
             else
             {
-                UpdateUI(false);
-                Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
-                newThread.Start("submit");
+                if(Xamarin.Essentials.SecureStorage.GetAsync("submitstate").Result == "1")
+                {
+                    UpdateUI(false);
+                    Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
+                    newThread.Start("submit");
+                }
+                else
+                {
+                    DependencyService.Get<Toast>().Show("Please select correct supervisor email");
+                }
             }
         }
 
@@ -595,7 +603,7 @@ namespace MSDHSystem.ViewModels
             }
             con.Close();
 
-            //SendMail(Xamarin.Essentials.SecureStorage.GetAsync("email").Result, suggestBox.Text);
+            SendMail("TS", Xamarin.Essentials.SecureStorage.GetAsync("username").Result);
         }
 
         public void Save()
@@ -830,31 +838,43 @@ namespace MSDHSystem.ViewModels
             });
         }
 
-        public void SendMail(string fromEmail, string toEmail)
+        public void SendMail(string formid, string recordid)
         {
+            string connectionString = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+            string storedProcedureName = "sp_FormSubmissionNotification";
+
             try
             {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
 
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                        // Add any input parameters if required
+                        command.Parameters.AddWithValue("@formid", formid);
+                        command.Parameters.AddWithValue("@recordid", recordid);
 
-                mail.From = new MailAddress(fromEmail);
-                mail.To.Add(toEmail);
-                mail.Subject = "Mississippi State Department Of Health";
-                mail.Body = "A Time Study has been submitted by " + fromEmail;
+                        // Add any output parameters if required
+                        //command.Parameters.Add("@OutputParameterName", SqlDbType.Int, 0).Direction = ParameterDirection.Output;
 
-                SmtpServer.Port = 587;
-                SmtpServer.Host = "smtp.gmail.com";
-                SmtpServer.EnableSsl = true;
-                SmtpServer.UseDefaultCredentials = false;
-                SmtpServer.Credentials = new System.Net.NetworkCredential(toEmail, Xamarin.Essentials.SecureStorage.GetAsync("pass").Result);
+                        connection.Open();
 
-                SmtpServer.Send(mail);
+                        // Execute the stored procedure
+                        command.ExecuteNonQuery();
+
+                        // Access the output parameters if required
+                        //string outputValue = command.Parameters["@OutputParameterName"].Value.ToString();
+
+                        connection.Close();
+                    }
+                }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                DependencyService.Get<Toast>().Show("Faild");
+                DependencyService.Get<Toast>().Show(ex.Message);
             }
+            
         }
 
     }
