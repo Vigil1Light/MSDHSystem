@@ -17,7 +17,7 @@ namespace MSDHSystem
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+/*            DependencyService.Register<MockDataStore>();
             var isLoogged = Xamarin.Essentials.SecureStorage.GetAsync("isLogged").Result;
             var users = new Users();
             users.username = Xamarin.Essentials.SecureStorage.GetAsync("username").Result;
@@ -28,7 +28,8 @@ namespace MSDHSystem
             else
             {
                 MainPage = new LoginPage();
-            }
+            }*/
+            MainPage = new LoginPage();
 
         }
 
