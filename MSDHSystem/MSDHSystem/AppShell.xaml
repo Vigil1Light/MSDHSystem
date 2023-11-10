@@ -115,7 +115,11 @@
     <FlyoutItem Title="Time Study Review" Icon="icon_feed.png" Route="TSR">
         <ShellContent ContentTemplate="{DataTemplate local:TimeStudyReviewPage}" />
     </FlyoutItem>
-    
+
+    <FlyoutItem Title="Time Study Approve" Icon="icon_feed.png" Route="TSR">
+        <ShellContent ContentTemplate="{DataTemplate local:TimeStudyApprovePage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="F &amp; A Form" Icon="icon_feed.png" Route="FA">
         <ShellContent ContentTemplate="{DataTemplate local:SubMenuPage}" />
     </FlyoutItem>

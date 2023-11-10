@@ -4,7 +4,6 @@
              xmlns:extensions="clr-namespace:MSDHSystem.Extensions"
              x:Class="MSDHSystem.Views.TimeStudyReviewPage"
              xmlns:local="clr-namespace:MSDHSystem.Extensions"
-             xmlns:forms="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"
              Title="Time Study Review">
     <ContentPage.Resources>
         <extensions:EmbeddedToImageSourceConverter x:Key="imageConverter" />
