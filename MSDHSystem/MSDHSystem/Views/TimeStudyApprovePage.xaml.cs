@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MSDHSystem.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace MSDHSystem.Views
         public TimeStudyApprovePage()
         {
             InitializeComponent();
+            this.BindingContext = new TimeStudyApproveViewModel();
         }
     }
 }
