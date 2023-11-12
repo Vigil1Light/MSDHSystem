@@ -1,12 +1,151 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MSDHSystem.Views.TimeStudyDetailPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+             xmlns:extensions="clr-namespace:MSDHSystem.Extensions"
+             x:Class="MSDHSystem.Views.TimeStudyDetailPage"
+             xmlns:local="clr-namespace:MSDHSystem.Extensions"
+             xmlns:forms="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"
+             Title="Time Study Sheet">
+    <ContentPage.Resources>
+        <extensions:EmbeddedToImageSourceConverter x:Key="imageConverter" />
+    </ContentPage.Resources>
+    <StackLayout>
+        <Image Source="{local:ImageResource MSDHSystem.Resources.Images.logo.png}" Aspect="AspectFill"></Image>
+        <Label HorizontalTextAlignment="Center" Text="Time Study Sheet" FontSize="Title" TextColor="#96d1ff"/>
+        <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Name:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding Name}"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Email:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding Email}"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Location:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding Location}"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="JobName:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding Jobname}"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Org:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding Orgcode}"></Label>
+                <Label Text="PIN:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding Pin}"></Label>
+                <Label Text="PID No:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding PIDnumber}"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Week From:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding StartDate}"></Label>
+                <Label Text="To:" TextColor="Black" FontAttributes="Bold"></Label>
+                <Label Text="{Binding EndDate}"></Label>
+            </StackLayout>
         </StackLayout>
-    </ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ListView x:Name="lstTimeStudyDetail" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"
+                SeparatorColor="LightGray" SeparatorVisibility="Default" HasUnevenRows="True"
+                BackgroundColor="White"
+                IsEnabled="{Binding IsEnabled}"
+                ItemsSource="{Binding TimeStudyDetailItems}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid BackgroundColor="Black" RowSpacing="1" ColumnSpacing="1" Padding="1">
+                                <Grid Grid.Row="0" RowSpacing="1" ColumnSpacing="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.5*" />
+                                        <ColumnDefinition Width="9.5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding No}" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                    <Grid Grid.Column="1" RowSpacing="1" ColumnSpacing="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="5*" />
+                                            <ColumnDefinition Width="5*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Row="0" Grid.Column="0" BackgroundColor="{Binding BackColor}" Text="{Binding Program}" HorizontalTextAlignment="Center"></Label>
+                                        <Label Grid.Row="0" Grid.Column="1" BackgroundColor="{Binding BackColor}" Text="{Binding Activity}" HorizontalTextAlignment="Center"></Label>
+                                        <Grid Grid.Row="1" RowSpacing="1" ColumnSpacing="1" Grid.ColumnSpan="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1.25*" />
+                                                <ColumnDefinition Width="1.25*" />
+                                                <ColumnDefinition Width="1.25*" />
+                                                <ColumnDefinition Width="1.25*" />
+                                                <ColumnDefinition Width="1.25*" />
+                                                <ColumnDefinition Width="1.25*" />
+                                                <ColumnDefinition Width="1.25*" />
+                                                <ColumnDefinition Width="1.25*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Mon" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Tue" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Wed" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Thu" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Fri" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Sat" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Sun" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="Totals" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                        </Grid>
+                                        <Grid Grid.Row="2" Grid.ColumnSpan="2" RowSpacing="1" ColumnSpacing="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                                <ColumnDefinition Width="0.625*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding H1}" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding M1}" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding H2}" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding M2}" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding H3}" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding M3}" HorizontalOptions="Fill" Grid.Column="5" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding H4}" HorizontalOptions="Fill" Grid.Column="6" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding M4}" HorizontalOptions="Fill" Grid.Column="7" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding H5}" HorizontalOptions="Fill" Grid.Column="8" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding M5}" HorizontalOptions="Fill" Grid.Column="9" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding H6}" HorizontalOptions="Fill" Grid.Column="10" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding M6}" HorizontalOptions="Fill" Grid.Column="11" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding H7}" HorizontalOptions="Fill" Grid.Column="12" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding M7}" HorizontalOptions="Fill" Grid.Column="13" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding TotalHours}" HorizontalOptions="Fill" Grid.Column="14" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            <Label Text="{Binding TotalMins}" HorizontalOptions="Fill" Grid.Column="15" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="LightCyan" HorizontalOptions="Center" VerticalOptions="Center" Padding="2">
+                        <Label Text="Total Hours:" FontSize="Small" TextColor="Black"></Label>
+                        <Label Text="{Binding Hours}" FontSize="Small"></Label>
+                        <Label Text=" "></Label>
+                        <Label Text="Total Mins:" FontSize="Small" TextColor="Black"></Label>
+                        <Label Text="{Binding Mins}" FontSize="Small"></Label>
+                    </StackLayout>
+                </ListView.Footer>
+            </ListView>
+            <ActivityIndicator HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           x:Name="activity"
+                           Color="MediumSlateBlue"  
+                           BackgroundColor="Transparent"
+                           Scale="2"
+                           IsRunning="{Binding IsLoading}"/>
+        </Grid>
+    </StackLayout>
 </ContentPage>
