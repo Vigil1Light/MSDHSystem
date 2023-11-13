@@ -88,6 +88,7 @@ namespace MSDHSystem.ViewModels
             {
                 DependencyService.Get<Toast>().Show("Successfully rejected");
             }
+            con.Close();
         }
 
         private void OnApproveClicked(TimeStudyApproveData data)
@@ -109,6 +110,7 @@ namespace MSDHSystem.ViewModels
             {
                 DependencyService.Get<Toast>().Show("Successfully approved");
             }
+            con.Close();
         }
 
         private void GetValue()

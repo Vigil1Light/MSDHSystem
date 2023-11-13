@@ -542,27 +542,11 @@ namespace MSDHSystem.ViewModels
                     string strQuery = string.Format("DELETE FROM TimeStudyDetail WHERE pid_nmbr = '{0}' AND Program = '{1}' AND Activity = '{2}' AND CalenderYear = '{3}' AND CalenderWeek = '{4}'", Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], startDate.Year.ToString(), GetWeekNumber(startDate).ToString());
 
                     SqlCommand command = new SqlCommand(strQuery, con);
-                    SqlDataReader reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-
-                        }
-                    }
-                    reader.Close();
+                    command.ExecuteNonQuery();
 
                     strQuery = string.Format("INSERT INTO TimeStudyDetail(PIN, Program, Activity, Mondaytime, TuesdayTime, WednesdayTime, ThursdayTime, FridayTime, SaturdayTime, SundayTime, TotalTime, SupervisorName, DateCompleted, CalenderWeek, pid_nmbr, CalenderYear, SignedByEmployee) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', 'YES')", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], tempTime[0], tempTime[1], tempTime[2], tempTime[3], tempTime[4], tempTime[5], tempTime[6], TimeStudyItems[i].TotalHours + ":" + TimeStudyItems[i].TotalMins, suggestBox.Text, DateTime.Today.ToString("MM/dd/yyyy"), GetWeekNumber(startDate).ToString(), Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, startDate.Year.ToString());
                     command = new SqlCommand(strQuery, con);
-                    reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-
-                        }
-                    }
-                    reader.Close();
+                    command.ExecuteNonQuery();
 
                     /*strQuery = string.Format("DELETE FROM TimeStudyEmmployeeInfo WHERE PIN = '{0}' AND CalenderWeek = '{1}' AND FormType = 'TS'",Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, GetWeekNumber(startDate).ToString());
                     command = new SqlCommand(strQuery, con);
@@ -577,15 +561,7 @@ namespace MSDHSystem.ViewModels
 
                     strQuery = string.Format("INSERT INTO TimeStudyEmmployeeInfo(EmployeeName, PIN, Classification, ORG, PID_NO, CalenderWeek, FormType) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', 'TS')", Xamarin.Essentials.SecureStorage.GetAsync("username").Result, Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, Location + "/" + Jobname, Orgcode, Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, GetWeekNumber(startDate).ToString());
                     command = new SqlCommand(strQuery, con);
-                    reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-
-                        }
-                    }
-                    reader.Close();
+                    command.ExecuteNonQuery();
 
                     tempHour.Clear();
                     tempMin.Clear();
@@ -757,27 +733,11 @@ namespace MSDHSystem.ViewModels
                     string strQuery = string.Format("DELETE FROM TimeStudyDetail WHERE pid_nmbr = '{0}' AND Program = '{1}' AND Activity = '{2}' AND CalenderYear = '{3}' AND CalenderWeek = '{4}'", Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], startDate.Year.ToString(), GetWeekNumber(startDate).ToString());
 
                     SqlCommand command = new SqlCommand(strQuery, con);
-                    SqlDataReader reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-
-                        }
-                    }
-                    reader.Close();
+                    command.ExecuteNonQuery();
 
                     strQuery = string.Format("INSERT INTO TimeStudyDetail(PIN, Program, Activity, Mondaytime, TuesdayTime, WednesdayTime, ThursdayTime, FridayTime, SaturdayTime, SundayTime, TotalTime, SupervisorName, DateCompleted, CalenderWeek, pid_nmbr, CalenderYear) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}')", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, TimeStudyItems[i].Program.Split(' ')[0], TimeStudyItems[i].Activity.Split(' ')[0], tempTime[0], tempTime[1], tempTime[2], tempTime[3], tempTime[4], tempTime[5], tempTime[6], TimeStudyItems[i].TotalHours + ":" + TimeStudyItems[i].TotalMins, suggestBox.Text, DateTime.Today.ToString("MM/dd/yyyy"), GetWeekNumber(startDate).ToString(), Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, startDate.Year.ToString());
                     command = new SqlCommand(strQuery, con);
-                    reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-
-                        }
-                    }
-                    reader.Close();
+                    command.ExecuteNonQuery();
 
                     /*strQuery = string.Format("DELETE FROM TimeStudyEmmployeeInfo WHERE PIN = '{0}' AND CalenderWeek = '{1}' AND FormType = 'TS'",Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, GetWeekNumber(startDate).ToString());
                     command = new SqlCommand(strQuery, con);
@@ -792,15 +752,7 @@ namespace MSDHSystem.ViewModels
 
                     strQuery = string.Format("INSERT INTO TimeStudyEmmployeeInfo(EmployeeName, PIN, Classification, ORG, PID_NO, CalenderWeek, FormType) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', 'TS')", Xamarin.Essentials.SecureStorage.GetAsync("username").Result, Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, Location + "/" + Jobname, Orgcode, Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result,GetWeekNumber(startDate).ToString());
                     command = new SqlCommand(strQuery, con);
-                    reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-
-                        }
-                    }
-                    reader.Close();
+                    command.ExecuteNonQuery();
 
                     tempHour.Clear();
                     tempMin.Clear();

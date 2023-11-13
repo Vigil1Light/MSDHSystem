@@ -292,24 +292,5 @@ namespace MSDHSystem.ViewModels
             IsLoading = !state;
         }
 
-        private void LongRunningTask(object parameter)
-        {
-            // Get the parameter value
-            string parameterValue = parameter as string;
-
-            // Perform the long-running operation here
-            // ...
-
-            // Update UI from the background thread using Device.BeginInvokeOnMainThread
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                // Update UI to indicate that the operation has completed
-
-                //await Task.Delay(1000);
-                //await Shell.Current.GoToAsync(nameof(TimeStudyPage));
-                UpdateUI(true);
-            });
-        }
-
     }
 }
