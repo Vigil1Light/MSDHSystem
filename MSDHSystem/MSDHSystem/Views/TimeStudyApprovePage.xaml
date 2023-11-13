@@ -16,7 +16,8 @@
                 SeparatorColor="LightGray" SeparatorVisibility="Default" HasUnevenRows="True"
                 BackgroundColor="White"
                 IsEnabled="{Binding IsEnabled}"
-                ItemsSource="{Binding TimeStudyApproveItems}">
+                ItemsSource="{Binding TimeStudyApproveItems}"
+                ItemTapped="lstTimeStudyApprove_ItemTapped">
                 <ListView.Header>
                     <Grid BackgroundColor="Black" RowSpacing="1" ColumnSpacing="1" Padding="1">
                         <Grid RowSpacing="1" ColumnSpacing="1">
