@@ -4,7 +4,6 @@
              xmlns:extensions="clr-namespace:MSDHSystem.Extensions"
              x:Class="MSDHSystem.Views.TimeStudyDetailPage"
              xmlns:local="clr-namespace:MSDHSystem.Extensions"
-             xmlns:forms="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"
              Title="Time Study Sheet">
     <ContentPage.Resources>
         <extensions:EmbeddedToImageSourceConverter x:Key="imageConverter" />
@@ -37,7 +36,7 @@
                 <Label Text="PID No:" TextColor="Black" FontAttributes="Bold"></Label>
                 <Label Text="{Binding PIDnumber}"></Label>
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
                 <Label Text="Week From:" TextColor="Black" FontAttributes="Bold"></Label>
                 <Label Text="{Binding StartDate}"></Label>
                 <Label Text="To:" TextColor="Black" FontAttributes="Bold"></Label>

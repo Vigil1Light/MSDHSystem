@@ -216,8 +216,8 @@ namespace MSDHSystem.ViewModels
                         {
                             if (reader[i] == null || reader[i].ToString() == "")
                             {
-                                tHour.Add("");
-                                tMin.Add("");
+                                tHour.Add("0");
+                                tMin.Add("0");
                             }
                             else
                             {
@@ -230,8 +230,8 @@ namespace MSDHSystem.ViewModels
                         {
                             if (reader[i] == null || reader[i].ToString() == "")
                             {
-                                tHour.Add("");
-                                tMin.Add("");
+                                tHour.Add("0");
+                                tMin.Add("0");
                             }
                             else
                             {
@@ -251,21 +251,22 @@ namespace MSDHSystem.ViewModels
                             H3 = tHour[2],
                             H4 = tHour[3],
                             H5 = tHour[4],
-                            H6 = tHour[5],
-                            H7 = tHour[6],
+                            H6 = tHour[6],
+                            H7 = tHour[7],
                             M1 = tMin[0],
                             M2 = tMin[1],
                             M3 = tMin[2],
                             M4 = tMin[3],
                             M5 = tMin[4],
-                            M6 = tMin[5],
-                            M7 = tMin[6],
-                            TotalHours = tHour[7],
-                            TotalMins = tHour[7],
+                            M6 = tMin[6],
+                            M7 = tMin[7],
+                            TotalHours = tHour[5],
+                            TotalMins = tHour[5],
                             BackColor = backColor
                         });
                         tHour.Clear();
                         tMin.Clear();
+                        CalculateSums();
                     }
                 }
                 reader.Close();

@@ -1,10 +1,13 @@
 ﻿using MSDHSystem.Models;
 using MSDHSystem.Utils;
+using MSDHSystem.Views;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -51,7 +54,7 @@ namespace MSDHSystem.ViewModels
             TimeStudyApproveItems = new ObservableCollection<TimeStudyApproveData>();
             UpdateUI(false);
             Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
-            newThread.Start();
+            newThread.Start("initial");
             AppSessionManager.Instance.StartSession();
             ApproveCommand = new Command<TimeStudyApproveData>(OnApproveClicked);
             RejectCommand = new Command<TimeStudyApproveData>(OnRejectClicked);
@@ -60,17 +63,52 @@ namespace MSDHSystem.ViewModels
 
         private void OnDetailClicked(TimeStudyApproveData data)
         {
-            DependencyService.Get<Toast>().Show(data.StartDate);
+            Application.Current.Properties["TimeStudyDetailValue"] = data;
+            UpdateUI(false);
+            Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
+            newThread.Start("detail");
         }
 
         private void OnRejectClicked(TimeStudyApproveData data)
         {
-            DependencyService.Get<Toast>().Show(data.EndDate);
+            string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+            List<int> Date = data.StartDate.ToString().Split('/').Select(int.Parse).ToList();
+            DateTime startDate = new DateTime(Date[2], Date[0], Date[1]);
+            string strQuery = string.Format("UPDATE TimeStudyDetail SET APPROVED = 'No', ApprovedTime = '{0}' WHERE pid_nmbr = '{1}' AND CalenderYear = '{2}' AND CalenderWeek = '{3}'", DateTime.Today.ToString("MM/dd/yyyy"), data.PIDNumber, startDate.Year.ToString(), GetWeekNumber(startDate).ToString());
+            SqlConnection con = new SqlConnection(connstring);
+            con.Open();
+            SqlCommand command = new SqlCommand(strQuery, con);
+            int result = 0;
+            result = command.ExecuteNonQuery();
+            if (result == 0)
+            {
+                DependencyService.Get<Toast>().Show("Can't reject that time study");
+            }
+            else
+            {
+                DependencyService.Get<Toast>().Show("Successfully rejected");
+            }
         }
 
         private void OnApproveClicked(TimeStudyApproveData data)
         {
-            DependencyService.Get<Toast>().Show(data.Name);
+            string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+            List<int> Date = data.StartDate.ToString().Split('/').Select(int.Parse).ToList();
+            DateTime startDate = new DateTime(Date[2], Date[0], Date[1]);
+            string strQuery = string.Format("UPDATE TimeStudyDetail SET APPROVED = 'Yes', ApprovedTime = '{0}' WHERE pid_nmbr = '{1}' AND CalenderYear = '{2}' AND CalenderWeek = '{3}'", DateTime.Today.ToString("MM/dd/yyyy"), data.PIDNumber, startDate.Year.ToString(), GetWeekNumber(startDate).ToString());
+            SqlConnection con = new SqlConnection(connstring);
+            con.Open();
+            SqlCommand command = new SqlCommand(strQuery, con);
+            int result = 0;
+            result = command.ExecuteNonQuery();
+            if (result == 0)
+            {
+                DependencyService.Get<Toast>().Show("Can't approve that time study");
+            }
+            else
+            {
+                DependencyService.Get<Toast>().Show("Successfully approved");
+            }
         }
 
         private void GetValue()
@@ -104,7 +142,8 @@ namespace MSDHSystem.ViewModels
                             Name = reader["Login_Name"].ToString(),
                             StartDate = startDate.ToString("MM/dd/yyyy"),
                             EndDate = (startDate.AddDays(4).ToString("MM/dd/yyyy")),
-                            BackColor = backColor
+                            PIDNumber = reader["pid_nmbr"].ToString(),
+                            BackColor = backColor,
                         });
                         n++;
                     }
@@ -163,13 +202,21 @@ namespace MSDHSystem.ViewModels
 
             // Perform the long-running operation here
             // ...
-            GetValue();
+            if (parameterValue == "initial") GetValue();
             // Update UI from the background thread using Device.BeginInvokeOnMainThread
-            Device.BeginInvokeOnMainThread(() =>
+            Device.BeginInvokeOnMainThread(async () =>
             {
                 // Update UI to indicate that the operation has completed 
+                if (parameterValue == "detail")
+                {
+                    await Shell.Current.GoToAsync($"{nameof(TimeStudyDetailPage)}");
+                }
                 UpdateUI(true);
             });
+        }
+        public static int GetWeekNumber(DateTime thisDate)
+        {
+            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(thisDate, System.Globalization.CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
         }
     }
 }

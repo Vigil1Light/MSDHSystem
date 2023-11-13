@@ -23,7 +23,7 @@ namespace MSDHSystem.Views
         }
         private async void lstTimeStudyApprove_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            try
+            /*try
             {
                 var selectedProduct = (TimeStudyApproveData)e.Item;
                 Application.Current.Properties["TimeStudyDetailValue"] = selectedProduct;
@@ -37,7 +37,7 @@ namespace MSDHSystem.Views
             {
                 await DisplayAlert("Error", ex.Message.ToString(), "Ok");
             }
-            lstTimeStudyApprove.SelectedItem = null;
+            lstTimeStudyApprove.SelectedItem = null;*/
         }
 
         private void LongRunningTask(object parameter)
