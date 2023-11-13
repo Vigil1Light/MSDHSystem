@@ -14,24 +14,24 @@ namespace MSDHSystem.Models
         public int No { get; set; }
         public Color BackColor { get; set; }
 
-        private string H1;
-        private string H2;
-        private string H3;
-        private string H4;
-        private string H5;
-        private string H6;
-        private string H7;
-        private string M1;
-        private string M2;
-        private string M3;
-        private string M4;
-        private string M5;
-        private string M6;
-        private string M7;
-        private string TotalHours { get; set; }
-        private string TotalMins { get; set; }
-        private string Program { get; set; }
-        private string Activity { get; set; }
+        public string H1;
+        public string H2;
+        public string H3;
+        public string H4;
+        public string H5;
+        public string H6;
+        public string H7;
+        public string M1;
+        public string M2;
+        public string M3;
+        public string M4;
+        public string M5;
+        public string M6;
+        public string M7;
+        public string TotalHours { get; set; }
+        public string TotalMins { get; set; }
+        public string Program { get; set; }
+        public string Activity { get; set; }
 
     }
 }
