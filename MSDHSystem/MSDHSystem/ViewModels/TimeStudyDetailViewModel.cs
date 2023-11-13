@@ -221,9 +221,9 @@ namespace MSDHSystem.ViewModels
                             }
                             else
                             {
-                                List<int> time = reader[i].ToString().Split(':').Select(int.Parse).ToList();
-                                tHour.Add(time[0].ToString());
-                                tMin.Add(time[1].ToString());
+                                List<string> time = reader[i].ToString().Split(':').Select(item => string.IsNullOrEmpty(item) ? "0" : item).ToList();
+                                tHour.Add(time[0]);
+                                tMin.Add(time[1]);     
                             }
                         }
                         for (int i = 18; i < 20; i++)
@@ -235,9 +235,9 @@ namespace MSDHSystem.ViewModels
                             }
                             else
                             {
-                                List<int> time = reader[i].ToString().Split(':').Select(int.Parse).ToList();
-                                tHour.Add(time[0].ToString());
-                                tMin.Add(time[1].ToString());
+                                List<string> time = reader[i].ToString().Split(':').Select(item => string.IsNullOrEmpty(item) ? "0" : item).ToList();
+                                tHour.Add(time[0]);
+                                tMin.Add(time[1]);
                             }
                         }
 

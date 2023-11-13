@@ -4,13 +4,13 @@
              xmlns:extensions="clr-namespace:MSDHSystem.Extensions"
              x:Class="MSDHSystem.Views.TimeStudyApprovePage"
              xmlns:local="clr-namespace:MSDHSystem.Extensions"
-             Title="Time Study Approve">
+             Title="Time Study Submitted">
     <ContentPage.Resources>
         <extensions:EmbeddedToImageSourceConverter x:Key="imageConverter" />
     </ContentPage.Resources>
     <StackLayout>
         <Image Source="{local:ImageResource MSDHSystem.Resources.Images.logo.png}" Aspect="AspectFill"></Image>
-        <Label HorizontalTextAlignment="Center" Text="Time Study Approve" FontSize="Title" TextColor="#96d1ff"/>
+        <Label HorizontalTextAlignment="Center" Text="Time Study Submitted" FontSize="Title" TextColor="#96d1ff"/>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <ListView x:Name="lstTimeStudyApprove" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"
                 SeparatorColor="LightGray" SeparatorVisibility="Default" HasUnevenRows="True"
