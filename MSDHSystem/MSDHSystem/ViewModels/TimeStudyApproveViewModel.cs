@@ -86,7 +86,7 @@ namespace MSDHSystem.ViewModels
             }
             else
             {
-                DependencyService.Get<Toast>().Show("Successfully rejected");
+                DependencyService.Get<Toast>().Show("Successfully rejected for " + data.Name);
             }
             con.Close();
         }
@@ -108,7 +108,7 @@ namespace MSDHSystem.ViewModels
             }
             else
             {
-                DependencyService.Get<Toast>().Show("Successfully approved");
+                DependencyService.Get<Toast>().Show("Successfully approved for " + data.Name);
             }
             con.Close();
         }

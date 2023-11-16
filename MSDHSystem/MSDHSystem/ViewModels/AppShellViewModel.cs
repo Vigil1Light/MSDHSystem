@@ -28,27 +28,7 @@ namespace MSDHSystem.ViewModels
         public AppShellViewModel(Users user)
         {
             HeaderText = "Welcome " + user.username;
-            CheckSupervisor(user);
-        }
-
-        public void CheckSupervisor(Users user)
-        {
-            string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
-            string strQuery = string.Format("SELECT DISTINCT SupervisorName FROM TimeStudyDetail WHERE SupervisorName = '{0}'", user.username + "@msdh.ms.gov");
-            SqlConnection con = new SqlConnection(connstring);
-            con.Open();
-            SqlCommand command = new SqlCommand(strQuery, con);
-            SqlDataReader reader = command.ExecuteReader();
-            if (reader.HasRows)
-            {
-                IsSupervisor = true;
-            }
-            else
-            {
-                IsSupervisor = false;
-            }
-            reader.Close();
-            con.Close();
+            IsSupervisor = user.issupervisor;
         }
     }
 }

@@ -88,6 +88,9 @@ namespace MSDHSystem.ViewModels
                 try
                 {
                     UpdateUI(false);
+
+                    CheckSupervisor(username);
+
                     result = await app.AcquireTokenByUsernamePassword(scopes,
                                                                      username + @"@" + domain,
                                                                      password)
@@ -164,6 +167,26 @@ namespace MSDHSystem.ViewModels
 
             IsEnabled = state;
             IsLoading = !state;
+        }
+
+        public void CheckSupervisor(string username)
+        {
+            string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+            string strQuery = string.Format("SELECT DISTINCT SupervisorName FROM TimeStudyDetail WHERE SupervisorName = '{0}'", username + "@msdh.ms.gov");
+            SqlConnection con = new SqlConnection(connstring);
+            con.Open();
+            SqlCommand command = new SqlCommand(strQuery, con);
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                Users.issupervisor = true;
+            }
+            else
+            {
+                Users.issupervisor = false;
+            }
+            reader.Close();
+            con.Close();
         }
     }
 }
