@@ -10,8 +10,7 @@
     BackgroundImageSource="{local:ImageResource MSDHSystem.Resources.Images.back.png}">
 
     <StackLayout>
-        <StackLayout>
-            <components:OutlinedMaterialEntry
+        <components:OutlinedMaterialEntry
                 PlaceholderText="Username"
                 Keyboard="Email"
                 ReturnType="Next"
@@ -20,33 +19,32 @@
                 Text="{Binding Users.username}"
                 IsEnabled="{Binding IsEnabled}"/>
 
-            <components:OutlinedMaterialEntry
-                PlaceholderText="Password"
-                Keyboard="Default"
-                ReturnType="Next"
-                IsPassword="True" 
-                LeadingIcon="{local:ImageResource MSDHSystem.Resources.Images.ic_password.png}"
-                Margin="75, 0, 75, 0"
-                Text="{Binding Users.password}"
-                IsEnabled="{Binding IsEnabled}"/>
+        <components:OutlinedMaterialEntry
+            PlaceholderText="Password"
+            Keyboard="Default"
+            ReturnType="Next"
+            IsPassword="True" 
+            LeadingIcon="{local:ImageResource MSDHSystem.Resources.Images.ic_password.png}"
+            Margin="75, 0, 75, 0"
+            Text="{Binding Users.password}"
+            IsEnabled="{Binding IsEnabled}"/>
 
-            <Button
-                Visual="Material"
-                BackgroundColor="DodgerBlue"
-                Text="Login"
-                Margin="75, 0, 75, 0"
-                Command="{Binding LoginCommand}"
-                IsEnabled="{Binding IsEnabled}"/>
+        <Button
+            Visual="Material"
+            BackgroundColor="DodgerBlue"
+            Text="Login"
+            Margin="75, 0, 75, 0"
+            Command="{Binding LoginCommand}"
+            IsEnabled="{Binding IsEnabled}"/>
 
-            <ActivityIndicator x:Name="activity"  
-                IsRunning="{Binding IsLoading}"  
-                IsEnabled="{Binding IsLoading}"  
-                IsVisible="{Binding IsLoading}"  
-                Color="DodgerBlue"  
-                BackgroundColor="Transparent"
-                Scale="2"
-                Margin="50"/>
+        <ActivityIndicator x:Name="activity"  
+            IsRunning="{Binding IsLoading}"  
+            IsEnabled="{Binding IsLoading}"  
+            IsVisible="{Binding IsLoading}"  
+            Color="DodgerBlue"  
+            BackgroundColor="Transparent"
+            Scale="2"
+            Margin="50"/>
 
-        </StackLayout>
     </StackLayout>
 </ContentPage>
