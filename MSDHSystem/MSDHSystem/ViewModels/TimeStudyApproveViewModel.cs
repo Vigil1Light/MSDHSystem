@@ -203,12 +203,11 @@ namespace MSDHSystem.ViewModels
             string parameterValue = parameter as string;
 
             // Perform the long-running operation here
-            // ...
-            if (parameterValue == "initial") GetValue();
             // Update UI from the background thread using Device.BeginInvokeOnMainThread
             Device.BeginInvokeOnMainThread(async () =>
             {
                 // Update UI to indicate that the operation has completed 
+                if (parameterValue == "initial") GetValue();
                 if (parameterValue == "detail")
                 {
                     await Shell.Current.GoToAsync($"{nameof(TimeStudyDetailPage)}");
