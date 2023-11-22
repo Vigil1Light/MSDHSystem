@@ -11,13 +11,13 @@
 
     <StackLayout>
         <components:OutlinedMaterialEntry
-                PlaceholderText="Username"
-                Keyboard="Email"
-                ReturnType="Next"
-                LeadingIcon="{local:ImageResource MSDHSystem.Resources.Images.ic_user.png}"
-                Margin="75, 150, 75, 0"
-                Text="{Binding Users.username}"
-                IsEnabled="{Binding IsEnabled}"/>
+            PlaceholderText="Username"
+            Keyboard="Email"
+            ReturnType="Next"
+            LeadingIcon="{local:ImageResource MSDHSystem.Resources.Images.ic_user.png}"
+            Margin="75, 150, 75, 0"
+            Text="{Binding Users.username}"
+            IsEnabled="{Binding IsEnabled}"/>
 
         <components:OutlinedMaterialEntry
             PlaceholderText="Password"
