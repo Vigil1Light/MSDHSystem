@@ -86,6 +86,10 @@ namespace MSDHSystem.ViewModels
                                     {
                                         tmpStatus = "(Waiting Approve)";
                                     }
+                                    else if (sqlDataReader["APPROVED"].ToString() == "No")
+                                    {
+                                        tmpStatus = "(Rejected)";
+                                    }
                                     else if (sqlDataReader["APPROVED"].ToString() != "Yes")
                                     {
                                         tmpStatus = "(Waiting Approve)";
