@@ -9,6 +9,7 @@ using MSDHSystem.Views;
 using System.Data.SqlClient;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices.ComTypes;
+using System.Threading;
 
 namespace MSDHSystem.ViewModels
 {
@@ -59,7 +60,9 @@ namespace MSDHSystem.ViewModels
             }
             else
             {
-                _ = ADlogin(Users.username, Users.password);
+                UpdateUI(false);
+                Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
+                newThread.Start();
             }
         }
 
@@ -87,8 +90,6 @@ namespace MSDHSystem.ViewModels
             {
                 try
                 {
-                    UpdateUI(false);
-
                     CheckSupervisor(username);
 
                     result = await app.AcquireTokenByUsernamePassword(scopes,
@@ -187,6 +188,22 @@ namespace MSDHSystem.ViewModels
             }
             reader.Close();
             con.Close();
+        }
+
+        private void LongRunningTask(object parameter)
+        {
+            // Get the parameter value
+            string parameterValue = parameter as string;
+
+            // Perform the long-running operation here
+            // ...
+
+            // Update UI from the background thread using Device.BeginInvokeOnMainThread
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                // Update UI to indicate that the operation has completed
+                await ADlogin(Users.username, Users.password);
+            });
         }
     }
 }
