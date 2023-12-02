@@ -63,6 +63,8 @@ namespace MSDHSystem.ViewModels
                 UpdateUI(false);
                 Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
                 newThread.Start();
+                _ = ADlogin(Users.username, Users.password);
+
             }
         }
 
@@ -90,8 +92,6 @@ namespace MSDHSystem.ViewModels
             {
                 try
                 {
-                    CheckSupervisor(username);
-
                     result = await app.AcquireTokenByUsernamePassword(scopes,
                                                                      username + @"@" + domain,
                                                                      password)
@@ -197,12 +197,12 @@ namespace MSDHSystem.ViewModels
 
             // Perform the long-running operation here
             // ...
-
+            CheckSupervisor(Users.username);
             // Update UI from the background thread using Device.BeginInvokeOnMainThread
-            Device.BeginInvokeOnMainThread(async () =>
+            Device.BeginInvokeOnMainThread( () =>
             {
                 // Update UI to indicate that the operation has completed
-                await ADlogin(Users.username, Users.password);
+                
             });
         }
     }
