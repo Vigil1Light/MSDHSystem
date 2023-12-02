@@ -395,7 +395,7 @@ namespace MSDHSystem.ViewModels
         {
             for(int i = 0; i < TimeStudyItems.Count; i++)
             {
-                if (int.Parse(TimeStudyItems[i].TotalHours) < 35)
+                if (TimeStudyItems[i].TotalHours != null && int.Parse(TimeStudyItems[i].TotalHours) < 35)
                 {
                     DependencyService.Get<Toast>().Show("The total hours of every week must be greater than 35 hours");
                     return;
@@ -595,7 +595,7 @@ namespace MSDHSystem.ViewModels
         {
             for (int i = 0; i < TimeStudyItems.Count; i++)
             {
-                if (int.Parse(TimeStudyItems[i].TotalHours) < 35)
+                if (TimeStudyItems[i].TotalHours != null && int.Parse(TimeStudyItems[i].TotalHours) < 35)
                 {
                     DependencyService.Get<Toast>().Show("The total hours of every week must be greater than 35 hours");
                     return;
