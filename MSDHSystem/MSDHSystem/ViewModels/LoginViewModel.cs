@@ -202,7 +202,6 @@ namespace MSDHSystem.ViewModels
             Device.BeginInvokeOnMainThread( () =>
             {
                 // Update UI to indicate that the operation has completed
-                
             });
         }
     }

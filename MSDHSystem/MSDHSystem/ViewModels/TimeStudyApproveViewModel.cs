@@ -80,6 +80,9 @@ namespace MSDHSystem.ViewModels
             SqlCommand command = new SqlCommand(strQuery, con);
             int result = 0;
             result = command.ExecuteNonQuery();
+            UpdateUI(false);
+            Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
+            newThread.Start("initial");
             if (result == 0)
             {
                 DependencyService.Get<Toast>().Show("Can't reject that time study");
@@ -102,6 +105,9 @@ namespace MSDHSystem.ViewModels
             SqlCommand command = new SqlCommand(strQuery, con);
             int result = 0;
             result = command.ExecuteNonQuery();
+            UpdateUI(false);
+            Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
+            newThread.Start("initial");
             if (result == 0)
             {
                 DependencyService.Get<Toast>().Show("Can't approve that time study");
@@ -117,8 +123,9 @@ namespace MSDHSystem.ViewModels
         {
             try
             {
+                TimeStudyApproveItems.Clear();
                 string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
-                string strQuery = string.Format("SELECT DISTINCT a.CalenderYear, a.CalenderWeek, b.Login_Name, b.pid_nmbr FROM TimeStudyDetail a INNER JOIN AD_Info b ON a.pid_nmbr = b.pid_nmbr WHERE SupervisorName = '{0}' AND SignedByEmployee = 'YES' AND (APPROVED IS NULL OR APPROVED <> 'Yes')", Xamarin.Essentials.SecureStorage.GetAsync("username").Result + "@msdh.ms.gov");
+                string strQuery = string.Format("SELECT DISTINCT a.CalenderYear, a.CalenderWeek, b.Login_Name, b.pid_nmbr FROM TimeStudyDetail a INNER JOIN AD_Info b ON a.pid_nmbr = b.pid_nmbr WHERE SupervisorName = '{0}' AND SignedByEmployee = 'YES' AND (APPROVED IS NULL OR (APPROVED <> 'Yes' AND APPROVED <> 'No'))", Xamarin.Essentials.SecureStorage.GetAsync("username").Result + "@msdh.ms.gov");
                 SqlConnection con = new SqlConnection(connstring);
                 con.Open();
                 SqlCommand command = new SqlCommand(strQuery, con);
