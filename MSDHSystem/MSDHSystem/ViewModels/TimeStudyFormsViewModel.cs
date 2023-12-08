@@ -393,14 +393,14 @@ namespace MSDHSystem.ViewModels
 
         public void Submit()
         {
-            for(int i = 0; i < TimeStudyItems.Count; i++)
+/*            for(int i = 0; i < TimeStudyItems.Count; i++)
             {
                 if (TimeStudyItems[i].TotalHours != null && int.Parse(TimeStudyItems[i].TotalHours) < 35)
                 {
                     DependencyService.Get<Toast>().Show("The total hours of every week must be greater than 35 hours");
                     return;
                 }
-            }
+            }*/
 
             List<int> Date = timeStudyDate.startDate.ToString().Split('/').Select(int.Parse).ToList();
             DateTime startDate = new DateTime(Date[2], Date[0], Date[1]);
@@ -593,14 +593,14 @@ namespace MSDHSystem.ViewModels
 
         public void Save()
         {
-            for (int i = 0; i < TimeStudyItems.Count; i++)
+/*            for (int i = 0; i < TimeStudyItems.Count; i++)
             {
                 if (TimeStudyItems[i].TotalHours != null && int.Parse(TimeStudyItems[i].TotalHours) < 35)
                 {
                     DependencyService.Get<Toast>().Show("The total hours of every week must be greater than 35 hours");
                     return;
                 }
-            }
+            }*/
 
             List<int> Date = timeStudyDate.startDate.ToString().Split('/').Select(int.Parse).ToList();
             DateTime startDate = new DateTime(Date[2], Date[0], Date[1]);
