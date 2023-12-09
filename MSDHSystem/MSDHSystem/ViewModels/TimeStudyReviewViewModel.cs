@@ -147,6 +147,7 @@ namespace MSDHSystem.ViewModels
                 }
                 else
                 {
+                    IsEnabled = false;
                     DependencyService.Get<Toast>().Show("Can't find Time Study Review data");
                 }
                 reader.Close();
