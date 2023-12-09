@@ -199,11 +199,11 @@ namespace MSDHSystem.ViewModels
 
             // Perform the long-running operation here
             // ...
-            GetValue();
             // Update UI from the background thread using Device.BeginInvokeOnMainThread
             Device.BeginInvokeOnMainThread(() =>
             {
                 // Update UI to indicate that the operation has completed 
+                GetValue();
                 UpdateUI(true);
             });
         }
