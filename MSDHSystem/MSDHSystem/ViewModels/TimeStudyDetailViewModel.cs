@@ -261,7 +261,7 @@ namespace MSDHSystem.ViewModels
                             M6 = tMin[6],
                             M7 = tMin[7],
                             TotalHours = tHour[5],
-                            TotalMins = tHour[5],
+                            TotalMins = tMin[5],
                             BackColor = backColor
                         });
                         tHour.Clear();
