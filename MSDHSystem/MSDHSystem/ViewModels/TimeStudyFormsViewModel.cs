@@ -214,7 +214,7 @@ namespace MSDHSystem.ViewModels
         {
             try
             {
-                string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+                string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
                 string strQuery = string.Format("SELECT * FROM AD_Info WHERE Login_Name = '{0}'", Xamarin.Essentials.SecureStorage.GetAsync("username").Result);
                 SqlConnection con = new SqlConnection(connstring);
                 con.Open();
@@ -405,7 +405,7 @@ namespace MSDHSystem.ViewModels
             List<int> Date = timeStudyDate.startDate.ToString().Split('/').Select(int.Parse).ToList();
             DateTime startDate = new DateTime(Date[2], Date[0], Date[1]);
 
-            string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+            string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
             SqlConnection con = new SqlConnection(connstring);
             con.Open();
 
@@ -605,7 +605,7 @@ namespace MSDHSystem.ViewModels
             List<int> Date = timeStudyDate.startDate.ToString().Split('/').Select(int.Parse).ToList();
             DateTime startDate = new DateTime(Date[2], Date[0], Date[1]);
 
-            string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+            string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
             SqlConnection con = new SqlConnection(connstring);
             con.Open();
 
@@ -810,7 +810,7 @@ namespace MSDHSystem.ViewModels
 
         public void SendMail(string formid, string recordid)
         {
-            string connectionString = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+            string connectionString = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
             string storedProcedureName = "sp_FormSubmissionNotification";
 
             try

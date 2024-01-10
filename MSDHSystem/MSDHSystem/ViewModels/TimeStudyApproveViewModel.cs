@@ -71,7 +71,7 @@ namespace MSDHSystem.ViewModels
 
         private void OnRejectClicked(TimeStudyApproveData data)
         {
-            string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+            string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
             List<int> Date = data.StartDate.ToString().Split('/').Select(int.Parse).ToList();
             DateTime startDate = new DateTime(Date[2], Date[0], Date[1]);
             string strQuery = string.Format("UPDATE TimeStudyDetail SET APPROVED = 'No', ApprovedTime = '{0}' WHERE pid_nmbr = '{1}' AND CalenderYear = '{2}' AND CalenderWeek = '{3}'", DateTime.Today.ToString("MM/dd/yyyy"), data.PIDNumber, startDate.Year.ToString(), GetWeekNumber(startDate).ToString());
@@ -96,7 +96,7 @@ namespace MSDHSystem.ViewModels
 
         private void OnApproveClicked(TimeStudyApproveData data)
         {
-            string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+            string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
             List<int> Date = data.StartDate.ToString().Split('/').Select(int.Parse).ToList();
             DateTime startDate = new DateTime(Date[2], Date[0], Date[1]);
             string strQuery = string.Format("UPDATE TimeStudyDetail SET APPROVED = 'Yes', ApprovedTime = '{0}' WHERE pid_nmbr = '{1}' AND CalenderYear = '{2}' AND CalenderWeek = '{3}'", DateTime.Today.ToString("MM/dd/yyyy"), data.PIDNumber, startDate.Year.ToString(), GetWeekNumber(startDate).ToString());
@@ -124,7 +124,7 @@ namespace MSDHSystem.ViewModels
             try
             {
                 TimeStudyApproveItems.Clear();
-                string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+                string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
                 string strQuery = string.Format("SELECT DISTINCT a.CalenderYear, a.CalenderWeek, b.Login_Name, b.pid_nmbr FROM TimeStudyDetail a INNER JOIN AD_Info b ON a.pid_nmbr = b.pid_nmbr WHERE SupervisorName = '{0}' AND SignedByEmployee = 'YES' AND (APPROVED IS NULL OR (APPROVED <> 'Yes' AND APPROVED <> 'No'))", Xamarin.Essentials.SecureStorage.GetAsync("username").Result + "@msdh.ms.gov");
                 SqlConnection con = new SqlConnection(connstring);
                 con.Open();

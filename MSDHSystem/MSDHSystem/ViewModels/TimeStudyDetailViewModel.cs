@@ -165,7 +165,7 @@ namespace MSDHSystem.ViewModels
         {
             try
             {
-                string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+                string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
                 string strQuery = string.Format("SELECT * FROM AD_Info WHERE Login_Name = '{0}'", timeStudyApproveDate.Name);
                 SqlConnection con = new SqlConnection(connstring);
                 con.Open();

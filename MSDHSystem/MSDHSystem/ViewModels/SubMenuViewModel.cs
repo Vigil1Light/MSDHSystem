@@ -61,7 +61,7 @@ namespace MSDHSystem.ViewModels
                 obMenus = new ObservableCollection<Menus>();
                 for (int i = 0; i < menuList.Count; i++)
                 {
-                    string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+                    string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
                     string strQuery = string.Format("SELECT * FROM MSDHSitesDescription WHERE SiteID = '{0}'", menuList[i]);
                     SqlConnection con = new SqlConnection(connstring);
                     con.Open();
@@ -96,7 +96,7 @@ namespace MSDHSystem.ViewModels
         {
             try
             {
-                string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+                string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
                 string strQuery = string.Format("SELECT * FROM MSDHMenuList WHERE MenuType = '{0}'", menu);
                 SqlConnection con = new SqlConnection(connstring);
                 con.Open();

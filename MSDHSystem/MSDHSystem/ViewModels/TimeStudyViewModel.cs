@@ -44,7 +44,7 @@ namespace MSDHSystem.ViewModels
             try
             {
                 obMenus = new ObservableCollection<TimeStudyDate>();
-                string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+                string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
                 string strQuery = string.Format("SELECT * FROM MSDHFormsConfig WHERE Setting = 'TimeStudyMonth' AND Inactive = '0' AND (value4 = '{0}' OR value4 = '{1}') ORDER BY RecordID ASC", DateTime.Now.Year.ToString(), (DateTime.Now.Year - 1).ToString());
                 SqlConnection con = new SqlConnection(connstring);
                 con.Open();

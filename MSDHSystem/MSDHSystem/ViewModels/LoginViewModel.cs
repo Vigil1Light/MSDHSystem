@@ -99,7 +99,7 @@ namespace MSDHSystem.ViewModels
                     if (result != null)
                     {
                         UpdateUI(true);
-                        string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+                        string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
                         string strQuery = string.Format("SELECT * FROM AD_Info WHERE Login_Name = '{0}'", Users.username);
                         SqlConnection con = new SqlConnection(connstring);
                         con.Open();
@@ -129,7 +129,7 @@ namespace MSDHSystem.ViewModels
                     if (ex.Message.Contains("AADSTS50055"))
                     {
                         UpdateUI(true);
-                        string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+                        string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
                         string strQuery = string.Format("SELECT * FROM AD_Info WHERE Login_Name = '{0}'", Users.username);
                         SqlConnection con = new SqlConnection(connstring);
                         con.Open();
@@ -172,7 +172,7 @@ namespace MSDHSystem.ViewModels
 
         public void CheckSupervisor(string username)
         {
-            string connstring = @"data source=InventorySystem.mssql.somee.com;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
+            string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
             string strQuery = string.Format("SELECT DISTINCT SupervisorName FROM TimeStudyDetail WHERE SupervisorName = '{0}'", username + "@msdh.ms.gov");
             SqlConnection con = new SqlConnection(connstring);
             con.Open();
