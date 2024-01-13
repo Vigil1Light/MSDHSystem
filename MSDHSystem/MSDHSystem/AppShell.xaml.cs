@@ -14,6 +14,7 @@ namespace MSDHSystem
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(TimeStudyPage), typeof(TimeStudyPage));
+            Routing.RegisterRoute(nameof(LabTimeStudyPage), typeof(LabTimeStudyPage));
             Routing.RegisterRoute(nameof(TimeStudyFormsPage), typeof(TimeStudyFormsPage));
             Routing.RegisterRoute(nameof(TimeStudyDetailPage), typeof(TimeStudyDetailPage));
             this.BindingContext = new AppShellViewModel(users);
