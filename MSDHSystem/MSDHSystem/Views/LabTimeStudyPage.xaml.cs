@@ -1,9 +1,9 @@
-﻿using Microsoft.SqlServer.Server;
-using MSDHSystem.Models;
+﻿using MSDHSystem.Models;
 using MSDHSystem.Utils;
 using MSDHSystem.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -14,39 +14,36 @@ using Xamarin.Forms.Xaml;
 
 namespace MSDHSystem.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SubMenuPage : ContentPage
-	{
-        public SubMenuPage()
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class LabTimeStudyPage : ContentPage
+    {
+        public LabTimeStudyPage()
         {
             InitializeComponent();
-            this.BindingContext = new SubMenuViewModel(Shell.Current.CurrentItem.Route, lstSubMenus);   
+            this.BindingContext = new LabTimeStudyViewModel(lstLabTimeStudyDates);
         }
-
-        private async void lstSubMenus_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void lstLabTimeStudyDates_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-
             try
             {
-                var selectedProduct = (Menus)e.Item;
-                if (selectedProduct.menuTitle == "Time Study")
+                var selectedProduct = (TimeStudyDate)e.Item;
+                Application.Current.Properties["TimeStudyDateValue"] = selectedProduct;
+                if (selectedProduct.status == "(Waiting Approve)")
                 {
-                    IsLoading(true);
-                    Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
-                    newThread.Start("TS");
+                    DependencyService.Get<Toast>().Show("Lab Time Study Form is Waiting Approval you can’t click to Edit");
                 }
-                else if (selectedProduct.menuTitle == "Lab Time Study")
+                else
                 {
                     IsLoading(true);
                     Thread newThread = new Thread(new ParameterizedThreadStart(LongRunningTask));
-                    newThread.Start("LTS");
+                    newThread.Start();
                 }
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", ex.Message.ToString(), "Ok");
             }
-            lstSubMenus.SelectedItem = null;
+            lstLabTimeStudyDates.SelectedItem = null;
         }
 
         private void LongRunningTask(object parameter)
@@ -56,26 +53,19 @@ namespace MSDHSystem.Views
 
             // Perform the long-running operation here
             // ...
-            
+
             // Update UI from the background thread using Device.BeginInvokeOnMainThread
             Device.BeginInvokeOnMainThread(async () =>
             {
                 // Update UI to indicate that the operation has completed
-                if(parameterValue == "TS")
-                {
-                    await Shell.Current.GoToAsync(nameof(TimeStudyPage));
-                }
-                else if(parameterValue == "LTS")
-                {
-                    await Shell.Current.GoToAsync(nameof(LabTimeStudyPage));
-                }
+                //await Shell.Current.GoToAsync($"{nameof(TimeStudyFormsPage)}");
                 IsLoading(false);
             });
         }
 
         void IsLoading(bool state)
         {
-            lstSubMenus.IsEnabled = !state;
+            lstLabTimeStudyDates.IsEnabled = !state;
             activity.IsRunning = state;
         }
     }

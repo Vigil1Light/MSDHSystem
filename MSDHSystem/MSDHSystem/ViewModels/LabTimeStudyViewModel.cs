@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace MSDHSystem.ViewModels
 {
-    public class TimeStudyViewModel : BaseViewModel
+    public class LabTimeStudyViewModel : BaseViewModel
     {
         ObservableCollection<TimeStudyDate> obMenus;
 
@@ -32,7 +32,7 @@ namespace MSDHSystem.ViewModels
         }
 
 
-        public TimeStudyViewModel(ListView lstMenus)
+        public LabTimeStudyViewModel(ListView lstMenus)
         {
             AddMenus();
             lstMenus.ItemsSource = obMenus;
@@ -63,17 +63,17 @@ namespace MSDHSystem.ViewModels
                         if (DateTime.Compare(dbDate, DateTime.Now) >= 0)
                         {
                             tmpStatus = "";
-                            tmpMonth = "New Time Study";
-                        }  
+                            tmpMonth = "New Lab Time Study";
+                        }
                         else
                         {
                             SqlConnection con1 = new SqlConnection(connstring);
                             con1.Open();
-                            string query = string.Format("SELECT distinct * FROM  TimeStudyDetail a LEFT JOIN  TimeStudyEmmployeeInfo b ON a.pid_nmbr = b.PID_No WHERE a.pid_nmbr = '{0}' AND  b.FormType= 'TS' AND a.CalenderYear = '{1}' AND a.CalenderWeek = {2} ORDER BY a.CalenderWeek", Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, dbDate.Year.ToString(), weeknumber.ToString());
+                            string query = string.Format("SELECT distinct * FROM  TimeStudyDetail a LEFT JOIN  TimeStudyEmmployeeInfo b ON a.pid_nmbr = b.PID_No WHERE a.pid_nmbr = '{0}' AND  b.FormType= 'LTS' AND a.CalenderYear = '{1}' AND a.CalenderWeek = {2} ORDER BY a.CalenderWeek", Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, dbDate.Year.ToString(), weeknumber.ToString());
                             SqlCommand command1 = new SqlCommand(query, con1);
                             SqlDataReader sqlDataReader = command1.ExecuteReader();
-                            
-                            
+
+
                             if (sqlDataReader.HasRows)
                             {
                                 if (sqlDataReader.Read())
@@ -119,7 +119,7 @@ namespace MSDHSystem.ViewModels
                             endDate = reader["Value3"].ToString(),
                             status = tmpStatus
                         });
-                    }   
+                    }
                 }
                 reader.Close();
                 con.Close();
