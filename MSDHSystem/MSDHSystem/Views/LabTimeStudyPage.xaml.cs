@@ -58,7 +58,7 @@ namespace MSDHSystem.Views
             Device.BeginInvokeOnMainThread(async () =>
             {
                 // Update UI to indicate that the operation has completed
-                //await Shell.Current.GoToAsync($"{nameof(TimeStudyFormsPage)}");
+                await Shell.Current.GoToAsync($"{nameof(LabTimeStudyFormsPage)}");
                 IsLoading(false);
             });
         }
