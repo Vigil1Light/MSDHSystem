@@ -11,7 +11,7 @@
     </ContentPage.Resources>
     <StackLayout>
         <Image Source="{local:ImageResource MSDHSystem.Resources.Images.logo.png}" Aspect="AspectFill"></Image>
-        <Label HorizontalTextAlignment="Center" Text="Time Study" FontSize="Title" TextColor="#96d1ff"/>
+        <Label HorizontalTextAlignment="Center" Text="Lab Time Study" FontSize="Title" TextColor="#96d1ff"/>
         <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
             <StackLayout Orientation="Horizontal">
                 <Label Text="Name:" TextColor="Black" FontAttributes="Bold"></Label>
@@ -42,7 +42,7 @@
                 SeparatorColor="LightGray" SeparatorVisibility="Default" HasUnevenRows="True"
                 BackgroundColor="White"
                 IsEnabled="{Binding IsEnabled}"
-                ItemsSource="{Binding LabTimeStudyItems}">
+                ItemsSource="{Binding TimeStudyItems}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
