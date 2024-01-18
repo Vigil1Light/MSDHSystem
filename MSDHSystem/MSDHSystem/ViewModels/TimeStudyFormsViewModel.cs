@@ -557,16 +557,9 @@ namespace MSDHSystem.ViewModels
                     command = new SqlCommand(strQuery, con);
                     command.ExecuteNonQuery();
 
-                    /*strQuery = string.Format("DELETE FROM TimeStudyEmmployeeInfo WHERE PIN = '{0}' AND CalenderWeek = '{1}' AND FormType = 'TS'",Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, GetWeekNumber(startDate).ToString());
+                    strQuery = string.Format("DELETE FROM TimeStudyEmmployeeInfo WHERE PIN = '{0}' AND FormType = 'TS'", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result);
                     command = new SqlCommand(strQuery, con);
-                    reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-
-                        }
-                    }*/
+                    command.ExecuteNonQuery();
 
                     strQuery = string.Format("INSERT INTO TimeStudyEmmployeeInfo(EmployeeName, PIN, Classification, ORG, PID_NO, CalenderWeek, FormType) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', 'TS')", Xamarin.Essentials.SecureStorage.GetAsync("username").Result, Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, Location + "/" + Jobname, Orgcode, Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, GetWeekNumber(startDate).ToString());
                     command = new SqlCommand(strQuery, con);
@@ -757,16 +750,9 @@ namespace MSDHSystem.ViewModels
                     command = new SqlCommand(strQuery, con);
                     command.ExecuteNonQuery();
 
-                    /*strQuery = string.Format("DELETE FROM TimeStudyEmmployeeInfo WHERE PIN = '{0}' AND CalenderWeek = '{1}' AND FormType = 'TS'",Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, GetWeekNumber(startDate).ToString());
+                    strQuery = string.Format("DELETE FROM TimeStudyEmmployeeInfo WHERE PIN = '{0}' AND FormType = 'TS'", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result);
                     command = new SqlCommand(strQuery, con);
-                    reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-
-                        }
-                    }*/
+                    command.ExecuteNonQuery();
 
                     strQuery = string.Format("INSERT INTO TimeStudyEmmployeeInfo(EmployeeName, PIN, Classification, ORG, PID_NO, CalenderWeek, FormType) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', 'TS')", Xamarin.Essentials.SecureStorage.GetAsync("username").Result, Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, Location + "/" + Jobname, Orgcode, Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result,GetWeekNumber(startDate).ToString());
                     command = new SqlCommand(strQuery, con);
