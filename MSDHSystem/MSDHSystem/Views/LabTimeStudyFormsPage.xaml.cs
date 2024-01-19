@@ -24,7 +24,7 @@ namespace MSDHSystem.Views
         {
             InitializeComponent();
             GetEmailValue();
-            this.BindingContext = new TimeStudyFormsViewModel(staticSuggestBox);
+            this.BindingContext = new LabTimeStudyFormsViewModel(staticSuggestBox);
             SubmitBtn.IsEnabled = false;
         }
 
