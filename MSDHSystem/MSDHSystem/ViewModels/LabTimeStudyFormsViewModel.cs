@@ -243,7 +243,7 @@ namespace MSDHSystem.ViewModels
                 {
                     while (reader.Read())
                     {
-                        programs.Add(reader["RecordID"].ToString() + " " + reader["Labortory"].ToString());
+                        programs.Add(reader["Labortory"].ToString());
                     }
                 }
                 reader.Close();
