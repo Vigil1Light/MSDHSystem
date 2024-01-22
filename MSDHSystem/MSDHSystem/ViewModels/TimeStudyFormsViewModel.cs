@@ -557,7 +557,7 @@ namespace MSDHSystem.ViewModels
                     command = new SqlCommand(strQuery, con);
                     command.ExecuteNonQuery();
 
-                    strQuery = string.Format("DELETE FROM TimeStudyEmmployeeInfo WHERE PIN = '{0}' AND FormType = 'TS'", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result);
+                    strQuery = string.Format("DELETE FROM TimeStudyEmmployeeInfo WHERE PIN = '{0}' AND FormType = 'TS' AND CalenderWeek = {1}", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, GetWeekNumber(startDate).ToString());
                     command = new SqlCommand(strQuery, con);
                     command.ExecuteNonQuery();
 
@@ -750,7 +750,7 @@ namespace MSDHSystem.ViewModels
                     command = new SqlCommand(strQuery, con);
                     command.ExecuteNonQuery();
 
-                    strQuery = string.Format("DELETE FROM TimeStudyEmmployeeInfo WHERE PIN = '{0}' AND FormType = 'TS'", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result);
+                    strQuery = string.Format("DELETE FROM TimeStudyEmmployeeInfo WHERE PIN = '{0}' AND FormType = 'TS' AND CalenderWeek = {1}", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result, GetWeekNumber(startDate).ToString());
                     command = new SqlCommand(strQuery, con);
                     command.ExecuteNonQuery();
 
