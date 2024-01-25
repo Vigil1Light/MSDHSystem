@@ -266,7 +266,7 @@ namespace MSDHSystem.ViewModels
                 {
                     List<int> Date = timeStudyDate.startDate.ToString().Split('/').Select(int.Parse).ToList();
                     DateTime startDate = new DateTime(Date[2], Date[0], Date[1]);
-                    strQuery = string.Format("SELECT * FROM TimeStudyDetail AS a INNER JOIN TimeStudyLabProgram AS b ON a.Program = b.Labortory INNER JOIN TimeStudyLabActivity AS c ON CAST(a.Activity AS INTEGER) = c.RecordID WHERE pid_nmbr = '{0}' AND CalenderYear = '{1}' AND CalenderWeek = '{2}'", Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, startDate.Year.ToString(), GetWeekNumber(startDate).ToString());
+                    strQuery = string.Format("SELECT * FROM TimeStudyDetail AS a INNER JOIN TimeStudyLabProgram AS b ON a.Program = b.ProgramName INNER JOIN TimeStudyLabActivity AS c ON a.Activity = c.ActivityNumber WHERE pid_nmbr = '{0}' AND CalenderYear = '{1}' AND CalenderWeek = '{2}'", Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, startDate.Year.ToString(), GetWeekNumber(startDate).ToString());
                     command = new SqlCommand(strQuery, con);
                     reader = command.ExecuteReader();
 
@@ -319,8 +319,8 @@ namespace MSDHSystem.ViewModels
                                 No = n,
                                 Programs = programs,
                                 Activities = activities,
-                                Program = reader["RecordID"].ToString() + " " + reader["Labortory"].ToString(),
-                                Activity = reader["Activity"].ToString() + " " + reader["ActivityName"].ToString(),
+                                Program = reader["Labortory"].ToString(),
+                                Activity = reader["ActivityNumber"].ToString() + " " + reader["ActivityName"].ToString(),
                                 H1 = tHour[0],
                                 H2 = tHour[1],
                                 H3 = tHour[2],
