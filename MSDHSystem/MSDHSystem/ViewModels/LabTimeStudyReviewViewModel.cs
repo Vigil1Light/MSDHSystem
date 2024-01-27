@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace MSDHSystem.ViewModels
 {
-    public class TimeStudyReviewViewModel : BaseViewModel, INotifyPropertyChanged
+    public class LabTimeStudyReviewViewModel : BaseViewModel, INotifyPropertyChanged
     {
         private bool isloading = false;
         private bool isenabled = true;
@@ -82,7 +82,7 @@ namespace MSDHSystem.ViewModels
             }
         }
 
-        public TimeStudyReviewViewModel()
+        public LabTimeStudyReviewViewModel()
         {
             TimeStudyReviewItems = new ObservableCollection<TimeStudyReviewData>();
             UpdateUI(false);
@@ -96,7 +96,7 @@ namespace MSDHSystem.ViewModels
             try
             {
                 string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
-                string strQuery = string.Format("SELECT * FROM  TimeStudyDetail a INNER JOIN TimeStudyEmmployeeInfo b ON a.pid_nmbr = b.PID_NO WHERE a.PIN = '{0}' AND b.FormType = 'TS' ORDER BY CAST(a.CalenderYear AS INT) ASC, CAST(a.CalenderWeek AS INT) ASC", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result);
+                string strQuery = string.Format("SELECT * FROM  TimeStudyDetail a INNER JOIN TimeStudyEmmployeeInfo b ON a.pid_nmbr = b.PID_NO WHERE a.PIN = '{0}' AND b.FormType = 'LTS' ORDER BY CAST(a.CalenderYear AS INT) ASC, CAST(a.CalenderWeek AS INT) ASC", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result);
                 SqlConnection con = new SqlConnection(connstring);
                 con.Open();
                 SqlCommand command = new SqlCommand(strQuery, con);

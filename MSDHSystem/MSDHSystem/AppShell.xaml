@@ -116,17 +116,14 @@
         <ShellContent ContentTemplate="{DataTemplate local:TimeStudyReviewPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Time Study Submitted" Icon="icon_feed.png" Route="TSA" IsVisible="{Binding IsSupervisor}">
-        <ShellContent ContentTemplate="{DataTemplate local:TimeStudyApprovePage}" />
+    <FlyoutItem Title="Lab Time Study Review" Icon="icon_feed.png" Route="LTSR">
+        <ShellContent ContentTemplate="{DataTemplate local:LabTimeStudyReviewPage}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Lab Time Study Submitted" Icon="icon_feed.png" Route="LTSA" IsVisible="{Binding IsSupervisor}">
+        <ShellContent ContentTemplate="{DataTemplate local:LabTimeStudyApprovePage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="F &amp; A Form" Icon="icon_feed.png" Route="FA">
-        <ShellContent ContentTemplate="{DataTemplate local:SubMenuPage}" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="Win Employees" Icon="icon_feed.png" Route="WIN Employees">
-        <ShellContent ContentTemplate="{DataTemplate local:SubMenuPage}" />
-    </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
 
