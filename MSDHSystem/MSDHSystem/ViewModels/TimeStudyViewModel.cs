@@ -69,7 +69,7 @@ namespace MSDHSystem.ViewModels
                         {
                             SqlConnection con1 = new SqlConnection(connstring);
                             con1.Open();
-                            string query = string.Format("SELECT distinct * FROM  TimeStudyDetail a LEFT JOIN  TimeStudyEmmployeeInfo b ON a.pid_nmbr = b.PID_No WHERE a.pid_nmbr = '{0}' AND  b.FormType= 'TS' AND a.CalenderYear = '{1}' AND a.CalenderWeek = {2} ORDER BY a.CalenderWeek", Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, dbDate.Year.ToString(), weeknumber.ToString());
+                            string query = string.Format("SELECT distinct * FROM  TimeStudyDetail a LEFT JOIN  TimeStudyEmmployeeInfo b ON a.pid_nmbr = b.PID_No INNER JOIN TimeStudyProgram c ON a.Program = c.ProgramCode INNER JOIN TimeStudyActivity d ON a.Activity = d.ActivityNumber WHERE a.pid_nmbr = '{0}' AND  b.FormType= 'TS' AND a.CalenderYear = '{1}' AND a.CalenderWeek = {2} ORDER BY a.CalenderWeek", Xamarin.Essentials.SecureStorage.GetAsync("pid_number").Result, dbDate.Year.ToString(), weeknumber.ToString());
                             SqlCommand command1 = new SqlCommand(query, con1);
                             SqlDataReader sqlDataReader = command1.ExecuteReader();
                             

@@ -96,7 +96,7 @@ namespace MSDHSystem.ViewModels
             try
             {
                 string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
-                string strQuery = string.Format("SELECT * FROM  TimeStudyDetail a INNER JOIN TimeStudyEmmployeeInfo b ON a.pid_nmbr = b.PID_NO WHERE a.PIN = '{0}' AND b.FormType = 'LTS' ORDER BY CAST(a.CalenderYear AS INT) ASC, CAST(a.CalenderWeek AS INT) ASC", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result);
+                string strQuery = string.Format("SELECT * FROM  TimeStudyDetail a INNER JOIN TimeStudyEmmployeeInfo b ON a.pid_nmbr = b.PID_NO INNER JOIN TimeStudyLabProgram c ON a.Program = c.ProgramName INNER JOIN TimeStudyLabActivity d ON a.Activity = d.ActivityNumber WHERE a.PIN = '{0}' AND b.FormType = 'LTS' ORDER BY CAST(a.CalenderYear AS INT) ASC, CAST(a.CalenderWeek AS INT) ASC", Xamarin.Essentials.SecureStorage.GetAsync("pin_number").Result);
                 SqlConnection con = new SqlConnection(connstring);
                 con.Open();
                 SqlCommand command = new SqlCommand(strQuery, con);
@@ -136,19 +136,19 @@ namespace MSDHSystem.ViewModels
                         n++;
                         if (n == 2)
                         {
-                            Name = reader["Login_Name"].ToString();
-                            Location = reader["location"].ToString();
-                            Jobname = reader["job_name"].ToString();
-                            Orgcode = reader["org_code"].ToString();
-                            Pin = reader["pin_win_nmbr"].ToString();
-                            PIDnumber = reader["pid_nmbr"].ToString();
+                            Name = reader["EmployeeName"].ToString();
+                            Location = reader["Classification"].ToString().Split('/')[0];
+                            Jobname = reader["Classification"].ToString().Split('/')[1];
+                            Orgcode = reader["ORG"].ToString();
+                            Pin = reader["PIN"].ToString();
+                            PIDnumber = reader["PID_NO"].ToString();
                         }
                     }
                 }
                 else
                 {
                     IsEnabled = false;
-                    DependencyService.Get<Toast>().Show("Can't find Time Study Review data");
+                    DependencyService.Get<Toast>().Show("Can't find Lab Time Study Review data");
                 }
                 reader.Close();
                 con.Close();
