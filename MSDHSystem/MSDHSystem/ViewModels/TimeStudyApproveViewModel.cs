@@ -125,7 +125,7 @@ namespace MSDHSystem.ViewModels
             {
                 TimeStudyApproveItems.Clear();
                 string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
-                string strQuery = string.Format("SELECT DISTINCT a.CalenderYear, a.CalenderWeek, b.Login_Name, b.pid_nmbr FROM TimeStudyDetail a INNER JOIN AD_Info b ON a.pid_nmbr = b.pid_nmbr WHERE SupervisorName = '{0}' AND SignedByEmployee = 'YES' AND (APPROVED IS NULL OR (APPROVED <> 'Yes' AND APPROVED <> 'No'))", Xamarin.Essentials.SecureStorage.GetAsync("username").Result + "@msdh.ms.gov");
+                string strQuery = string.Format("SELECT DISTINCT a.CalenderYear, a.CalenderWeek, b.Login_Name, b.pid_nmbr FROM TimeStudyDetail a INNER JOIN AD_Info b ON a.pid_nmbr = b.pid_nmbr INNER JOIN TimeStudyProgram c ON a.Program = c.ProgramCode INNER JOIN TimeStudyActivity d ON a.Activity = d.ActivityNumber WHERE a.SupervisorName = '{0}' AND a.SignedByEmployee = 'YES' AND (APPROVED IS NULL OR (APPROVED <> 'Yes' AND APPROVED <> 'No'))", Xamarin.Essentials.SecureStorage.GetAsync("username").Result + "@msdh.ms.gov");
                 SqlConnection con = new SqlConnection(connstring);
                 con.Open();
                 SqlCommand command = new SqlCommand(strQuery, con);
