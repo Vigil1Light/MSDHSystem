@@ -173,18 +173,31 @@ namespace MSDHSystem.ViewModels
         public void CheckSupervisor(string username)
         {
             string connstring = @"data source=155.254.244.41;initial catalog=InventorySystem;user id=linglu626;password=linglu626;Connect Timeout=600";
-            string strQuery = string.Format("SELECT DISTINCT SupervisorName FROM TimeStudyDetail WHERE SupervisorName = '{0}'", username + "@msdh.ms.gov");
+            string strQuery = string.Format("SELECT DISTINCT SupervisorName FROM TimeStudyDetail a INNER JOIN TimeStudyProgram b ON a.Program = b.ProgramCode INNER JOIN TimeStudyActivity c ON a.Activity = c.ActivityNumber WHERE a.SupervisorName = '{0}'", username + "@msdh.ms.gov");
             SqlConnection con = new SqlConnection(connstring);
             con.Open();
             SqlCommand command = new SqlCommand(strQuery, con);
             SqlDataReader reader = command.ExecuteReader();
             if (reader.HasRows)
             {
-                Users.issupervisor = true;
+                Users.istsupervisor = true;
             }
             else
             {
-                Users.issupervisor = false;
+                Users.istsupervisor = false;
+            }
+            reader.Close();
+
+            strQuery = string.Format("SELECT DISTINCT SupervisorName FROM TimeStudyDetail a INNER JOIN TimeStudyLabProgram b ON a.Program = b.ProgramName INNER JOIN TimeStudyLabActivity c ON a.Activity = c.ActivityNumber WHERE a.SupervisorName = '{0}'", username + "@msdh.ms.gov");
+            command = new SqlCommand(strQuery, con);
+            reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                Users.islsupervisor = true;
+            }
+            else
+            {
+                Users.islsupervisor = false;
             }
             reader.Close();
             con.Close();

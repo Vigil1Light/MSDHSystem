@@ -8,6 +8,7 @@ namespace MSDHSystem.Models
     {
         public string username { get; set; }
         public string password { get; set; }
-        public bool issupervisor { get; set; }
+        public bool istsupervisor { get; set; }
+        public bool islsupervisor { get; set; }
     }
 }
