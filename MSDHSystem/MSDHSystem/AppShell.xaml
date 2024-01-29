@@ -119,7 +119,11 @@
     <FlyoutItem Title="Lab Time Study Review" Icon="icon_feed.png" Route="LTSR">
         <ShellContent ContentTemplate="{DataTemplate local:LabTimeStudyReviewPage}" />
     </FlyoutItem>
-    
+
+    <FlyoutItem Title="Time Study Submitted" Icon="icon_feed.png" Route="TSA" IsVisible="{Binding IsSupervisor}">
+        <ShellContent ContentTemplate="{DataTemplate local:TimeStudyApprovePage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Lab Time Study Submitted" Icon="icon_feed.png" Route="LTSA" IsVisible="{Binding IsSupervisor}">
         <ShellContent ContentTemplate="{DataTemplate local:LabTimeStudyApprovePage}" />
     </FlyoutItem>
