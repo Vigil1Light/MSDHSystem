@@ -1,12 +1,88 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MSDHSystem.Views.LabTimeStudyApprovePage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             xmlns:extensions="clr-namespace:MSDHSystem.Extensions"
+             x:Class="MSDHSystem.Views.LabTimeStudyApprovePage"
+             xmlns:local="clr-namespace:MSDHSystem.Extensions"
+             Title="Lab Time Study Submitted">
+    <ContentPage.Resources>
+        <extensions:EmbeddedToImageSourceConverter x:Key="imageConverter" />
+    </ContentPage.Resources>
+    <StackLayout>
+        <Image Source="{local:ImageResource MSDHSystem.Resources.Images.logo.png}" Aspect="AspectFill"></Image>
+        <Label HorizontalTextAlignment="Center" Text="Lab Time Study Submitted" FontSize="Title" TextColor="#96d1ff"/>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ListView x:Name="lstTimeStudyApprove" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"
+                SeparatorColor="LightGray" SeparatorVisibility="Default" HasUnevenRows="True"
+                BackgroundColor="White"
+                IsEnabled="{Binding IsEnabled}"
+                ItemsSource="{Binding TimeStudyApproveItems}"
+                ItemTapped="lstTimeStudyApprove_ItemTapped">
+                <ListView.Header>
+                    <Grid BackgroundColor="Black" RowSpacing="1" ColumnSpacing="1" Padding="1">
+                        <Grid RowSpacing="1" ColumnSpacing="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition Width="9.5*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="No" TextColor="White" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="SlateBlue" HorizontalTextAlignment="Center"></Label>
+                            <Grid RowSpacing="1" ColumnSpacing="1" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2.2*" />
+                                    <ColumnDefinition Width="2.4*" />
+                                    <ColumnDefinition Width="2.4*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Name" TextColor="White" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="SlateBlue" HorizontalTextAlignment="Center"></Label>
+                                <Label Text="From" TextColor="White" HorizontalOptions="Fill" Grid.Column="1" FontSize="Small" BackgroundColor="SlateBlue" HorizontalTextAlignment="Center"></Label>
+                                <Label Text="To" TextColor="White" HorizontalOptions="Fill" Grid.Column="2" FontSize="Small" BackgroundColor="SlateBlue" HorizontalTextAlignment="Center"></Label>
+                                <Label Text="Approve" TextColor="White" HorizontalOptions="Fill" Grid.Column="3" FontSize="Small" BackgroundColor="SlateBlue" HorizontalTextAlignment="Center"></Label>
+                                <Label Text="Detail" TextColor="White" HorizontalOptions="Fill" Grid.Column="4" FontSize="Small" BackgroundColor="SlateBlue" HorizontalTextAlignment="Center"></Label>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid BackgroundColor="Black" RowSpacing="1" ColumnSpacing="1" Padding="1">
+                                <Grid RowSpacing="1" ColumnSpacing="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.5*" />
+                                        <ColumnDefinition Width="9.5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding No}" HorizontalOptions="Fill" Grid.Column="0" FontSize="Small" BackgroundColor="{Binding BackColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                    <Grid Grid.Column="1" RowSpacing="1" ColumnSpacing="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2.2*" />
+                                            <ColumnDefinition Width="2.4*" />
+                                            <ColumnDefinition Width="2.4*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="1*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" BackgroundColor="{Binding BackColor}" Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+                                        <Label Grid.Column="1" BackgroundColor="{Binding BackColor}" Text="{Binding StartDate}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+                                        <Label Grid.Column="2" BackgroundColor="{Binding BackColor}" Text="{Binding EndDate}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+                                        <Grid Grid.Column="3" RowSpacing="1" ColumnSpacing="1">
+                                            <ImageButton Grid.Column="0" Padding="5" HorizontalOptions="Fill" WidthRequest="40" HeightRequest="40" BackgroundColor="{Binding BackColor}" Source="{local:ImageResource MSDHSystem.Resources.Images.ic_check.png}" Command="{Binding Source={x:Reference lstTimeStudyApprove}, Path=BindingContext.ApproveCommand}" CommandParameter="{Binding .}"></ImageButton>
+                                            <ImageButton Grid.Column="1" Padding="5" HorizontalOptions="Fill" WidthRequest="40" HeightRequest="40" BackgroundColor="{Binding BackColor}" Source="{local:ImageResource MSDHSystem.Resources.Images.ic_deny.png}" Command="{Binding Source={x:Reference lstTimeStudyApprove}, Path=BindingContext.RejectCommand}" CommandParameter="{Binding .}"></ImageButton>
+                                        </Grid>
+                                        <ImageButton Grid.Column="4" Padding="5" HorizontalOptions="Fill" WidthRequest="40" HeightRequest="40" BackgroundColor="{Binding BackColor}" Source="{local:ImageResource MSDHSystem.Resources.Images.ic_detail.png}" Command="{Binding Source={x:Reference lstTimeStudyApprove}, Path=BindingContext.DetailCommand}" CommandParameter="{Binding .}"></ImageButton>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ActivityIndicator HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           x:Name="activity"
+                           Color="MediumSlateBlue"  
+                           BackgroundColor="Transparent"
+                           Scale="2"
+                           IsRunning="{Binding IsLoading}"/>
+        </Grid>
+    </StackLayout>
 </ContentPage>
